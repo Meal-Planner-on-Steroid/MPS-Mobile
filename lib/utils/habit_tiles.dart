@@ -3,8 +3,44 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 class HabitTile extends StatelessWidget {
   final String habitName;
+  final VoidCallback onTap;
+  final VoidCallback settingTapped;
+  final int timeSpent;
+  final int timeGoal;
+  final bool isHabitStarted;
 
-  const HabitTile({Key? key, required this.habitName}) : super(key: key);
+  const HabitTile({
+    Key? key,
+    required this.habitName,
+    required this.onTap,
+    required this.settingTapped,
+    required this.timeSpent,
+    required this.timeGoal,
+    required this.isHabitStarted,
+  }) : super(key: key);
+
+  // Convert second into min:sec -> e.g. 62 seconds = 1:02
+  String formatToMinSec(int totalSeconds) {
+    String secs = (totalSeconds % 60).toString();
+    String mins = (totalSeconds / 60).toStringAsFixed(5);
+
+    // If secs is 1 digit number
+    if (secs.length == 1) {
+      secs = '0' + secs;
+    }
+
+    // If mins is 1 digit number
+    if (mins[1] == '.') {
+      mins = mins.substring(0, 1);
+    }
+
+    return mins + ":" + secs;
+  }
+
+  // Calculate progress percentage
+  double percentCompleted() {
+    return timeSpent / timeGoal * 60;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +57,21 @@ class HabitTile extends StatelessWidget {
             Row(
               children: [
                 // Progress circle
-
-                Container(
-                  height: 50,
-                  width: 50,
-                  child: Stack(children: [
-                    CircularPercentIndicator(
-                      radius: 50,
-                    ),
-                    // play pause btn
-                    Center(child: Icon(Icons.play_arrow))
-                  ]),
+                GestureDetector(
+                  onTap: onTap,
+                  child: SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Stack(children: [
+                      CircularPercentIndicator(
+                        radius: 50,
+                      ),
+                      // play pause btn
+                      Center(
+                          child: Icon(
+                              isHabitStarted ? Icons.pause : Icons.play_arrow))
+                    ]),
+                  ),
                 ),
 
                 // Space
@@ -54,14 +94,19 @@ class HabitTile extends StatelessWidget {
                     ),
                     // Progress
                     Text(
-                      '2:00 / 10:00',
+                      formatToMinSec(timeSpent) +
+                          ' / ' +
+                          formatToMinSec(timeGoal) +
+                          ' = ' +
+                          (percentCompleted()).toStringAsFixed(0) +
+                          ' %',
                       style: TextStyle(color: Colors.grey),
                     )
                   ],
                 ),
               ],
             ),
-            Icon(Icons.settings),
+            GestureDetector(onTap: settingTapped, child: Icon(Icons.settings)),
           ],
         ),
       ),

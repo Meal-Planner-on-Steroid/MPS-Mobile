@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/avatar_dan_setting.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: const [
-            Text('This is the home page'),
+            AvatarDanSetting(),
           ],
         ),
       ),

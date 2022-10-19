@@ -13,6 +13,7 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(225, 219, 214, 1),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(24),
@@ -61,7 +62,7 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          primary: const Color.fromARGB(100, 127, 209, 174),
+                          primary: const Color.fromRGBO(127, 209, 174, 1),
                         ),
                         onPressed: () {
                           // final form = _formKey.currentState;

@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(225, 219, 214, 1),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(24),
@@ -86,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          primary: const Color.fromARGB(100, 127, 209, 174),
+                          primary: const Color.fromRGBO(127, 209, 174, 1),
                         ),
                         onPressed: () {
                           // final form = _formKey.currentState;
@@ -130,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          primary: const Color.fromARGB(100, 255, 255, 255),
+                          primary: const Color.fromRGBO(255, 255, 255, 1),
                         ),
                         onPressed: () {
                           // final form = _formKey.currentState;

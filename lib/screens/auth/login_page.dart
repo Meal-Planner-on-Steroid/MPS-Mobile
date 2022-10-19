@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../utils/belum_punya_akun.dart';
+import '../../utils/lupa_password.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -57,21 +58,22 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
 
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 16),
 
                   // Link lupa password
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          debugPrint('Lupa password');
-                        },
-                        child: const Text(
-                          "Lupa password",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
+                    children: const [
+                      LupaPassword(),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     debugPrint('Lupa password');
+                      //   },
+                      //   child: const Text(
+                      //     "Lupa password",
+                      //     style: TextStyle(color: Colors.black),
+                      //   ),
+                      // ),
                     ],
                   ),
 

@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
-import '../utils/avatar_dan_setting.dart';
-import 'me/kebutuhan_gizi_page.dart';
 
-class MePage extends StatefulWidget {
-  const MePage({Key? key}) : super(key: key);
+class KebuguhanGiziPage extends StatefulWidget {
+  const KebuguhanGiziPage({Key? key}) : super(key: key);
 
   @override
-  State<MePage> createState() => _MePageState();
+  State<KebuguhanGiziPage> createState() => _KebuguhanGiziPageState();
 }
 
-class _MePageState extends State<MePage> {
+class _KebuguhanGiziPageState extends State<KebuguhanGiziPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Me'),
+      ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
-            const AvatarDanSetting(),
-
             // Section
-            const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
                 border: Border.all(
@@ -33,53 +31,82 @@ class _MePageState extends State<MePage> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      flex: 3,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) {
-                              return const KebuguhanGiziPage();
-                            }),
-                          );
-                        },
-                        child: Column(
-                          children: const [
-                            Icon(Icons.person),
-                            Text('Kebutuhan'),
-                            Text('gizi'),
-                          ],
-                        ),
+                    const Text(
+                      'Data diri',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Expanded(
-                      flex: 3,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Column(
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Berat badan'),
+                        Row(
                           children: const [
-                            Icon(Icons.favorite),
-                            Text('Makanan'),
-                            Text('Favorit'),
+                            Text('-'),
+                            Text(' kg'),
                           ],
-                        ),
-                      ),
+                        )
+                      ],
                     ),
-                    Expanded(
-                      flex: 3,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Column(
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Tinggi badan'),
+                        Row(
                           children: const [
-                            Icon(Icons.heart_broken),
-                            Text('Blok'),
-                            Text('Makanan'),
+                            Text('-'),
+                            Text(' cm'),
                           ],
-                        ),
-                      ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Usia'),
+                        Row(
+                          children: const [
+                            Text('-'),
+                            Text(' th'),
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Berat badan'),
+                        Row(
+                          children: const [
+                            Text('-'),
+                            Text(' kg'),
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text('Gender'),
+                        Text('Laki-laki'),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text('Tingkat Aktivitas'),
+                        Text('Ringan'),
+                      ],
                     ),
                   ],
                 ),
@@ -92,7 +119,7 @@ class _MePageState extends State<MePage> {
               style: ElevatedButton.styleFrom(
                 primary: const Color.fromRGBO(255, 135, 101, 1),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(22),
+                  borderRadius: BorderRadius.circular(9),
                 ),
               ),
               onPressed: () {},
@@ -101,15 +128,7 @@ class _MePageState extends State<MePage> {
                 child: Column(
                   children: const [
                     Text(
-                      "Buat Rekomendasi",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      "Menu Makanan",
+                      "Hitung Kebutuhan Gizi",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -121,47 +140,23 @@ class _MePageState extends State<MePage> {
               ),
             ),
 
-            // Section
+            // Atau login dengan
             const SizedBox(height: 16),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color.fromRGBO(127, 209, 174, 1),
-                  width: 2,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(9),
+            Row(children: const <Widget>[
+              Expanded(
+                child: Divider(
+                  height: 2,
+                  color: Colors.black,
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    const Text('Streak'),
-                    const SizedBox(height: 8),
-                    const Divider(
-                      height: 1,
-                      color: Color.fromRGBO(255, 219, 214, 1),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: const [
-                        Text(
-                          '7',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 38,
-                          ),
-                        ),
-                        Text('hari'),
-                      ],
-                    )
-                  ],
+              Text("Hasil"),
+              Expanded(
+                child: Divider(
+                  height: 2,
+                  color: Colors.black,
                 ),
               ),
-            ),
+            ]),
 
             // Section
             const SizedBox(height: 16),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import './list_makanan_page.dart';
 
-class MakananFavoritPage extends StatefulWidget {
-  const MakananFavoritPage({Key? key}) : super(key: key);
+class BlokMakananPage extends StatefulWidget {
+  const BlokMakananPage({Key? key}) : super(key: key);
 
   @override
-  State<MakananFavoritPage> createState() => _MakananFavoritPageState();
+  State<BlokMakananPage> createState() => _BlokMakananPageState();
 }
 
-class _MakananFavoritPageState extends State<MakananFavoritPage> {
+class _BlokMakananPageState extends State<BlokMakananPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -40,15 +40,15 @@ class _MakananFavoritPageState extends State<MakananFavoritPage> {
           children: [
             ListMakananPage(
               judul: 'menu',
-              jenis: 'fav',
+              jenis: 'blok',
             ),
             ListMakananPage(
               judul: 'bahan',
-              jenis: 'fav',
+              jenis: 'blok',
             ),
             ListMakananPage(
               judul: 'camilan',
-              jenis: 'fav',
+              jenis: 'blok',
             ),
           ],
         ),

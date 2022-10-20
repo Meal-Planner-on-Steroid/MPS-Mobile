@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/avatar_dan_setting.dart';
 import 'me/kebutuhan_gizi_page.dart';
 import 'me/makanan_favorit_page.dart';
+import 'me/blok_makanan_page.dart';
 
 class MePage extends StatefulWidget {
   const MePage({Key? key}) : super(key: key);
@@ -78,7 +79,13 @@ class _MePageState extends State<MePage> {
                     Expanded(
                       flex: 3,
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                              return const BlokMakananPage();
+                            }),
+                          );
+                        },
                         child: Column(
                           children: const [
                             Icon(Icons.heart_broken),

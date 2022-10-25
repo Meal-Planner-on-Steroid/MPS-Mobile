@@ -3,6 +3,7 @@ import '../utils/avatar_dan_setting.dart';
 import 'me/kebutuhan_gizi_page.dart';
 import 'me/makanan_favorit_page.dart';
 import 'me/blok_makanan_page.dart';
+import 'me/hasil_rekomendasi_page.dart';
 
 class MePage extends StatefulWidget {
   const MePage({Key? key}) : super(key: key);
@@ -109,7 +110,13 @@ class _MePageState extends State<MePage> {
                   borderRadius: BorderRadius.circular(22),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return const HasilRekomendasiPage();
+                  }),
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(

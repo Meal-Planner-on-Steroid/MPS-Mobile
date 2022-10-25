@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   percent_indicator: ^3.4.0
+  getwidget: ^2.0.4
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -20,7 +20,7 @@ class _MePageState extends State<MePage> {
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
-            const AvatarDanSetting(),
+            const AvatarDanSetting(currentPage: 'Me'),
 
             // Section
             const SizedBox(height: 16),

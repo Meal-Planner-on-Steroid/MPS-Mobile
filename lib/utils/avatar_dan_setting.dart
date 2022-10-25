@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import '../screens/profil_page.dart';
 
 class AvatarDanSetting extends StatelessWidget {
-  const AvatarDanSetting({Key? key}) : super(key: key);
+  final String currentPage;
+  const AvatarDanSetting({
+    Key? key,
+    required this.currentPage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +14,15 @@ class AvatarDanSetting extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ProfilPage(
+                        fromPage: currentPage,
+                      )),
+            );
+          },
           child: const CircleAvatar(
             backgroundImage: AssetImage('assets/images/user_random.jpg'),
           ),

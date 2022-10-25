@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: const [
-            AvatarDanSetting(),
+            AvatarDanSetting(currentPage: 'Home'),
           ],
         ),
       ),

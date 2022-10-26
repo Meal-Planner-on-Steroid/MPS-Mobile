@@ -8,13 +8,6 @@ class MakananCard extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromRGBO(38, 50, 56, 12),
-            blurRadius: 2,
-            offset: Offset(0, 1),
-          )
-        ],
         borderRadius: BorderRadius.all(
           Radius.circular(9),
         ),

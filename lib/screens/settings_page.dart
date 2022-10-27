@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mps/screens/me/blok_makanan_page.dart';
+import 'package:mps/screens/profil_page.dart';
+import 'package:mps/screens/settings/air_minum_page.dart';
+import 'settings/goal_page.dart';
+import 'settings/air_minum_page.dart';
+import 'settings/help_page.dart';
+import 'me/kebutuhan_gizi_page.dart';
+import 'me/makanan_favorit_page.dart';
+import 'profil_page.dart';
 
 // ignore: must_be_immutable
 class SettingsPage extends StatelessWidget {
@@ -9,43 +18,45 @@ class SettingsPage extends StatelessWidget {
       settingIcon: Icons.star,
       title: 'Goal',
       desc: 'Sesuaikan tujuan diet',
-      href: 'hei',
+      href: const GoalPage(fromPage: 'Setting'),
     ),
     ListSetting(
       settingIcon: Icons.person,
       title: 'Kebutuhan Gizi',
       desc: 'Berat badan, tinggi badan, usia, dll',
-      href: 'hei',
+      href: const KebuguhanGiziPage(),
     ),
     ListSetting(
       settingIcon: Icons.favorite,
       title: 'Makanan Favorit',
       desc: 'Makanan akan lebih sering ',
-      href: 'hei',
+      href: const MakananFavoritPage(),
     ),
     ListSetting(
       settingIcon: Icons.heart_broken_sharp,
       title: 'Blok makanan',
       desc: 'Alergi atau makanan yang tidak disukai',
-      href: 'hei',
+      href: const BlokMakananPage(),
     ),
     ListSetting(
       settingIcon: Icons.local_drink_rounded,
       title: 'Air Minum',
       desc: 'Alergi atau makanan yang tidak disukai',
-      href: 'hei',
+      href: const AirMinumPage(
+        fromPage: 'settings',
+      ),
     ),
     ListSetting(
       settingIcon: Icons.contact_page,
       title: 'Profil',
       desc: 'Profil dan password',
-      href: 'hei',
+      href: const ProfilPage(fromPage: 'settings'),
     ),
     ListSetting(
       settingIcon: Icons.question_mark,
       title: 'Bantuan',
       desc: 'Cara penggunaan, hubungi kami,',
-      href: 'hei',
+      href: const HelpPage(fromPage: 'setting'),
     ),
   ];
 
@@ -68,28 +79,41 @@ class SettingsPage extends StatelessWidget {
                   .map(
                     (item) => Padding(
                       padding: const EdgeInsets.only(bottom: 16),
-                      child: Row(
-                        children: [
-                          Icon(
-                            item.settingIcon,
-                            color: Colors.yellow.shade800,
-                          ),
-                          const SizedBox(width: 16),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => item.href,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          color: Colors.white,
+                          child: Row(
                             children: [
-                              Text(
-                                item.title,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Icon(
+                                item.settingIcon,
+                                color: Colors.yellow.shade800,
                               ),
-                              const SizedBox(height: 4),
-                              Text(item.desc),
+                              const SizedBox(width: 16),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.title,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(item.desc),
+                                ],
+                              )
                             ],
-                          )
-                        ],
+                          ),
+                        ),
                       ),
                     ),
                   )
@@ -136,7 +160,7 @@ class ListSetting {
   final IconData settingIcon;
   final String title;
   final String desc;
-  final String href;
+  final Widget href;
 
   ListSetting({
     required this.settingIcon,

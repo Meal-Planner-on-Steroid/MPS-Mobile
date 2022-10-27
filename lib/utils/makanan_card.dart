@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'checkbox_green.dart';
 
 class MakananCard extends StatelessWidget {
-  const MakananCard({Key? key}) : super(key: key);
+  final bool beChecked;
+
+  const MakananCard({Key? key, this.beChecked = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,33 +21,45 @@ class MakananCard extends StatelessWidget {
           children: [
             // Title & Gambar
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(9),
-                  child: SizedBox.fromSize(
-                    size: const Size.fromRadius(40),
-                    child: Image.asset(
-                      'assets/images/makanan_random.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Column(
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Waktu makan',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(9),
+                      child: SizedBox.fromSize(
+                        size: const Size.fromRadius(40),
+                        child: Image.asset(
+                          'assets/images/makanan_random.jpg',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Text('Nama makanan'),
+                    const SizedBox(width: 8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Waktu makan',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text('Nama makanan'),
+                      ],
+                    ),
                   ],
+                ),
+                Container(
+                  child: (() {
+                    if (beChecked) {
+                      return const CheckboxGreen();
+                    }
+                  }()),
                 ),
               ],
             ),

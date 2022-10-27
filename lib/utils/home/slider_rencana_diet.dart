@@ -11,37 +11,43 @@ class SliderRencanaDiet extends StatefulWidget {
 }
 
 class _SliderRencanaDietState extends State<SliderRencanaDiet> {
-  // ignore: todo
-  // TODO: Buat card makanan dengan checkbox
+  final PageController _pageController = PageController();
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   List<ListRencanaDiet> listRencanaDiet = [
     ListRencanaDiet(
       hari: 'hari',
       body: const [
-        MakananCard(),
-        MakananCard(),
-        MakananCard(),
-        MakananCard(),
-        MakananCard(),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
       ],
     ),
     ListRencanaDiet(
       hari: 'hari',
       body: const [
-        MakananCard(),
-        MakananCard(),
-        MakananCard(),
-        MakananCard(),
-        MakananCard(),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
       ],
     ),
     ListRencanaDiet(
       hari: 'hari',
       body: const [
-        MakananCard(),
-        MakananCard(),
-        MakananCard(),
-        MakananCard(),
-        MakananCard(),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
+        MakananCard(beChecked: true),
       ],
     ),
   ];
@@ -50,10 +56,14 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
   Widget build(BuildContext context) {
     // return const Text('he');
     return ExpandablePageView(
+      controller: _pageController,
       children: listRencanaDiet
           .map(
-            (item) =>
-                SliderRencanaDietPage(hari: item.hari, makanans: item.body),
+            (item) => SliderRencanaDietPage(
+              hari: item.hari,
+              makanans: item.body,
+              controller: _pageController,
+            ),
           )
           .toList(),
     );

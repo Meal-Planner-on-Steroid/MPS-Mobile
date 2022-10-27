@@ -16,19 +16,28 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(24),
-          children: const [
-            AvatarDanSetting(currentPage: 'Home'),
+          // padding: const EdgeInsets.all(24),
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 24,
+                top: 24,
+                right: 24,
+              ),
+              child: Column(
+                children: const [
+                  AvatarDanSetting(currentPage: 'Home'),
 
-            // Dropdown status
-            SizedBox(height: 16),
-            GoalHariIni(),
+                  // Dropdown status
+                  SizedBox(height: 16),
+                  GoalHariIni(),
+                ],
+              ),
+            ),
 
             // Slider
-            SizedBox(height: 16),
-            // ignore: todo
-            // TODO: Buat padding khusus di slider page
-            SliderRencanaDiet(),
+            const SizedBox(height: 16),
+            const SliderRencanaDiet(),
           ],
         ),
       ),

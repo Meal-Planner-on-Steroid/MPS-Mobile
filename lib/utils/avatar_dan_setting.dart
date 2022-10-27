@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/profil_page.dart';
+import '../screens/settings_page.dart';
 
 class AvatarDanSetting extends StatelessWidget {
   final String currentPage;
@@ -29,11 +30,12 @@ class AvatarDanSetting extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => const MintaResetPasswordPage()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(fromPage: currentPage),
+              ),
+            );
           },
           child: const Padding(
             padding: EdgeInsets.all(12.0),

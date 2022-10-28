@@ -18,7 +18,7 @@ class SettingsPage extends StatelessWidget {
       settingIcon: Icons.star,
       title: 'Goal',
       desc: 'Sesuaikan tujuan diet',
-      href: const GoalPage(fromPage: 'Setting'),
+      href: GoalPage(fromPage: 'Setting'),
     ),
     ListSetting(
       settingIcon: Icons.person,
@@ -73,7 +73,6 @@ class SettingsPage extends StatelessWidget {
           padding: const EdgeInsets.all(24),
           children: [
             // List settings
-            // ! Pakai list
             Column(
               children: listSetting
                   .map(

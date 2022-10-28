@@ -24,19 +24,25 @@ class SettingsPage extends StatelessWidget {
       settingIcon: Icons.person,
       title: 'Kebutuhan Gizi',
       desc: 'Berat badan, tinggi badan, usia, dll',
-      href: const KebuguhanGiziPage(),
+      href: const KebuguhanGiziPage(
+        fromPage: 'settings',
+      ),
     ),
     ListSetting(
       settingIcon: Icons.favorite,
       title: 'Makanan Favorit',
       desc: 'Makanan akan lebih sering ',
-      href: const MakananFavoritPage(),
+      href: const MakananFavoritPage(
+        fromPage: 'settings',
+      ),
     ),
     ListSetting(
       settingIcon: Icons.heart_broken_sharp,
       title: 'Blok makanan',
       desc: 'Alergi atau makanan yang tidak disukai',
-      href: const BlokMakananPage(),
+      href: const BlokMakananPage(
+        fromPage: 'settings',
+      ),
     ),
     ListSetting(
       settingIcon: Icons.local_drink_rounded,

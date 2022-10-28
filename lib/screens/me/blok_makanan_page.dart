@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import './list_makanan_page.dart';
 
 class BlokMakananPage extends StatefulWidget {
-  const BlokMakananPage({Key? key}) : super(key: key);
+  final String fromPage;
+
+  const BlokMakananPage({Key? key, required this.fromPage}) : super(key: key);
 
   @override
   State<BlokMakananPage> createState() => _BlokMakananPageState();
@@ -34,7 +36,7 @@ class _BlokMakananPageState extends State<BlokMakananPage> {
                   )),
             ],
           ),
-          title: const Text('Me'),
+          title: Text(widget.fromPage),
         ),
         body: const TabBarView(
           children: [

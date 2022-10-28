@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class KebuguhanGiziPage extends StatefulWidget {
-  const KebuguhanGiziPage({Key? key}) : super(key: key);
+  final String fromPage;
+
+  const KebuguhanGiziPage({Key? key, required this.fromPage}) : super(key: key);
 
   @override
   State<KebuguhanGiziPage> createState() => _KebuguhanGiziPageState();
@@ -12,7 +14,7 @@ class _KebuguhanGiziPageState extends State<KebuguhanGiziPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Me'),
+        title: Text(widget.fromPage),
       ),
       body: SafeArea(
         child: ListView(

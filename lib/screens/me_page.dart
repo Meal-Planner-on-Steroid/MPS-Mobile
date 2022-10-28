@@ -45,7 +45,9 @@ class _MePageState extends State<MePage> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return const KebuguhanGiziPage();
+                              return const KebuguhanGiziPage(
+                                fromPage: 'Me',
+                              );
                             }),
                           );
                         },
@@ -64,7 +66,9 @@ class _MePageState extends State<MePage> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return const MakananFavoritPage();
+                              return const MakananFavoritPage(
+                                fromPage: 'Me',
+                              );
                             }),
                           );
                         },
@@ -83,7 +87,9 @@ class _MePageState extends State<MePage> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return const BlokMakananPage();
+                              return const BlokMakananPage(
+                                fromPage: 'Me',
+                              );
                             }),
                           );
                         },

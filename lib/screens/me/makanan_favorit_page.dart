@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import './list_makanan_page.dart';
 
 class MakananFavoritPage extends StatefulWidget {
-  const MakananFavoritPage({Key? key}) : super(key: key);
+  final String fromPage;
+
+  const MakananFavoritPage({Key? key, required this.fromPage})
+      : super(key: key);
 
   @override
   State<MakananFavoritPage> createState() => _MakananFavoritPageState();
@@ -34,7 +37,7 @@ class _MakananFavoritPageState extends State<MakananFavoritPage> {
                   )),
             ],
           ),
-          title: const Text('Me'),
+          title: Text(widget.fromPage),
         ),
         body: const TabBarView(
           children: [

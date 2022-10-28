@@ -56,7 +56,7 @@ class SettingsPage extends StatelessWidget {
       settingIcon: Icons.question_mark,
       title: 'Bantuan',
       desc: 'Cara penggunaan, hubungi kami,',
-      href: const HelpPage(fromPage: 'setting'),
+      href: HelpPage(fromPage: 'setting'),
     ),
   ];
 

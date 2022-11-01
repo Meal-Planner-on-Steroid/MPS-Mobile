@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mps/utils/accordeon_rekomendasi_makanan/accordion_makanan.dart';
-import '../../utils/makanan_card.dart';
 
 class HasilRekomendasiPage extends StatelessWidget {
   const HasilRekomendasiPage({Key? key}) : super(key: key);
@@ -206,8 +205,6 @@ class HasilRekomendasiPage extends StatelessWidget {
 
             // Accordeon makanan
             const SizedBox(height: 16),
-
-            const MakananCard(),
 
             const SizedBox(height: 16),
 

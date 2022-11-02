@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mps/screens/auth/login_page.dart';
+import 'package:mps/services/auth_service.dart';
 import 'screens/home_page.dart';
 import 'screens/me_page.dart';
 import 'screens/menu_page.dart';
@@ -39,6 +41,27 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
+  final _authService = AuthService();
+
+  Future<bool> getAuth() async {
+    try {
+      // ignore: unused_local_variable
+      final auth = await _authService.getAuth();
+      debugPrint('This is main page');
+
+      if (auth.access.isEmpty || auth.refresh.isEmpty) {
+        // if (auth.access.isEmpty) {
+        debugPrint('tidak ada access dan refresh');
+        return false;
+      }
+
+      debugPrint('ada access dan refresh');
+      return true;
+    } on Exception catch (_) {
+      return false;
+    }
+  }
+
   int currentPage = 0;
   List<Widget> pages = const [
     HomePage(),
@@ -49,26 +72,37 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.shade300,
-      // appBar: AppBar(
-      //   title: const Text('Flutter'),
-      // ),
-      body: pages[currentPage],
-      bottomNavigationBar: NavigationBar(
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Me'),
-          NavigationDestination(icon: Icon(Icons.fastfood), label: 'Menu'),
-          NavigationDestination(icon: Icon(Icons.history), label: 'Riwayat'),
-        ],
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPage = index;
-          });
-        },
-        selectedIndex: currentPage,
-      ),
+    return FutureBuilder(
+      future: getAuth(),
+      builder: (context, AsyncSnapshot<bool> snapshot) {
+        if (snapshot.data == true) {
+          return Scaffold(
+            backgroundColor: Colors.grey.shade300,
+            // appBar: AppBar(
+            //   title: const Text('Flutter'),
+            // ),
+            body: pages[currentPage],
+            bottomNavigationBar: NavigationBar(
+              destinations: const [
+                NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+                NavigationDestination(icon: Icon(Icons.person), label: 'Me'),
+                NavigationDestination(
+                    icon: Icon(Icons.fastfood), label: 'Menu'),
+                NavigationDestination(
+                    icon: Icon(Icons.history), label: 'Riwayat'),
+              ],
+              onDestinationSelected: (int index) {
+                setState(() {
+                  currentPage = index;
+                });
+              },
+              selectedIndex: currentPage,
+            ),
+          );
+        } else {
+          return const LoginPage();
+        }
+      },
     );
   }
 }

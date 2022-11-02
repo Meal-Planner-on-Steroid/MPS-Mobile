@@ -35,10 +35,19 @@ class RegisterPageState extends State<RegisterPage> {
 
                   // Register input
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Name'),
+                    decoration: const InputDecoration(labelText: 'First name'),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter your username';
+                        return 'Please enter your first name';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(labelText: 'Last name'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your last name';
                       }
                       return null;
                     },

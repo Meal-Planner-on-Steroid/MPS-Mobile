@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mps/main.dart';
+import 'package:mps/models/user_model.dart';
 import '../../utils/belum_punya_akun.dart';
 import '../../utils/lupa_password.dart';
 
@@ -11,6 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  final _user = User();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 64),
 
-                  // Login input
+                  // Username input
                   TextFormField(
                     decoration: const InputDecoration(labelText: 'Username'),
                     validator: (value) {
@@ -48,7 +51,14 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       return null;
                     },
+                    onSaved: (value) {
+                      setState(() {
+                        _user.username = value!;
+                      });
+                    },
                   ),
+
+                  // Password input
                   TextFormField(
                     decoration: const InputDecoration(labelText: 'Password'),
                     validator: (value) {
@@ -56,6 +66,11 @@ class _LoginPageState extends State<LoginPage> {
                         return 'Please enter your password';
                       }
                       return null;
+                    },
+                    onSaved: (value) {
+                      setState(() {
+                        _user.password = value!;
+                      });
                     },
                   ),
 
@@ -66,15 +81,6 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: const [
                       LupaPassword(),
-                      // GestureDetector(
-                      //   onTap: () {
-                      //     debugPrint('Lupa password');
-                      //   },
-                      //   child: const Text(
-                      //     "Lupa password",
-                      //     style: TextStyle(color: Colors.black),
-                      //   ),
-                      // ),
                     ],
                   ),
 
@@ -89,11 +95,20 @@ class _LoginPageState extends State<LoginPage> {
                           shape: const StadiumBorder(),
                           primary: const Color.fromRGBO(127, 209, 174, 1),
                         ),
-                        onPressed: () {
-                          // final form = _formKey.currentState;
-                          // if (form!.validate()) {
-                          //   form.save();
-                          // }
+                        onPressed: () async {
+                          final form = _formKey.currentState;
+
+                          if (form!.validate()) {
+                            form.save();
+                            if (await _user.save()) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MyApp(),
+                                ),
+                              );
+                            }
+                          }
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(11.0),

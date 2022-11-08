@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mps/app/services/auth_service.dart';
 import 'package:mps/screens/auth/login_page.dart';
 import 'package:mps/screens/me/blok_makanan_page.dart';
 import 'package:mps/screens/profil_page.dart';
 import 'package:mps/screens/settings/air_minum_page.dart';
-import 'package:mps/services/auth_service.dart';
 import 'settings/goal_page.dart';
 import 'settings/air_minum_page.dart';
 import 'settings/help_page.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mps/models/auth_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class AuthService {
   Future saveAuth(Auth auth) async {
@@ -9,7 +10,6 @@ class AuthService {
     await prefs.setString('access', auth.access);
     await prefs.setString('refresh', auth.refresh);
 
-    // TODO: request untuk ambil access dan refresh
     final access = prefs.getString('access') ?? '';
     final refresh = prefs.getString('refresh') ?? '';
 
@@ -38,7 +38,6 @@ class AuthService {
     try {
       final prefs = await SharedPreferences.getInstance();
 
-      // TODO: request untuk hapus access dan request
       await prefs.remove('access');
       await prefs.remove('refresh');
 
@@ -46,6 +45,33 @@ class AuthService {
 
       return true;
     } on Exception catch (_) {
+      return false;
+    }
+  }
+
+  Future login(String username, String password) async {
+    try {
+      // TODO: ubah menjadi base_url
+      // http://127.0.0.1:8000/auth/login
+      final url = Uri.http('192.168.1.18:8000', 'api/auth/login');
+
+      debugPrint(url.toString());
+      debugPrint('username: $username');
+      debugPrint('password: $password');
+
+      var response = await http
+          .post(url, body: {"username": username, "password": password});
+
+      debugPrint('Response status: ${response.statusCode}');
+      debugPrint('Response body: ${response.body}');
+
+      if (response.statusCode != 200) {
+        return false;
+      }
+
+      return response.body;
+    } on Exception catch (e) {
+      debugPrint(e.toString());
       return false;
     }
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mps/app/controllers/auth_controller.dart';
 import 'package:mps/main.dart';
 import 'package:mps/models/user_model.dart';
 import '../../utils/belum_punya_akun.dart';
@@ -14,6 +15,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _user = User();
+  final _authController = AuthController();
 
   @override
   Widget build(BuildContext context) {
@@ -100,14 +102,17 @@ class _LoginPageState extends State<LoginPage> {
 
                           if (form!.validate()) {
                             form.save();
-                            if (await _user.save()) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const MyApp(),
-                                ),
-                              );
-                            }
+                            await _authController.login(
+                                _user.username, _user.password);
+                            // if (await _authController.login(
+                            //     _user.username, _user.password)) {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => const MyApp(),
+                            //     ),
+                            //   );
+                            // }
                           }
                         },
                         child: const Padding(

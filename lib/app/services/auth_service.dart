@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mps/models/auth_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AuthService {
+  final String? _baseUrl = dotenv.env['BASE_URL'];
+
   Future saveAuth(Auth auth) async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -51,9 +54,7 @@ class AuthService {
 
   Future login(String username, String password) async {
     try {
-      // TODO: ubah menjadi base_url
-      // http://127.0.0.1:8000/auth/login
-      final url = Uri.http('192.168.1.18:8000', 'api/auth/login');
+      final url = Uri.http(_baseUrl.toString(), 'api/auth/login');
 
       debugPrint(url.toString());
       debugPrint('username: $username');

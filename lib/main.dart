@@ -5,8 +5,10 @@ import 'screens/home_page.dart';
 import 'screens/me_page.dart';
 import 'screens/menu_page.dart';
 import 'screens/riwayat_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: 'assets/env/.env_development');
   runApp(const MyApp());
 }
 
@@ -50,7 +52,6 @@ class _RootPageState extends State<RootPage> {
       debugPrint('This is main page');
 
       if (auth.access.isEmpty || auth.refresh.isEmpty) {
-        // if (auth.access.isEmpty) {
         debugPrint('tidak ada access dan refresh');
         return false;
       }

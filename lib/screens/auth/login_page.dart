@@ -102,17 +102,15 @@ class _LoginPageState extends State<LoginPage> {
 
                           if (form!.validate()) {
                             form.save();
-                            await _authController.login(
-                                _user.username, _user.password);
-                            // if (await _authController.login(
-                            //     _user.username, _user.password)) {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => const MyApp(),
-                            //     ),
-                            //   );
-                            // }
+                            if (await _authController.login(
+                                _user.username, _user.password)) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MyApp(),
+                                ),
+                              );
+                            }
                           }
                         },
                         child: const Padding(

@@ -37,11 +37,10 @@ class AuthController {
       debugPrint('yey');
 
       final json = jsonDecode(response);
-      debugPrint(json);
+      debugPrint(json.toString());
 
-      // TODO: simpan token access dan refresh
-      // final newAuth = Auth(refresh: 'refresh', access: 'access');
-      // await _authService.saveAuth(newAuth);
+      final newAuth = Auth(refresh: 'refresh', access: 'access');
+      await _authService.saveAuth(newAuth);
 
       return true;
     } on Exception catch (e) {

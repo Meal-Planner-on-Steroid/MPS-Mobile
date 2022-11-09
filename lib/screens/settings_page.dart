@@ -138,8 +138,8 @@ class SettingsPage extends StatelessWidget {
                     primary: const Color.fromRGBO(127, 209, 174, 1),
                   ),
                   onPressed: () async {
-                    // await _authService.deleteAuth();
                     if (await _authService.deleteAuth()) {
+                      debugPrint('user logout');
                       Navigator.push(
                         context,
                         MaterialPageRoute(

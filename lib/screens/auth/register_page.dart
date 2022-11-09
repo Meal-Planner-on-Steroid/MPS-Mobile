@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-// import '../../utils/belum_punya_akun.dart';
+import 'package:mps/app/controllers/auth_controller.dart';
+import 'package:mps/app/models/user_model.dart';
+import 'package:mps/screens/auth/login_page.dart';
 import '../../utils/sudah_punya_akun.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -11,6 +13,11 @@ class RegisterPage extends StatefulWidget {
 
 class RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
+  final _user = User();
+  final _authController = AuthController();
+
+  bool isError = false;
+  String errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +32,7 @@ class RegisterPageState extends State<RegisterPage> {
               child: Column(
                 children: <Widget>[
                   const SizedBox(height: 24),
+
                   // Salam
                   const Text(
                     'Buat akun anda 📓',
@@ -42,6 +50,11 @@ class RegisterPageState extends State<RegisterPage> {
                       }
                       return null;
                     },
+                    onSaved: (value) {
+                      setState(() {
+                        _user.firstName = value!;
+                      });
+                    },
                   ),
                   TextFormField(
                     decoration: const InputDecoration(labelText: 'Last name'),
@@ -50,6 +63,11 @@ class RegisterPageState extends State<RegisterPage> {
                         return 'Please enter your last name';
                       }
                       return null;
+                    },
+                    onSaved: (value) {
+                      setState(() {
+                        _user.lastName = value!;
+                      });
                     },
                   ),
                   TextFormField(
@@ -60,6 +78,11 @@ class RegisterPageState extends State<RegisterPage> {
                       }
                       return null;
                     },
+                    onSaved: (value) {
+                      setState(() {
+                        _user.email = value!;
+                      });
+                    },
                   ),
                   TextFormField(
                     decoration: const InputDecoration(labelText: 'Username'),
@@ -69,6 +92,11 @@ class RegisterPageState extends State<RegisterPage> {
                       }
                       return null;
                     },
+                    onSaved: (value) {
+                      setState(() {
+                        _user.username = value!;
+                      });
+                    },
                   ),
                   TextFormField(
                     decoration: const InputDecoration(labelText: 'Password'),
@@ -77,6 +105,11 @@ class RegisterPageState extends State<RegisterPage> {
                         return 'Please enter your password';
                       }
                       return null;
+                    },
+                    onSaved: (value) {
+                      setState(() {
+                        _user.password = value!;
+                      });
                     },
                   ),
 
@@ -91,11 +124,26 @@ class RegisterPageState extends State<RegisterPage> {
                           shape: const StadiumBorder(),
                           primary: const Color.fromRGBO(127, 209, 174, 1),
                         ),
-                        onPressed: () {
-                          // final form = _formKey.currentState;
-                          // if (form!.validate()) {
-                          //   form.save();
-                          // }
+                        onPressed: () async {
+                          final form = _formKey.currentState;
+                          if (form!.validate()) {
+                            form.save();
+                            if (await _authController.register(_user)) {
+                              debugPrint("User registered");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginPage(),
+                                ),
+                              );
+                              return;
+                            }
+                            setState(() {
+                              isError = !isError;
+                              errorMessage =
+                                  "Maaf, terjadi masalah pada registrasi 😢";
+                            });
+                          }
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(11.0),
@@ -109,6 +157,19 @@ class RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ],
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  Visibility(
+                    visible: isError,
+                    child: Text(
+                      errorMessage,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
 
                   const Spacer(),

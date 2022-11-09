@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mps/app/models/auth_model.dart';
+import 'package:mps/app/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -71,6 +72,31 @@ class AuthService {
       }
 
       return response.body;
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+
+  Future register(User user) async {
+    try {
+      final url = Uri.http(_baseUrl.toString(), 'api/auth/register');
+
+      debugPrint(url.toString());
+
+      var response = await http.post(url, body: {
+        "first_name": user.firstName,
+        "last_name": user.lastName,
+        "email": user.email,
+        "username": user.username,
+        "password": user.password,
+      });
+
+      if (response.statusCode != 200) {
+        return false;
+      }
+
+      return true;
     } on Exception catch (e) {
       debugPrint(e.toString());
       return false;

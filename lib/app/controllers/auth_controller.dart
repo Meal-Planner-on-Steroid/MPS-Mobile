@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mps/app/models/auth_model.dart';
 import 'package:mps/app/services/auth_service.dart';
+import 'package:mps/app/models/user_model.dart';
 
 class AuthController {
   final _authService = AuthService();
@@ -41,6 +42,24 @@ class AuthController {
 
       final newAuth = Auth(refresh: 'refresh', access: 'access');
       await _authService.saveAuth(newAuth);
+
+      return true;
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+
+  Future register(User user) async {
+    try {
+      var response = await _authService.register(user);
+
+      if (response == false) {
+        debugPrint('fail');
+        return false;
+      }
+
+      debugPrint("yey");
 
       return true;
     } on Exception catch (e) {

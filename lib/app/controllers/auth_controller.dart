@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:mps/app/models/auth_model.dart';
 import 'package:mps/app/services/auth_service.dart';
-import 'package:mps/models/auth_model.dart';
 
 class AuthController {
   final _authService = AuthService();

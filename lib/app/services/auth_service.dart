@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mps/models/auth_model.dart';
+import 'package:mps/app/models/auth_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';

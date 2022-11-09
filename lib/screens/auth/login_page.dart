@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mps/app/controllers/auth_controller.dart';
 import 'package:mps/main.dart';
-import 'package:mps/models/user_model.dart';
+import 'package:mps/app/models/user_model.dart';
 import '../../utils/belum_punya_akun.dart';
 import '../../utils/lupa_password.dart';
 

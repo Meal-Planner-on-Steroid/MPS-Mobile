@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mps/app/models/auth_model.dart';
 import 'package:mps/app/services/auth_service.dart';
 import 'package:mps/app/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController {
   final _authService = AuthService();
@@ -34,14 +35,20 @@ class AuthController {
         debugPrint('fail');
         return false;
       }
-
       debugPrint('yey');
 
       final json = jsonDecode(response);
-      debugPrint(json.toString());
 
-      final newAuth = Auth(refresh: 'refresh', access: 'access');
+      // Simpan auth
+      final newAuth = Auth(refresh: json['refresh'], access: json['access']);
       await _authService.saveAuth(newAuth);
+
+      // Simpan decoded jwt access
+      var decodeAccess = _authService.decodeToken(json['access']);
+      final prefs = await SharedPreferences.getInstance();
+
+      await prefs.setString('userId', decodeAccess['user_id'].toString());
+      await prefs.setString('username', decodeAccess['username'].toString());
 
       return true;
     } on Exception catch (e) {

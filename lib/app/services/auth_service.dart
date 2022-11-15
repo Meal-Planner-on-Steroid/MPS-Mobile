@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:mps/app/models/auth_model.dart';
 import 'package:mps/app/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,6 +8,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AuthService {
   final String? _baseUrl = dotenv.env['BASE_URL'];
+
+  Map<String, dynamic> decodeToken(String token) {
+    Map<String, dynamic> payload = Jwt.parseJwt(token);
+
+    return payload;
+  }
 
   Future saveAuth(Auth auth) async {
     final prefs = await SharedPreferences.getInstance();
@@ -29,8 +36,8 @@ class AuthService {
     final access = prefs.getString('access') ?? '';
     final refresh = prefs.getString('refresh') ?? '';
 
-    debugPrint(access);
-    debugPrint(refresh);
+    // debugPrint(access);
+    // debugPrint(refresh);
 
     return Auth(
       refresh: refresh,

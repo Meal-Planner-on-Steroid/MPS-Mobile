@@ -57,6 +57,7 @@ class _RootPageState extends State<RootPage> {
       }
 
       debugPrint('ada access dan refresh');
+
       return true;
     } on Exception catch (_) {
       return false;

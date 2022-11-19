@@ -13,8 +13,6 @@ class KebutuhanGiziService {
     try {
       final url = Uri.http(_baseUrl.toString(), endpoint);
 
-      debugPrint(url.toString());
-
       var request = await http.post(
         url,
         headers: {"Content-Type": "application/json"},
@@ -32,7 +30,6 @@ class KebutuhanGiziService {
       var response = jsonDecode(request.body);
       return HasilKebutuhanGiziSerializer.fromJson(response);
     } on Exception catch (e) {
-      debugPrint('error di getkebutuhangizi');
       debugPrint(e.toString());
       return false;
     }

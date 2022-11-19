@@ -157,7 +157,7 @@ class Data {
 class UserProfileSeralizer {
   final String? message;
   final int? statusCode;
-  final Data? data;
+  final List? data;
 
   UserProfileSeralizer({this.message, this.statusCode, this.data});
 
@@ -165,8 +165,12 @@ class UserProfileSeralizer {
     final message = json['message'];
     final statusCode = json['statusCode'];
 
-    final tempDataJson = json['data'][0];
-    final data = Data.fromJson(tempDataJson);
+    // ignore: todo
+    // TODO: Optionally serialize list or object
+    // final tempDataJson = json['data'][0];
+    // final data = Data.fromJson(tempDataJson);
+    final tempDataJson = json['data'];
+    final List data = List.from(tempDataJson);
 
     return UserProfileSeralizer(
       message: message,

@@ -193,8 +193,6 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                                   enableTingkatAktivitas = true;
                                   tingkatAktivitasTemp = tingkatAktivitas.data;
 
-                                  debugPrint(_aktivitas.toString());
-
                                   _aktivitas = [
                                     for (var items in tingkatAktivitasTemp)
                                       {

@@ -7,7 +7,7 @@ import 'package:mps/app/serializers/tingkat_aktivitas_serializer.dart';
 
 class TingkatAktivitasService {
   final String? _baseUrl = dotenv.env['BASE_URL'];
-  final String endpoint = 'api/aktivitas';
+  final String endpoint = '/api/aktivitas';
 
   Future get(TingkatAktivitasFilter tingkatAktivitasFilter) async {
     try {

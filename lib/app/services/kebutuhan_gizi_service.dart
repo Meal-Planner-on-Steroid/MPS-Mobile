@@ -54,4 +54,32 @@ class KebutuhanGiziService {
       return false;
     }
   }
+
+  Future getKebutuhanGizi(UserProfile userProfile) async {
+    try {
+      final url = Uri.http(_baseUrl.toString(), '/api/kebutuhan-gizi');
+
+      debugPrint(url.toString());
+
+      var request = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(
+          {
+            "berat_badan": userProfile.beratBadan,
+            "tinggi_badan": userProfile.tinggiBadan,
+            "usia": userProfile.usia,
+            "gender": userProfile.gender,
+            "nilai_tingkat_aktivitas": userProfile.tingkatAktivitasNilai,
+          },
+        ),
+      );
+
+      return request.body;
+    } on Exception catch (e) {
+      debugPrint('error di getkebutuhangizi');
+      debugPrint(e.toString());
+      return false;
+    }
+  }
 }

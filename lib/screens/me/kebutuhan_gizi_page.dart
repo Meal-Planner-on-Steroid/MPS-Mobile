@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mps/app/controllers/kebutuhan_gizi_controller.dart';
 import 'package:mps/app/controllers/tingkat_aktivitas_controller.dart';
+import 'package:mps/app/filters/tingkat_aktivitas_filter.dart';
 import 'package:mps/app/models/user_profile_model.dart';
 import 'package:select_form_field/select_form_field.dart';
 
@@ -19,6 +20,7 @@ class _KebuguhanGiziPageState extends State<KebuguhanGiziPage> {
   final _kebutuhanGiziController = KebutuhanGiziController();
   final _tingkatAktivitasController = TingkatAktivitasController();
 
+  var tingkatAktivitasFilter = TingkatAktivitasFilter();
   bool enableTingkatAktivitas = false;
   late List<dynamic> tingkatAktivitasTemp;
 
@@ -179,9 +181,10 @@ class _KebuguhanGiziPageState extends State<KebuguhanGiziPage> {
                                 });
                               },
                               onChanged: (value) async {
+                                tingkatAktivitasFilter.gender = value;
                                 var tingkatAktivitas =
                                     await _tingkatAktivitasController
-                                        .get(value);
+                                        .get(tingkatAktivitasFilter);
                                 setState(() {
                                   enableTingkatAktivitas = true;
                                   tingkatAktivitasTemp = tingkatAktivitas.data;

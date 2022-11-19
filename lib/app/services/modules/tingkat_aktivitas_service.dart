@@ -7,6 +7,7 @@ import 'package:mps/app/serializers/tingkat_aktivitas_serializer.dart';
 
 class TingkatAktivitasService {
   final String? _baseUrl = dotenv.env['BASE_URL'];
+  final String endpoint = 'api/aktivitas';
 
   Future get(TingkatAktivitasFilter tingkatAktivitasFilter) async {
     try {
@@ -17,16 +18,12 @@ class TingkatAktivitasService {
         'gender': tingkatAktivitasFilter.gender,
       };
 
-      final url = Uri.http(_baseUrl.toString(), 'api/aktivitas/', queryParams);
+      final url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
 
-      debugPrint(url.toString());
+      var request = await http.get(url);
 
-      var response = await http.get(url);
-
-      debugPrint(response.body);
-
-      final result = jsonDecode(response.body);
-      return TingkatAktivitasSeralizer.fromJson(result);
+      final response = jsonDecode(request.body);
+      return TingkatAktivitasSeralizer.fromJson(response);
     } on Exception catch (e) {
       debugPrint(e.toString());
       return false;

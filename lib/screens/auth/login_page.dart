@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mps/app/controllers/auth_controller.dart';
+import 'package:mps/app/controllers/pages/auth_controller.dart';
 import 'package:mps/main.dart';
 import 'package:mps/app/models/user_model.dart';
 import '../../utils/belum_punya_akun.dart';
@@ -46,7 +46,16 @@ class _LoginPageState extends State<LoginPage> {
 
                   // Username input
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Username'),
+                    decoration: const InputDecoration(
+                      hintText: 'Username',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your username';
@@ -61,8 +70,19 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   // Password input
+                  const SizedBox(height: 8),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Password'),
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      hintText: 'Password',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your password';

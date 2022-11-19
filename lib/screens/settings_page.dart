@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mps/app/services/auth_service.dart';
+import 'package:mps/app/services/pages/auth_service.dart';
 import 'package:mps/screens/auth/login_page.dart';
 import 'package:mps/screens/me/blok_makanan_page.dart';
 import 'package:mps/screens/profil_page.dart';
@@ -7,7 +7,7 @@ import 'package:mps/screens/settings/air_minum_page.dart';
 import 'settings/goal_page.dart';
 import 'settings/air_minum_page.dart';
 import 'settings/help_page.dart';
-import 'me/kebutuhan_gizi_page.dart';
+import 'me/hitung_kebutuhan_gizi_page.dart';
 import 'me/makanan_favorit_page.dart';
 import 'profil_page.dart';
 
@@ -27,7 +27,7 @@ class SettingsPage extends StatelessWidget {
       settingIcon: Icons.person,
       title: 'Kebutuhan Gizi',
       desc: 'Berat badan, tinggi badan, usia, dll',
-      href: const KebuguhanGiziPage(
+      href: const HitungKebuguhanGiziPage(
         fromPage: 'settings',
       ),
     ),

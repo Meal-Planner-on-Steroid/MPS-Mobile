@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mps/app/models/auth_model.dart';
-import 'package:mps/app/services/auth_service.dart';
+import 'package:mps/app/services/pages/auth_service.dart';
 import 'package:mps/app/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

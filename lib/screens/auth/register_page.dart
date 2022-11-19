@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mps/app/controllers/auth_controller.dart';
+import 'package:mps/app/controllers/pages/auth_controller.dart';
 import 'package:mps/app/models/user_model.dart';
 import 'package:mps/screens/auth/login_page.dart';
 import '../../utils/sudah_punya_akun.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/avatar_dan_setting.dart';
-import 'me/kebutuhan_gizi_page.dart';
+import 'me/hitung_kebutuhan_gizi_page.dart';
 import 'me/makanan_favorit_page.dart';
 import 'me/blok_makanan_page.dart';
 import 'me/hasil_rekomendasi_page.dart';
@@ -45,7 +45,7 @@ class _MePageState extends State<MePage> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return const KebuguhanGiziPage(
+                              return const HitungKebuguhanGiziPage(
                                 fromPage: 'Me',
                               );
                             }),

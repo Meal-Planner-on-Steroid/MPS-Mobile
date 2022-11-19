@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mps/app/filters/tingkat_aktivitas_filter.dart';
-import 'package:mps/app/services/tingkat_aktivitas_service.dart';
+import 'package:mps/app/services/modules/tingkat_aktivitas_service.dart';
 
 class TingkatAktivitasController {
   final _tingkatAktivitasService = TingkatAktivitasService();
@@ -10,13 +10,11 @@ class TingkatAktivitasController {
       var response = await _tingkatAktivitasService.get(tingkatAktivitasFilter);
 
       if (response == false) {
-        debugPrint('fail');
+        debugPrint('Gagal mengambil tingkat aktivitas');
         return false;
       }
 
-      debugPrint("yey");
-      debugPrint(response.message);
-      debugPrint(response.statusCode.toString());
+      debugPrint("Berhasil mengambil tingkat aktivitas");
 
       return response;
     } on Exception catch (e) {

@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:mps/app/controllers/kebutuhan_gizi_controller.dart';
-import 'package:mps/app/controllers/tingkat_aktivitas_controller.dart';
+import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart';
+import 'package:mps/app/controllers/modules/tingkat_aktivitas_controller.dart';
 import 'package:mps/app/filters/tingkat_aktivitas_filter.dart';
 import 'package:mps/app/models/user_profile_model.dart';
 import 'package:select_form_field/select_form_field.dart';
 
-class KebuguhanGiziPage extends StatefulWidget {
+class HitungKebuguhanGiziPage extends StatefulWidget {
   final String fromPage;
 
-  const KebuguhanGiziPage({Key? key, required this.fromPage}) : super(key: key);
+  const HitungKebuguhanGiziPage({Key? key, required this.fromPage})
+      : super(key: key);
 
   @override
-  State<KebuguhanGiziPage> createState() => _KebuguhanGiziPageState();
+  State<HitungKebuguhanGiziPage> createState() =>
+      _HitungKebuguhanGiziPageState();
 }
 
-class _KebuguhanGiziPageState extends State<KebuguhanGiziPage> {
+class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
   final _formKey = GlobalKey<FormState>();
   final _userProfile = UserProfile();
-  final _kebutuhanGiziController = KebutuhanGiziController();
+
+  final _hitungKebutuhanGiziController = HitungKebutuhanGiziController();
   final _tingkatAktivitasController = TingkatAktivitasController();
 
   var tingkatAktivitasFilter = TingkatAktivitasFilter();
+
   bool enableTingkatAktivitas = false;
   late List<dynamic> tingkatAktivitasTemp;
 
@@ -250,7 +254,8 @@ class _KebuguhanGiziPageState extends State<KebuguhanGiziPage> {
 
                         if (form!.validate()) {
                           form.save();
-                          await _kebutuhanGiziController.post(_userProfile);
+                          await _hitungKebutuhanGiziController
+                              .post(_userProfile);
                         }
                       },
                       child: Padding(

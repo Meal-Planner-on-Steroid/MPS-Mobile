@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart';
+import 'package:mps/app/models/user_profile_model.dart';
 import '../utils/avatar_dan_setting.dart';
 import 'me/hitung_kebutuhan_gizi_page.dart';
 import 'me/makanan_favorit_page.dart';
@@ -13,6 +15,21 @@ class MePage extends StatefulWidget {
 }
 
 class _MePageState extends State<MePage> {
+  final _userProfileFuture = UserProfile();
+
+  final _hitungKebutuhanGiziController = HitungKebutuhanGiziController();
+
+  Future updateAndGetUserProfile() async {
+    await Future.delayed(Duration.zero);
+    final userProfileData = await _hitungKebutuhanGiziController.get();
+
+    debugPrint("User telah memiliki user profile");
+
+    debugPrint(userProfileData.data[0].gender.toString());
+
+    return userProfileData.data[0];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +39,7 @@ class _MePageState extends State<MePage> {
           children: [
             const AvatarDanSetting(currentPage: 'Me'),
 
-            // Section
+            // Tiga tombol
             const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
@@ -107,7 +124,7 @@ class _MePageState extends State<MePage> {
               ),
             ),
 
-            // Section
+            // Tombol buat rekomendasi menu makanan
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -148,7 +165,7 @@ class _MePageState extends State<MePage> {
               ),
             ),
 
-            // Section
+            // Streak
             const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
@@ -190,100 +207,151 @@ class _MePageState extends State<MePage> {
               ),
             ),
 
-            // Section
-            const SizedBox(height: 16),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color.fromRGBO(127, 209, 174, 1),
-                  width: 2,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(9),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Status',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text('IMT'),
-                        Text('-'),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text('Kebutuhan Energi'),
-                        Text('-'),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
+            // Status pengguna
 
-            // Section
-            const SizedBox(height: 16),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color.fromRGBO(127, 209, 174, 1),
-                  width: 2,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(9),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            FutureBuilder(
+              future: updateAndGetUserProfile(),
+              builder: (context, snapshot) {
+                dynamic currentData;
+                if (snapshot.hasData) {
+                  currentData = snapshot.data!;
+                } else {
+                  currentData = _userProfileFuture;
+                }
+
+                return Column(
                   children: [
-                    const Text(
-                      'Kebutuhan Gizi',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    // Status
+                    const SizedBox(height: 16),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color.fromRGBO(127, 209, 174, 1),
+                          width: 2,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(9),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Status',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('IMT'),
+                                Text(currentData.imt.toStringAsFixed(2)),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('Kebutuhan Energi'),
+                                Row(
+                                  children: [
+                                    Text(currentData.keseluruhanEnergi
+                                        .toStringAsFixed(2)),
+                                    const Text(' kcal'),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text('Protein'),
-                        Text('-'),
-                      ],
+
+                    // Kebutuhan gizi
+                    const SizedBox(height: 16),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color.fromRGBO(127, 209, 174, 1),
+                          width: 2,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(9),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Kebutuhan Gizi',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('Protein'),
+                                Row(
+                                  children: [
+                                    Text(currentData.butuhProtein.protein10
+                                        .toStringAsFixed(2)),
+                                    const Text(' - '),
+                                    Text(currentData.butuhProtein.protein15
+                                        .toStringAsFixed(2)),
+                                    const Text(' g'),
+                                  ],
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('Karbohidrat'),
+                                Row(
+                                  children: [
+                                    Text(currentData.butuhKarbo.karbo60
+                                        .toStringAsFixed(2)),
+                                    const Text(' - '),
+                                    Text(currentData.butuhKarbo.karbo75
+                                        .toStringAsFixed(2)),
+                                    const Text(' g'),
+                                  ],
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('Lemak'),
+                                Row(
+                                  children: [
+                                    Text(currentData.butuhLemak.lemak10
+                                        .toStringAsFixed(2)),
+                                    const Text(' - '),
+                                    Text(currentData.butuhLemak.lemak25
+                                        .toStringAsFixed(2)),
+                                    const Text(' g'),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text('Karbohidrat'),
-                        Text('-'),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text('Lemak'),
-                        Text('-'),
-                      ],
-                    )
                   ],
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),

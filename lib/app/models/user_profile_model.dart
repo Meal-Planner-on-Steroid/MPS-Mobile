@@ -1,16 +1,16 @@
-class ButuhProteinModel {
-  double? protein10;
-  double? protein15;
+class ButuhProtein {
+  double protein10 = 0;
+  double protein15 = 0;
 }
 
-class ButuhKarboModel {
-  double? karbo60;
-  double? karbo75;
+class ButuhKarbo {
+  double karbo60 = 0;
+  double karbo75 = 0;
 }
 
-class ButuhLemakModel {
-  double? lemak10;
-  double? lemak25;
+class ButuhLemak {
+  double lemak10 = 0;
+  double lemak25 = 0;
 }
 
 class UserProfile {
@@ -22,10 +22,10 @@ class UserProfile {
   double beratBadan = 0;
   double tinggiBadan = 0;
   int usia = 0;
-  String gender = '';
+  String gender = 'LA';
   double imt = 0;
   double keseluruhanEnergi = 0;
-  ButuhProteinModel? butuhProtein;
-  ButuhLemakModel? butuhLemak;
-  ButuhKarboModel? butuhKarbo;
+  ButuhProtein butuhProtein = ButuhProtein();
+  ButuhLemak butuhLemak = ButuhLemak();
+  ButuhKarbo butuhKarbo = ButuhKarbo();
 }

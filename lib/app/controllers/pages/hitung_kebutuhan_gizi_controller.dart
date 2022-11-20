@@ -19,25 +19,28 @@ class HitungKebutuhanGiziController {
   var tingkatAktivitasFilter = TingkatAktivitasFilter();
   var userProfileFilter = UserProfileFilter();
 
-  var butuhProtein = ButuhProteinModel();
-  var butuhLemak = ButuhLemakModel();
-  var butuhKarbo = ButuhKarboModel();
+  var butuhProtein = ButuhProtein();
+  var butuhLemak = ButuhLemak();
+  var butuhKarbo = ButuhKarbo();
 
-  Future get(int userId) async {
+  Future get() async {
     try {
-      var response = await _hitungKebutuhanGiziService.get(userId);
+      final prefs = await SharedPreferences.getInstance();
 
-      if (response == false) {
-        debugPrint('fail');
+      var userId = int.parse(prefs.getString('userId') ?? '');
+      userProfileFilter.userId = userId.toString();
+      var userProfileData = await _userProfileSerivce.get(userProfileFilter);
+
+      if (userProfileData == false) {
+        debugPrint('Gagal mengambil user profile');
         return false;
       }
 
-      debugPrint("yey");
-      debugPrint(response.message);
-      debugPrint(response.statusCode.toString());
-      debugPrint(response.data.gender);
+      debugPrint(userProfileData.message);
+      debugPrint(userProfileData.statusCode.toString());
+      debugPrint(userProfileData.data[0].usia.toString());
 
-      return true;
+      return userProfileData;
     } on Exception catch (e) {
       debugPrint(e.toString());
       return false;
@@ -102,7 +105,7 @@ class HitungKebutuhanGiziController {
       } else {
         // Update user profile jika sudah ada
         debugPrint('User sudah memiliki profile');
-        var profileId = userProfileData.data[0]['id'].toString();
+        var profileId = userProfileData.data[0].id.toString();
         request = await _hitungKebutuhanGiziService.put(userProfile, profileId);
       }
 

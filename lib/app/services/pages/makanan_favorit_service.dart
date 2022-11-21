@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mps/app/filters/makanan_filter.dart';
+import 'package:mps/app/models/makanan_model.dart';
 
-class BaseService {
-  // ignore: unused_field
+class MakananFavoritService {
   final String? _baseUrl = dotenv.env['BASE_URL'];
-  final String endpoint = ""; // Alamat endpoint
+  final String endpoint = "/api/preferensi-makanan/";
 
-  Future get() async {
+  Future get(MakananFilter makananFilter) async {
     try {
       return true;
     } catch (e) {
@@ -15,7 +16,7 @@ class BaseService {
     }
   }
 
-  Future getObject() async {
+  Future getObject(String id) async {
     try {
       return true;
     } catch (e) {
@@ -24,7 +25,7 @@ class BaseService {
     }
   }
 
-  Future post() async {
+  Future post(Makanan makanan) async {
     try {
       return true;
     } catch (e) {
@@ -33,7 +34,7 @@ class BaseService {
     }
   }
 
-  Future delete() async {
+  Future delete(String id) async {
     try {
       return true;
     } catch (e) {

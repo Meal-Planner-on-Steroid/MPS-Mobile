@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './list_makanan_page.dart';
+import 'package:mps/screens/me/makanan_favorit_list_page.dart';
 
 class MakananFavoritPage extends StatefulWidget {
   final String fromPage;
@@ -41,17 +41,17 @@ class _MakananFavoritPageState extends State<MakananFavoritPage> {
         ),
         body: const TabBarView(
           children: [
-            ListMakananPage(
+            MakananFavoritListPage(
               judul: 'menu',
-              jenis: 'fav',
+              jenis: 'ME',
             ),
-            ListMakananPage(
+            MakananFavoritListPage(
               judul: 'bahan',
-              jenis: 'fav',
+              jenis: 'BA',
             ),
-            ListMakananPage(
+            MakananFavoritListPage(
               judul: 'camilan',
-              jenis: 'fav',
+              jenis: 'CA',
             ),
           ],
         ),

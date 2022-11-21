@@ -51,11 +51,13 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
     await Future.delayed(Duration.zero);
     final userProfileData = await _hitungKebutuhanGiziController.get();
 
-    debugPrint("User telah memiliki user profile");
-
-    debugPrint(userProfileData.data[0].gender.toString());
-
-    return userProfileData.data[0];
+    if (userProfileData.data.length > 0) {
+      debugPrint("User telah memiliki user profile");
+      return userProfileData.data[0];
+    } else {
+      debugPrint("User belum memiliki user profile");
+      return false;
+    }
   }
 
   @override
@@ -65,12 +67,12 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
       future: updateAndGetUserProfile(),
       builder: ((context, snapshot) {
         dynamic currentData;
-        if (snapshot.hasData) {
+        if (snapshot.hasData && snapshot.data != false) {
           currentData = snapshot.data!;
         } else {
           currentData = _userProfileFuture;
         }
-        // return Text(currentData.gender.toString());
+
         return Scaffold(
           appBar: AppBar(
             title: Text(widget.fromPage),

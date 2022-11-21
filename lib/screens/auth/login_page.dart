@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: 'Username',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(50),
+                          Radius.circular(9),
                         ),
                       ),
                       filled: true,
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: 'Password',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(50),
+                          Radius.circular(9),
                         ),
                       ),
                       filled: true,

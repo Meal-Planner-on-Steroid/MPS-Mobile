@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart';
 import 'package:mps/app/models/user_profile_model.dart';
-import '../utils/avatar_dan_setting.dart';
+import 'package:mps/utils/avatar_dan_setting.dart';
 import 'me/hitung_kebutuhan_gizi_page.dart';
 import 'me/makanan_favorit_page.dart';
 import 'me/blok_makanan_page.dart';
@@ -23,11 +23,13 @@ class _MePageState extends State<MePage> {
     await Future.delayed(Duration.zero);
     final userProfileData = await _hitungKebutuhanGiziController.get();
 
-    debugPrint("User telah memiliki user profile");
-
-    debugPrint(userProfileData.data[0].gender.toString());
-
-    return userProfileData.data[0];
+    if (userProfileData.data.length > 0) {
+      debugPrint("User telah memiliki user profile");
+      return userProfileData.data[0];
+    } else {
+      debugPrint("User belum memiliki user profile");
+      return false;
+    }
   }
 
   @override
@@ -37,7 +39,7 @@ class _MePageState extends State<MePage> {
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
-            const AvatarDanSetting(currentPage: 'Me'),
+            const AvatarDanSetting(currentPage: 'Mee'),
 
             // Tiga tombol
             const SizedBox(height: 16),
@@ -213,7 +215,7 @@ class _MePageState extends State<MePage> {
               future: updateAndGetUserProfile(),
               builder: (context, snapshot) {
                 dynamic currentData;
-                if (snapshot.hasData) {
+                if (snapshot.hasData && snapshot.data != false) {
                   currentData = snapshot.data!;
                 } else {
                   currentData = _userProfileFuture;

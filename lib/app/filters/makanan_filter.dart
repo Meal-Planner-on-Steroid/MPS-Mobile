@@ -2,6 +2,7 @@ class MakananFilter {
   String? id;
   String? idIn;
   String? nama;
+  String? namaIcontains;
   String? porsi;
   String? lemak;
   String? protein;

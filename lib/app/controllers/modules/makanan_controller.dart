@@ -19,6 +19,7 @@ class MakananController {
       return response;
     } catch (e) {
       debugPrint(e.toString());
+      debugPrint("error di controller");
       return false;
     }
   }

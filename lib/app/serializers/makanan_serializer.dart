@@ -25,8 +25,8 @@
 class Data {
   final int? id;
   final String? nama;
-  final String? porsi;
-  final String? besarPorsiId;
+  final int? porsi;
+  final int? besarPorsiId;
   final double? beratPorsi;
   final double? lemak;
   final double? protein;
@@ -56,8 +56,8 @@ class Data {
       id: json['id'],
       nama: json['nama'],
       porsi: json['porsi'],
-      besarPorsiId: json['besarPorsiId'],
-      beratPorsi: json['beratPorsi'],
+      besarPorsiId: json['besar_porsi_id'],
+      beratPorsi: json['berat_porsi'],
       lemak: json['lemak'],
       protein: json['protein'],
       karbo: json['karbo'],

@@ -1,8 +1,8 @@
 class Makanan {
   int id = 0;
   String nama = 'NaN';
-  String porsi = 'NaN';
-  String besarPorsiId = 'NaN';
+  int porsi = 0;
+  int besarPorsiId = 0;
   double beratPorsi = 0;
   double lemak = 0;
   double protein = 0;

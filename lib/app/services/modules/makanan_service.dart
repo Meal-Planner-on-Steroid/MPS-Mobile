@@ -17,6 +17,7 @@ class MakananService {
         "id": makananFilter.id,
         "id__in": makananFilter.idIn,
         "nama": makananFilter.nama,
+        "nama__icontains": makananFilter.namaIcontains,
         "porsi": makananFilter.porsi,
         "lemak": makananFilter.lemak,
         "protein": makananFilter.protein,
@@ -25,11 +26,19 @@ class MakananService {
         "jenis": makananFilter.jenis,
       };
 
-      final url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
+      var url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
+      var decodeUrl = Uri.decodeFull(url.toString());
+
+      url = Uri.parse(decodeUrl);
+
+      debugPrint(url.toString());
 
       var request = await http.get(url);
 
       final response = jsonDecode(request.body);
+
+      debugPrint(response.toString());
+
       return MakananSerializer.fromJson(response);
     } on Exception catch (e) {
       debugPrint(e.toString());

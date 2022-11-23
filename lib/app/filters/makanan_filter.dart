@@ -9,4 +9,6 @@ class MakananFilter {
   String? karbo;
   String? energi;
   String? jenis;
+
+  String page = "1";
 }

@@ -24,6 +24,7 @@ class MakananService {
         "karbo": makananFilter.karbo,
         "energi": makananFilter.energi,
         "jenis": makananFilter.jenis,
+        "page": makananFilter.page,
       };
 
       var url = Uri.http(_baseUrl.toString(), endpoint, queryParams);

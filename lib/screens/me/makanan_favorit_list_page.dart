@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mps/app/controllers/modules/makanan_controller.dart';
 import 'package:mps/app/filters/makanan_filter.dart';
 import 'package:mps/screens/menu/detail_menu_page.dart';
-import 'package:mps/utils/checkbox_green.dart';
+import 'package:mps/utils/checkbox_makanan_favorit.dart';
 
 class MakananFavoritListPage extends StatefulWidget {
   final String judul;
@@ -100,7 +100,9 @@ class _MakananFavoritListPageState extends State<MakananFavoritListPage> {
                       ),
                       subtitle: Text(
                           "Pro ${makanan.protein}, Karb ${makanan.karbo}, Fat ${makanan.lemak}"),
-                      trailing: const CheckboxGreen(),
+                      trailing: CheckboxMakananFavorit(
+                        makananId: makanan.id,
+                      ),
                       shape: RoundedRectangleBorder(
                         side: const BorderSide(
                           width: 1,

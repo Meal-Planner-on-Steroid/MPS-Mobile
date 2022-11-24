@@ -38,7 +38,7 @@ class MakananService {
 
       final response = jsonDecode(request.body);
 
-      debugPrint(response.toString());
+      // debugPrint(response.toString());
 
       return MakananSerializer.fromJson(response);
     } on Exception catch (e) {

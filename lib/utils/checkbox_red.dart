@@ -25,6 +25,7 @@ class _CheckboxRedState extends State<CheckboxRed> {
       ),
       onTap: () {
         setState(() {
+          checked = !checked;
           if (checked) {
             _checkColor = Colors.red;
             _checkIcon = Icons.cancel_rounded;
@@ -32,7 +33,7 @@ class _CheckboxRedState extends State<CheckboxRed> {
             _checkColor = Colors.blue;
             _checkIcon = Icons.crop_square_outlined;
           }
-          checked = !checked;
+          debugPrint("checked adalah $checked");
         });
       },
     );

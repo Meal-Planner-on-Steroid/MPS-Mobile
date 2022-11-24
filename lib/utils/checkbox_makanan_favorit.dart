@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:mps/app/controllers/modules/preferensi_makanan_controller.dart';
 import 'package:mps/app/models/preferensi_makanan_model.dart';
 
+// ignore: must_be_immutable
 class CheckboxMakananFavorit extends StatefulWidget {
-  final int userId;
   final int makananId;
   final int? preferensiMakananId;
+  bool? checked = false;
 
-  const CheckboxMakananFavorit({
+  CheckboxMakananFavorit({
     Key? key,
-    required this.userId,
     required this.makananId,
     this.preferensiMakananId,
+    this.checked,
   }) : super(key: key);
 
   @override
@@ -24,7 +25,7 @@ class _CheckboxMakananFavoritState extends State<CheckboxMakananFavorit> {
 
   Color _checkColor = Colors.blue;
   IconData _checkIcon = Icons.crop_square_outlined;
-  bool checked = false;
+  late bool checked = widget.checked ?? false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,28 +39,38 @@ class _CheckboxMakananFavoritState extends State<CheckboxMakananFavorit> {
         ),
       ),
       onTap: () async {
+        // Setstate dipecah agar lebih mudah dibaca
+
+        preferensiMakananModel.makananId = widget.makananId;
+        preferensiMakananModel.jenis = 'FV';
+
+        // Update checked di awal
+        setState(() => checked = !checked);
+
         if (checked) {
           // POST untuk create preferensi makanan
-          preferensiMakananModel.userId = widget.userId;
-          preferensiMakananModel.makananId = widget.makananId;
-          preferensiMakananModel.jenis = 'fav';
           if (await _preferensiMakananController.post(preferensiMakananModel)) {
             setState(() {
               _checkColor = Colors.green;
               _checkIcon = Icons.check_circle;
             });
+          } else {
+            setState(() => checked = !checked);
           }
         } else {
           // DELETE untuk hapus preferensi makanan
           if (await _preferensiMakananController
-              .delete(widget.preferensiMakananId!)) {
+              .delete(preferensiMakananModel)) {
             setState(() {
               _checkColor = Colors.blue;
               _checkIcon = Icons.crop_square_outlined;
             });
+          } else {
+            setState(() => checked = !checked);
           }
         }
-        checked = !checked;
+
+        debugPrint('Checked adalah ${widget.checked}');
       },
     );
   }

@@ -33,8 +33,7 @@ class _MakananFavoritListPageState extends State<MakananFavoritListPage> {
       MakananFilter makananFilter) async {
     makananFilter.jenis = widget.jenis;
     var request = await _makananController.get(makananFilter);
-    makanans = request.data;
-    debugPrint('Berhasil mengambil list makanan');
+    makanans += request.data;
     return request.data;
   }
 
@@ -149,19 +148,21 @@ class _MakananFavoritListPageState extends State<MakananFavoritListPage> {
     });
   }
 
-  // TODO: Scroll
   void _scrollListener() async {
     if (makananScrollController.position.pixels ==
         makananScrollController.position.maxScrollExtent) {
       makananFilter.page = (int.parse(makananFilter.page) + 1).toString();
       final addMakanans = await getAndUpdateMakananList(makananFilter);
 
-      debugPrint("page sekarang ${makananFilter.page}");
+      // ignore: prefer_is_empty
+      if (addMakanans.length > 0) {
+        debugPrint("page sekarang ${makananFilter.page}");
 
-      setState(() {
-        makananFilter.page = (int.parse(makananFilter.page) + 1).toString();
-        makanans += addMakanans;
-      });
+        setState(() {});
+      } else {
+        debugPrint("=================================");
+        debugPrint("Sudah tidak ada data");
+      }
     }
   }
 }

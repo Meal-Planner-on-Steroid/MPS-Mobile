@@ -1,16 +1,36 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CheckboxRed extends StatefulWidget {
-  const CheckboxRed({Key? key}) : super(key: key);
+  bool? checked = false;
+  CheckboxRed({
+    Key? key,
+    this.checked,
+  }) : super(key: key);
 
   @override
   State<CheckboxRed> createState() => _CheckboxRedState();
 }
 
 class _CheckboxRedState extends State<CheckboxRed> {
-  Color _checkColor = Colors.blue;
-  IconData _checkIcon = Icons.crop_square_outlined;
-  bool checked = false;
+  Color? _checkColor;
+  IconData? _checkIcon;
+  bool? checked;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.checked == false || widget.checked == null) {
+      _checkColor = Colors.blue;
+      _checkIcon = Icons.crop_square_outlined;
+      checked = false;
+    } else {
+      _checkColor = Colors.red;
+      _checkIcon = Icons.cancel_rounded;
+      checked = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +45,8 @@ class _CheckboxRedState extends State<CheckboxRed> {
       ),
       onTap: () {
         setState(() {
-          checked = !checked;
-          if (checked) {
+          checked = !checked!;
+          if (checked == true) {
             _checkColor = Colors.red;
             _checkIcon = Icons.cancel_rounded;
           } else {

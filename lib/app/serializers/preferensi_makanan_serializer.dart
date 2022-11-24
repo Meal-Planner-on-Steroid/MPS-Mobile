@@ -16,8 +16,8 @@
 
 class Data {
   final int? id;
-  final String? userId;
-  final String? makananId;
+  final int? userId;
+  final int? makananId;
   final String? jenis;
 
   Data({
@@ -30,8 +30,8 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
       id: json['id'],
-      userId: json['userId'],
-      makananId: json['makananId'],
+      userId: json['user_id'],
+      makananId: json['makanan_id'],
       jenis: json['jenis'],
     );
   }

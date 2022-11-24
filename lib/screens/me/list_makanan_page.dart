@@ -58,7 +58,7 @@ class _ListMakananPageState extends State<ListMakananPage> {
                 subtitle: Text(makanan.desc),
                 trailing: widget.jenis == 'fav'
                     ? const CheckboxGreen()
-                    : const CheckboxRed(),
+                    : CheckboxRed(),
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(
                     width: 1,

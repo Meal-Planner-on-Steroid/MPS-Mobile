@@ -24,10 +24,12 @@ class PreferensiMakananService {
 
       final url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
 
+      debugPrint(url.toString());
+
       var request = await http.get(url);
 
       final response = jsonDecode(request.body);
-      return MakananSerializer.fromJson(response);
+      return PreferensiMakananSeralizer.fromJson(response);
     } on Exception catch (e) {
       debugPrint(e.toString());
       return false;

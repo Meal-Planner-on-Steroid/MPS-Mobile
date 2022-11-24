@@ -23,9 +23,24 @@ class _CheckboxMakananFavoritState extends State<CheckboxMakananFavorit> {
   final _preferensiMakananController = PreferensiMakananController();
   var preferensiMakananModel = PreferensiMakanan();
 
-  Color _checkColor = Colors.blue;
-  IconData _checkIcon = Icons.crop_square_outlined;
-  late bool checked = widget.checked ?? false;
+  Color? _checkColor;
+  IconData? _checkIcon;
+  bool? checked;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.checked == false || widget.checked == null) {
+      _checkColor = Colors.blue;
+      _checkIcon = Icons.crop_square_outlined;
+      checked = false;
+    } else {
+      _checkColor = Colors.green;
+      _checkIcon = Icons.check_circle;
+      checked = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +60,9 @@ class _CheckboxMakananFavoritState extends State<CheckboxMakananFavorit> {
         preferensiMakananModel.jenis = 'FV';
 
         // Update checked di awal
-        setState(() => checked = !checked);
+        setState(() => checked = !checked!);
 
-        if (checked) {
+        if (checked!) {
           // POST untuk create preferensi makanan
           if (await _preferensiMakananController.post(preferensiMakananModel)) {
             setState(() {
@@ -55,7 +70,7 @@ class _CheckboxMakananFavoritState extends State<CheckboxMakananFavorit> {
               _checkIcon = Icons.check_circle;
             });
           } else {
-            setState(() => checked = !checked);
+            setState(() => checked = !checked!);
           }
         } else {
           // DELETE untuk hapus preferensi makanan
@@ -66,7 +81,7 @@ class _CheckboxMakananFavoritState extends State<CheckboxMakananFavorit> {
               _checkIcon = Icons.crop_square_outlined;
             });
           } else {
-            setState(() => checked = !checked);
+            setState(() => checked = !checked!);
           }
         }
 

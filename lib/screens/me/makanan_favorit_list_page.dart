@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mps/app/controllers/modules/makanan_controller.dart';
+import 'package:mps/app/controllers/modules/preferensi_makanan_controller.dart';
 import 'package:mps/app/filters/makanan_filter.dart';
+import 'package:mps/app/filters/preferensi_makanan_filter.dart';
 import 'package:mps/screens/menu/detail_menu_page.dart';
 import 'package:mps/utils/checkbox_makanan_favorit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MakananFavoritListPage extends StatefulWidget {
   final String judul;
@@ -20,12 +23,15 @@ class MakananFavoritListPage extends StatefulWidget {
 
 class _MakananFavoritListPageState extends State<MakananFavoritListPage> {
   final _makananController = MakananController();
+  final _preferensiMakananController = PreferensiMakananController();
 
   var makananFilter = MakananFilter();
+  var preferensiMakananFilter = PreferensiMakananFilter();
 
   final controller = TextEditingController();
   var makananScrollController = ScrollController();
   List<dynamic> makanans = [];
+  List<int> preferensiMakananIdList = [];
 
   late Future<List<dynamic>> makananListFuture;
 
@@ -37,11 +43,37 @@ class _MakananFavoritListPageState extends State<MakananFavoritListPage> {
     return request.data;
   }
 
+  Future<List<dynamic>> getPreferensiMakanan(
+      PreferensiMakananFilter preferensiMakananFilter) async {
+    final prefs = await SharedPreferences.getInstance();
+    preferensiMakananFilter.userId = prefs.getString('userId');
+    preferensiMakananFilter.jenis = 'FV';
+
+    var request =
+        await _preferensiMakananController.get(preferensiMakananFilter);
+
+    return request.data;
+  }
+
+  Future<List<int>> makeListMakananIds() async {
+    List listPreferensiMakanan =
+        await getPreferensiMakanan(preferensiMakananFilter);
+    List<int> result = [];
+    for (var item in listPreferensiMakanan) {
+      result.add(item.makananId);
+    }
+
+    preferensiMakananIdList = result;
+
+    return result;
+  }
+
   @override
   void initState() {
     super.initState();
 
     makananListFuture = getAndUpdateMakananList(makananFilter);
+    makeListMakananIds();
     makananScrollController = ScrollController()..addListener(_scrollListener);
   }
 
@@ -102,6 +134,7 @@ class _MakananFavoritListPageState extends State<MakananFavoritListPage> {
                           "Pro ${makanan.protein}, Karb ${makanan.karbo}, Fat ${makanan.lemak}"),
                       trailing: CheckboxMakananFavorit(
                         makananId: makanan.id,
+                        checked: preferensiMakananIdList.contains(makanan.id),
                       ),
                       shape: RoundedRectangleBorder(
                         side: const BorderSide(

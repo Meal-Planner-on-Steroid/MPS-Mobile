@@ -4,6 +4,7 @@ import 'package:mps/app/models/makanan_model.dart';
 import 'package:mps/app/services/pages/makanan_favorit_service.dart';
 
 class MakananFavoritController {
+  // ignore: unused_field
   final _makananFavoritService = MakananFavoritService();
 
   Future get(MakananFilter makananFilter) async {

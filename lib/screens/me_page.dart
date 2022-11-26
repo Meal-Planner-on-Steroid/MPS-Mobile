@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart';
 import 'package:mps/app/models/user_profile_model.dart';
+import 'package:mps/screens/me/makanan_blok_page.dart';
 import 'package:mps/utils/avatar_dan_setting.dart';
 import 'me/hitung_kebutuhan_gizi_page.dart';
 import 'me/makanan_favorit_page.dart';
-import 'me/blok_makanan_page.dart';
 import 'me/hasil_rekomendasi_page.dart';
 
 class MePage extends StatefulWidget {
@@ -106,7 +106,7 @@ class _MePageState extends State<MePage> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return const BlokMakananPage(
+                              return const MakananBlokPage(
                                 fromPage: 'Me',
                               );
                             }),

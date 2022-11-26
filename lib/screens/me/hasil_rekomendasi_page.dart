@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mps/main.dart';
 import 'package:mps/utils/accordeon_rekomendasi_makanan/accordion_makanan.dart';
 
 class HasilRekomendasiPage extends StatelessWidget {
@@ -12,9 +13,11 @@ class HasilRekomendasiPage extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
+            // Tiga tombol
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                // Tombol pakai
                 Expanded(
                   flex: 3,
                   child: SizedBox(
@@ -27,11 +30,12 @@ class HasilRekomendasiPage extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(builder: (BuildContext context) {
-                        //     return const HasilRekomendasiPage();
-                        //   }),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MyApp(),
+                          ),
+                        );
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(12.0),
@@ -44,6 +48,8 @@ class HasilRekomendasiPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                // Tombol buat lagi / ulang
                 const SizedBox(width: 8),
                 Expanded(
                   flex: 3,
@@ -74,6 +80,8 @@ class HasilRekomendasiPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                // Tombol batal
                 const SizedBox(width: 8),
                 Expanded(
                   flex: 3,
@@ -87,11 +95,7 @@ class HasilRekomendasiPage extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(builder: (BuildContext context) {
-                        //     return const HasilRekomendasiPage();
-                        //   }),
-                        // );
+                        Navigator.pop(context);
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(12.0),
@@ -107,7 +111,7 @@ class HasilRekomendasiPage extends StatelessWidget {
               ],
             ),
 
-            // Section
+            // Status
             const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
@@ -151,7 +155,7 @@ class HasilRekomendasiPage extends StatelessWidget {
               ),
             ),
 
-            // Section
+            // Status gizi
             const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
@@ -203,11 +207,8 @@ class HasilRekomendasiPage extends StatelessWidget {
               ),
             ),
 
-            // Accordeon makanan
+            // List rekomendasi makanan
             const SizedBox(height: 16),
-
-            const SizedBox(height: 16),
-
             const AccordionMakanan(),
           ],
         ),

@@ -19,8 +19,6 @@ class UserProfileService {
 
       var request = await http.get(url);
 
-      debugPrint(request.body.toString());
-
       final response = jsonDecode(request.body);
       return UserProfileSeralizer.fromJson(response);
     } catch (e) {

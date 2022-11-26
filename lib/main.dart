@@ -49,7 +49,6 @@ class _RootPageState extends State<RootPage> {
     try {
       // ignore: unused_local_variable
       final auth = await _authService.getAuth();
-      debugPrint('This is main page');
 
       if (auth.access.isEmpty || auth.refresh.isEmpty) {
         debugPrint('tidak ada access dan refresh');

@@ -37,7 +37,6 @@ class HitungKebutuhanGiziController {
       }
 
       debugPrint(userProfileData.message);
-      debugPrint(userProfileData.statusCode.toString());
 
       return userProfileData;
     } on Exception catch (e) {

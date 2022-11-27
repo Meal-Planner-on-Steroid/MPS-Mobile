@@ -214,7 +214,7 @@ class RekomendasiMakanan {
 
 class Data {
   final KebutuhanGizi? kebutuhanGizi;
-  final RekomendasiMakanan? rekomendasiMakanan;
+  final dynamic rekomendasiMakanan;
 
   Data({
     required this.kebutuhanGizi,
@@ -223,7 +223,7 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      kebutuhanGizi: json['kebutuhan_gizi'],
+      kebutuhanGizi: KebutuhanGizi.fromJson(json['kebutuhan_gizi']),
       rekomendasiMakanan: json['rekomendasi']
           .map((list) =>
               list.map((item) => RekomendasiMakanan.fromJson(item)).toList())

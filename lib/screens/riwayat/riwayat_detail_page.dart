@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mps/utils/accordeon_rekomendasi_makanan/accordion_makanan.dart';
+// import 'package:mps/utils/accordeon_rekomendasi_makanan/accordion_makanan.dart';
 import 'package:mps/utils/makanan_card.dart';
 
 class RiwayatDetailpage extends StatefulWidget {
@@ -123,7 +123,7 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
 
             const SizedBox(height: 16),
 
-            const AccordionMakanan(),
+            // const AccordionMakanan(),
           ],
         ),
       ),

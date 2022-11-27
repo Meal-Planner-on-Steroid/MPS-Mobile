@@ -3,7 +3,11 @@ import 'package:getwidget/getwidget.dart';
 import '../makanan_card.dart';
 
 class AccordionMakanan extends StatefulWidget {
-  const AccordionMakanan({Key? key}) : super(key: key);
+  final List<dynamic>? data;
+  const AccordionMakanan({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   State<AccordionMakanan> createState() => _AccordionMakananState();
@@ -50,6 +54,8 @@ class _AccordionMakananState extends State<AccordionMakanan> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("id makanan pertama: ${widget.data![0][0].id}");
+
     return Container(
       color: Colors.white,
       child: Column(

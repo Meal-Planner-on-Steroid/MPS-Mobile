@@ -136,10 +136,11 @@ class _MePageState extends State<MePage> {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (BuildContext context) {
-                    return const HasilRekomendasiPage();
-                  }),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HasilRekomendasiPage(),
+                  ),
                 );
               },
               child: Padding(

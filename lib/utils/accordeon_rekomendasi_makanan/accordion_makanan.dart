@@ -72,16 +72,9 @@ class _AccordionMakananState extends State<AccordionMakanan> {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    items = listAccordeionBuilder(widget.data);
-  }
-
-  @override
   Widget build(BuildContext context) {
     debugPrint("id makanan pertama: ${widget.data[0][0].id}");
-
+    items = listAccordeionBuilder(widget.data);
     return Container(
       color: Colors.white,
       child: Column(

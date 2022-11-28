@@ -65,11 +65,15 @@ class RiwayatRekomendasiRencanaDietService {
         body: jsonEncode(
           {
             "user": {"id": riwayatRekomendasiRencanaDiet.userId},
-            "kebutuhan_gizi": riwayatRekomendasiRencanaDiet.rekomendasi,
-            "rekomendasi": riwayatRekomendasiRencanaDiet.kebutuhanGizi,
+            "kebutuhan_gizi":
+                riwayatRekomendasiRencanaDiet.kebutuhanGizi.toJson(),
+            "rekomendasi": riwayatRekomendasiRencanaDiet.rekomendasi,
           },
         ),
       );
+
+      var response = jsonDecode(request.body);
+      debugPrint(response.toString());
 
       return true;
     } catch (e) {

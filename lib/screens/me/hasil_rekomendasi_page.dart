@@ -146,14 +146,19 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                             ),
                           ),
                           onPressed: () async {
-                            await _hasilRekomendasiController
-                                .post(hasilRekomendasiMenu);
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => const MyApp(),
-                            //   ),
-                            // );
+                            if (await _hasilRekomendasiController.post(
+                                statusGizi, rekomendasiMakanan)) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MyApp(),
+                                ),
+                              );
+                            } else {
+                              const AlertDialog(
+                                title: Text('Berhasil'),
+                              );
+                            }
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(12.0),
@@ -181,10 +186,9 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                             ),
                           ),
                           onPressed: () {
-                            waitDialog();
-                            // setState(() {
-                            //   hasilRekomendasiMenu = generateRekomendasiMenu();
-                            // });
+                            setState(() {
+                              hasilRekomendasiMenu = generateRekomendasiMenu();
+                            });
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(12.0),
@@ -256,7 +260,7 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text('IMT'),
-                            Text(statusGizi!.imt!.toStringAsFixed(2)),
+                            Text(statusGizi.imt!.toStringAsFixed(2)),
                           ],
                         ),
                         const SizedBox(height: 8),
@@ -371,7 +375,8 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
   waitDialog() {
     return showDialog<String>(
       context: context,
-      builder: (BuildContext context) => FutureBuilder(
+      builder: (BuildContext context) =>
+          FutureBuilder<GenerateRekomendasiMenuSerializer>(
         future: generateRekomendasiMenu(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -395,6 +400,7 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
               ],
             );
           }
+
           return AlertDialog(
             title: const Text('Berhasil'),
             content: const Text('Berhasil membuat rekomendasi makanan'),

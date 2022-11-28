@@ -66,7 +66,7 @@ class HitungKebutuhanGiziController {
 
       debugPrint(hasilKebutuhanGizi.message);
 
-      // // Persipan data user profil
+      // Persipan data user profil
       final prefs = await SharedPreferences.getInstance();
 
       userProfile.userId = int.parse(prefs.getString('userId') ?? '');

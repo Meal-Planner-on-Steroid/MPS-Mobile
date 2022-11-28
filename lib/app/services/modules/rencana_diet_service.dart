@@ -54,12 +54,26 @@ class RencanaDietService {
         body: jsonEncode(
           {
             "user": {"id": rencanaDiet.userId},
+            "tanggal": rencanaDiet.tanggal.toIso8601String(),
             "rencana_diet_makanan": rencanaDiet.rencanaDietMakanan,
             "olahraga": rencanaDiet.olahraga,
             "minum": rencanaDiet.minum,
           },
         ),
       );
+
+      var response = jsonDecode(request.body);
+      debugPrint(response.toString());
+
+      // debugPrint(jsonEncode(
+      //   {
+      //     "user": {"id": rencanaDiet.userId},
+      //     "tanggal": rencanaDiet.tanggal.toIso8601String(),
+      //     "rencana_diet_makanan": rencanaDiet.rencanaDietMakanan,
+      //     "olahraga": rencanaDiet.olahraga,
+      //     "minum": rencanaDiet.minum,
+      //   },
+      // ));
 
       return true;
     } catch (e) {

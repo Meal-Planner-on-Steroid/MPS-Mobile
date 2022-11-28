@@ -12,8 +12,6 @@ class GenerateRekomendasiMenuService {
 
   Future post(GenerateRekomendasiMenu generateRekomendasiMenu) async {
     try {
-      debugPrint('ini service');
-
       final url = Uri.http(_baseUrl.toString(), endpoint);
 
       var request = await http.post(
@@ -28,6 +26,7 @@ class GenerateRekomendasiMenuService {
             "nilai_tingkat_aktivitas":
                 generateRekomendasiMenu.nilaiTingkatAktivitas,
             "with_detail": generateRekomendasiMenu.withDetail,
+            "blok_makanan": generateRekomendasiMenu.blokMakanan,
           },
         ),
       );

@@ -5,4 +5,5 @@ class GenerateRekomendasiMenu {
   int usia = 0;
   double nilaiTingkatAktivitas = 0;
   bool withDetail = false;
+  List blokMakanan = [];
 }

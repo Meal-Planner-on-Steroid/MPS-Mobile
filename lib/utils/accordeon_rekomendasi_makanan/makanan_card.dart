@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MakananCard extends StatelessWidget {
+class MakananCard extends StatefulWidget {
   final String waktuMakan;
   final String namaMakanan;
   final double protein;
@@ -18,6 +18,11 @@ class MakananCard extends StatelessWidget {
     required this.energi,
   }) : super(key: key);
 
+  @override
+  State<MakananCard> createState() => _MakananCardState();
+}
+
+class _MakananCardState extends State<MakananCard> {
   @override
   Widget build(BuildContext context) {
     // debugPrint('MakananCard =========');
@@ -59,7 +64,7 @@ class MakananCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              waktuMakan,
+                              widget.waktuMakan,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
@@ -67,7 +72,7 @@ class MakananCard extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              namaMakanan,
+                              widget.namaMakanan,
                               overflow: TextOverflow.ellipsis,
                               softWrap: false,
                               maxLines: 1,
@@ -95,11 +100,11 @@ class MakananCard extends StatelessWidget {
               children: [
                 // Detail
                 Text(
-                    "Pro ${protein.toStringAsFixed(1)}, Karb ${karbo.toStringAsFixed(1)}, Fat ${fat.toStringAsFixed(1)}"),
+                    "Pro ${widget.protein.toStringAsFixed(1)}, Karb ${widget.karbo.toStringAsFixed(1)}, Fat ${widget.fat.toStringAsFixed(1)}"),
 
                 // Kalori
                 Text(
-                  "${energi.toStringAsFixed(2)} kcal",
+                  "${widget.energi.toStringAsFixed(2)} kcal",
                   style: const TextStyle(color: Colors.blue),
                 ),
               ],

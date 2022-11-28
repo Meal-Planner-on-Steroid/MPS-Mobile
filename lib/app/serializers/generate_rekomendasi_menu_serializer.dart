@@ -141,28 +141,33 @@ class KebutuhanGizi {
   });
 
   factory KebutuhanGizi.fromJson(Map<String, dynamic> json) {
-    final imt = json['imt'];
-    final keseluruhanEnergi = json['total_energi'];
-    final amb = json['amb'];
-
-    final tempButuhProteinJson = json['kebutuhan_protein'];
-    final butuhProtein = ButuhProtein.fromJson(tempButuhProteinJson);
-
-    final tempButuhKarboJson = json['kebutuhan_karbo'];
-    final butuhKarbo = ButuhKarbo.fromJson(tempButuhKarboJson);
-
-    final tempButuhLemakJson = json['kebutuhan_lemak'];
-    final butuhLemak = ButuhLemak.fromJson(tempButuhLemakJson);
-
     return KebutuhanGizi(
-      imt: imt,
-      keseluruhanEnergi: keseluruhanEnergi,
-      amb: amb,
-      butuhProtein: butuhProtein,
-      butuhLemak: butuhLemak,
-      butuhKarbo: butuhKarbo,
+      imt: json['imt'],
+      keseluruhanEnergi: json['total_energi'],
+      amb: json['amb'],
+      butuhProtein: ButuhProtein.fromJson(json['kebutuhan_protein']),
+      butuhLemak: ButuhLemak.fromJson(json['kebutuhan_lemak']),
+      butuhKarbo: ButuhKarbo.fromJson(json['kebutuhan_karbo']),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "amb": amb,
+        "total_energi": keseluruhanEnergi,
+        "imt": imt,
+        "kebutuhan_protein": {
+          "protein_10": butuhProtein!.protein10,
+          "protein_15": butuhProtein!.protein15
+        },
+        "kebutuhan_lemak": {
+          "lemak_10": butuhLemak!.lemak10,
+          "lemak_25": butuhLemak!.lemak25
+        },
+        "kebutuhan_karbo": {
+          "karbo_60": butuhKarbo!.karbo60,
+          "karbo_75": butuhKarbo!.karbo75
+        }
+      };
 }
 
 class RekomendasiMakanan {
@@ -210,10 +215,25 @@ class RekomendasiMakanan {
       kelompok: json['kelompok'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "nama": nama,
+        "porsi": porsi,
+        "lemak": lemak,
+        "protein": protein,
+        "karbo": karbo,
+        "energi": energi,
+        "jenis": jenis,
+        "berat_porsi": beratPorsi,
+        "besar_porsi_id": besarPorsiId,
+        "sumber": sumber,
+        "kelompok": kelompok,
+      };
 }
 
 class Data {
-  final KebutuhanGizi? kebutuhanGizi;
+  final KebutuhanGizi kebutuhanGizi;
   final dynamic rekomendasiMakanan;
 
   Data({

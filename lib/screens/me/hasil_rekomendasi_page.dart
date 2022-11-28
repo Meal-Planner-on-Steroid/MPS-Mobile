@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mps/app/controllers/modules/generate_rekomendasi_menu_controller.dart';
+import 'package:mps/app/controllers/pages/hasil_rekomendasi_controller.dart';
 import 'package:mps/app/serializers/generate_rekomendasi_menu_serializer.dart';
 import 'package:mps/main.dart';
 import 'package:mps/utils/accordeon_rekomendasi_makanan/accordion_makanan.dart';
@@ -15,6 +16,7 @@ class HasilRekomendasiPage extends StatefulWidget {
 class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
   final _generateRekomendasiMakananController =
       GenerateRekomendasiMenuController();
+  final _hasilRekomendasiController = HasilRekomendasiController();
 
   late Future<GenerateRekomendasiMenuSerializer> hasilRekomendasiMenu;
 
@@ -27,7 +29,6 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
 
   Future<GenerateRekomendasiMenuSerializer> generateRekomendasiMenu() async {
     var response = await _generateRekomendasiMakananController.post();
-    // debugPrint(response.data.kebutuhanGizi.amb.toString());
     return response;
   }
 
@@ -132,7 +133,7 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    // Tombol pakai
+                    // Tombol pakai / setuju
                     Expanded(
                       flex: 3,
                       child: SizedBox(
@@ -144,13 +145,15 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                               borderRadius: BorderRadius.circular(9),
                             ),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MyApp(),
-                              ),
-                            );
+                          onPressed: () async {
+                            await _hasilRekomendasiController
+                                .post(hasilRekomendasiMenu);
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => const MyApp(),
+                            //   ),
+                            // );
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(12.0),

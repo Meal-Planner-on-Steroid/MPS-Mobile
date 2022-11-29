@@ -43,7 +43,16 @@ class RegisterPageState extends State<RegisterPage> {
 
                   // Register input
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'First name'),
+                    decoration: const InputDecoration(
+                      hintText: 'First name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(9),
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your first name';
@@ -56,8 +65,19 @@ class RegisterPageState extends State<RegisterPage> {
                       });
                     },
                   ),
+
+                  const SizedBox(height: 8),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Last name'),
+                    decoration: const InputDecoration(
+                      hintText: 'Last name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(9),
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your last name';
@@ -70,8 +90,19 @@ class RegisterPageState extends State<RegisterPage> {
                       });
                     },
                   ),
+
+                  const SizedBox(height: 8),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Email'),
+                    decoration: const InputDecoration(
+                      hintText: 'Email',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(9),
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your username';
@@ -84,8 +115,19 @@ class RegisterPageState extends State<RegisterPage> {
                       });
                     },
                   ),
+
+                  const SizedBox(height: 8),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Username'),
+                    decoration: const InputDecoration(
+                      hintText: 'Username',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(9),
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your username';
@@ -98,8 +140,20 @@ class RegisterPageState extends State<RegisterPage> {
                       });
                     },
                   ),
+
+                  const SizedBox(height: 8),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Password'),
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      hintText: 'Password',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(9),
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your password';

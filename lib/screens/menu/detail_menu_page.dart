@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mps/app/controllers/modules/bahan_makanan_controller.dart';
-import 'package:mps/app/controllers/modules/makanan_controller.dart';
-import 'package:mps/app/controllers/modules/satuan_controller.dart';
-import 'package:mps/app/serializers/makanan_serializer.dart';
+import 'package:mps/app/controllers/pages/detail_menu_controller.dart';
+import 'package:mps/app/models/detail_menu_model.dart';
 
 class DetailMenuPage extends StatefulWidget {
   final int makananId;
@@ -16,14 +14,12 @@ class DetailMenuPage extends StatefulWidget {
 }
 
 class _DetailMenuPageState extends State<DetailMenuPage> {
-  final _makananController = MakananController();
-  final _satuanController = SatuanController();
-  final _bahanMakananController = BahanMakananController();
+  final _detailMenuController = DetailMenuController();
 
-  late Future<MakananSerializer> makananFuture;
+  late Future<DetailMenu> detailMenuFuture;
 
-  Future<MakananSerializer> getThisMakanan(int id) async {
-    var response = await _makananController.getObject(id.toString());
+  Future<DetailMenu> getThisMenuDetail(int id) async {
+    var response = await _detailMenuController.getObject(id.toString());
     return response;
   }
 
@@ -31,19 +27,17 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
   void initState() {
     super.initState();
 
-    makananFuture = getThisMakanan(widget.makananId);
+    detailMenuFuture = getThisMenuDetail(widget.makananId);
   }
 
   @override
   Widget build(BuildContext context) {
     debugPrint('makanan id: ${widget.makananId}');
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Kembali'),
-      ),
+      appBar: AppBar(title: const Text('Kembali')),
       body: SafeArea(
-        child: FutureBuilder<MakananSerializer>(
-          future: makananFuture,
+        child: FutureBuilder<DetailMenu>(
+          future: detailMenuFuture,
           builder: (context, snapshot) {
             if (!snapshot.hasData ||
                 snapshot.connectionState != ConnectionState.done) {
@@ -52,8 +46,11 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
               return const Text('Gagal memuat makanan');
             }
 
-            var data = snapshot.data!.data;
+            var result = snapshot.data!;
+            var makanan = result.makanan.data;
+            var satuan = result.satuan.data;
 
+            // return Text(makanan.nama);
             return ListView(
               children: [
                 Stack(alignment: Alignment.bottomCenter, children: [
@@ -86,13 +83,13 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                       child: Column(
                         children: [
                           Text(
-                            data.nama,
+                            makanan.nama,
                             style: const TextStyle(
                               fontSize: 24,
                             ),
                           ),
                           const SizedBox(height: 4),
-                          Text("${data.porsi}"),
+                          Text("${makanan.porsi} ${satuan.nama}"),
                         ],
                       ),
                     ),
@@ -110,28 +107,28 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('${data.energi} kcal'),
+                                Text('${makanan.energi} kcal'),
                                 const Text('Energi'),
                               ],
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('${data.protein} g'),
+                                Text('${makanan.protein} g'),
                                 const Text('Protein'),
                               ],
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('${data.karbo} g'),
+                                Text('${makanan.karbo} g'),
                                 const Text('Karbo'),
                               ],
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('${data.lemak} g'),
+                                Text('${makanan.lemak} g'),
                                 const Text('Lemak'),
                               ],
                             ),

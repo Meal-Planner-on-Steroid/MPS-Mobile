@@ -111,7 +111,8 @@ class _MakananListPageState extends State<MakananListPage> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const DetailMenuPage(),
+                          builder: (context) =>
+                              DetailMenuPage(makananId: makanan.id),
                         ),
                       ),
                     );

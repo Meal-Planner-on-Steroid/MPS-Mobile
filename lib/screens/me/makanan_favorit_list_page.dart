@@ -146,7 +146,8 @@ class _MakananFavoritListPageState extends State<MakananFavoritListPage> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const DetailMenuPage(),
+                          builder: (context) =>
+                              DetailMenuPage(makananId: makanan.id),
                         ),
                       ),
                     );

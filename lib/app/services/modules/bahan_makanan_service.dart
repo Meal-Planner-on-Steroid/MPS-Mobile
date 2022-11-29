@@ -2,29 +2,24 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mps/app/filters/makanan_filter.dart';
-import 'package:mps/app/models/makanan_model.dart';
+import 'package:mps/app/filters/bahan_makanan_filter.dart';
 import 'package:http/http.dart' as http;
-import 'package:mps/app/serializers/makanan_serializer.dart';
+import 'package:mps/app/serializers/bahan_makanan_serializer.dart';
 
-class MakananService {
+class BahanMakananService {
   final String? _baseUrl = dotenv.env['BASE_URL'];
-  final String endpoint = "/api/makanan/";
+  final String endpoint = "/api/makanan-terkait/";
 
-  Future get(MakananFilter makananFilter) async {
+  Future get(BahanMakananFilter bahanMakananFilter) async {
     try {
       final queryParams = {
-        "id": makananFilter.id,
-        "id__in": makananFilter.idIn,
-        "nama": makananFilter.nama,
-        "nama__icontains": makananFilter.namaIcontains,
-        "porsi": makananFilter.porsi,
-        "lemak": makananFilter.lemak,
-        "protein": makananFilter.protein,
-        "karbo": makananFilter.karbo,
-        "energi": makananFilter.energi,
-        "jenis": makananFilter.jenis,
-        "page": makananFilter.page,
+        "id": bahanMakananFilter.id,
+        "berat": bahanMakananFilter.berat,
+        "berat__gt": bahanMakananFilter.beratGt,
+        "berat__lt": bahanMakananFilter.beratLt,
+        "satuan_id": bahanMakananFilter.satuanId,
+        "bahan_makanan_id": bahanMakananFilter.bahanMakananId,
+        "menu_makanan_id": bahanMakananFilter.menuMakananId,
       };
 
       var url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
@@ -40,7 +35,7 @@ class MakananService {
 
       // debugPrint(response.toString());
 
-      return MakananSerializer.fromJson(response);
+      return BahanMakananSerializer.fromJson(response);
     } on Exception catch (e) {
       debugPrint(e.toString());
       return false;
@@ -58,14 +53,14 @@ class MakananService {
 
       final response = jsonDecode(request.body);
       debugPrint(response.toString());
-      return MakananSerializer.fromJson(response);
+      return BahanMakananSerializer.fromJson(response);
     } catch (e) {
       debugPrint(e.toString());
       return false;
     }
   }
 
-  Future post(Makanan makanan) async {
+  Future post() async {
     try {
       return true;
     } catch (e) {

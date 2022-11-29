@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:mps/app/controllers/pages/detail_menu_controller.dart';
 import 'package:mps/app/models/detail_menu_model.dart';
 
@@ -41,14 +42,33 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
           builder: (context, snapshot) {
             if (!snapshot.hasData ||
                 snapshot.connectionState != ConnectionState.done) {
-              return const Text('memuat data makanan');
+              return Padding(
+                padding: const EdgeInsets.only(top: 24),
+                child: Column(
+                  children: const [
+                    GFLoader(
+                      type: GFLoaderType.circle,
+                    ),
+                    SizedBox(height: 24),
+                    Text('Proses memuat detail makanan'),
+                  ],
+                ),
+              );
             } else if (snapshot.hasError) {
-              return const Text('Gagal memuat makanan');
+              return Padding(
+                padding: const EdgeInsets.only(top: 24),
+                child: Column(
+                  children: const [
+                    Text('Gagal memuat makanan'),
+                  ],
+                ),
+              );
             }
 
             var result = snapshot.data!;
             var makanan = result.makanan.data;
             var satuan = result.satuan.data;
+            var makananTerkait = result.makananTerkait.data;
 
             // return Text(makanan.nama);
             return ListView(
@@ -144,33 +164,29 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                       child: SizedBox(
                         width: double.infinity,
                         child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
+                          children: [
+                            // Judul
+                            const Text(
                               'Bahan',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 8),
-                            Text('- Bahan 1'),
-                            SizedBox(height: 8),
-                            Text('- Bahan 2'),
-                            SizedBox(height: 8),
-                            Text('- Bahan 3'),
-                            SizedBox(height: 8),
-                            Text('- Bahan 4'),
-                            SizedBox(height: 8),
-                            Text('- Bahan 5'),
-                            SizedBox(height: 8),
-                            Text('- Bahan 6'),
-                            SizedBox(height: 8),
-                            Text('- Bahan 7'),
-                            SizedBox(height: 8),
-                            Text('- Bahan 8'),
-                            SizedBox(height: 8),
-                            Text('- Bahan 9'),
+
+                            // List
+                            const SizedBox(height: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: makananTerkait
+                                  .map<Widget>(
+                                    (item) => Padding(
+                                      padding: const EdgeInsets.only(top: 8),
+                                      child: Text("- ${item.nama}"),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
                           ],
                         ),
                       ),

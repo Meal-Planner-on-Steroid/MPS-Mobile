@@ -18,7 +18,7 @@
 
 class Data {
   final int? id;
-  final int? berat;
+  final double? berat;
   final int? satuanId;
   final int? bahanMakananId;
   final int? menuMakananId;

@@ -4,4 +4,5 @@ import 'package:mps/app/serializers/satuan_serializer.dart';
 class DetailMenu {
   MakananSerializer makanan = MakananSerializer();
   SatuanSerializer satuan = SatuanSerializer();
+  MakananSerializer makananTerkait = MakananSerializer();
 }

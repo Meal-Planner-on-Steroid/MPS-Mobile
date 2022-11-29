@@ -379,7 +379,8 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
           FutureBuilder<GenerateRekomendasiMenuSerializer>(
         future: generateRekomendasiMenu(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          if (!snapshot.hasData ||
+              snapshot.connectionState != ConnectionState.done) {
             return const AlertDialog(
               title: Text('Membuat rekomendasi menu makanan diet'),
               content: GFLoader(

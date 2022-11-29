@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'menu/list_item_page.dart';
+import 'menu/makanan_list_page.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
@@ -38,14 +38,17 @@ class _MenuPageState extends State<MenuPage> {
         ),
         body: const TabBarView(
           children: [
-            ListItemPage(
+            MakananListPage(
               judul: 'menu',
+              jenis: 'ME',
             ),
-            ListItemPage(
+            MakananListPage(
               judul: 'bahan',
+              jenis: 'BA',
             ),
-            ListItemPage(
+            MakananListPage(
               judul: 'camilan',
+              jenis: 'CA',
             ),
           ],
         ),

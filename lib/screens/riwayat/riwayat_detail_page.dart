@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mps/app/controllers/pages/riwayat_detail_controller.dart';
 import 'package:mps/app/models/page/riwayat_detail_model.dart';
 import 'package:mps/screens/riwayat/accordeon_makanan.dart';
+import 'package:mps/utils/coming_soon_dialog.dart';
 
 class RiwayatDetailpage extends StatefulWidget {
   final int riwayatId;
@@ -57,6 +56,46 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
       ),
       appBar: AppBar(
         title: const Text('Kembali'),
+        actions: [
+          TextButton(
+            onPressed: () => showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => const ComingSoonDialog(),
+            ),
+            child: Row(
+              children: const [
+                Text(
+                  'Share',
+                  style: TextStyle(color: Colors.black),
+                ),
+                SizedBox(width: 4),
+                Icon(
+                  Icons.share,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ),
+          TextButton(
+            onPressed: () => showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => const ComingSoonDialog(),
+            ),
+            child: Row(
+              children: const [
+                Text(
+                  'Export',
+                  style: TextStyle(color: Colors.black),
+                ),
+                SizedBox(width: 4),
+                Icon(
+                  Icons.save,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -97,6 +136,8 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
               var data = snapshot.data!;
               var riwayatRekomendasi = data.riwayatRekomendasi.data;
               var rekomendasiRencana = data.rekomendasiRencana.data;
+              var rekomendasiMakanan = data.rekomendasiMakanan.data;
+              var makanans = data.makanan.data;
 
               // inspect(rekomendasiRencana);
 
@@ -234,7 +275,11 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
 
                   // Accordeon makanan
                   const SizedBox(height: 16),
-                  AccordionMakanan(rekomendasiRencana: rekomendasiRencana),
+                  AccordionMakanan(
+                    rekomendasiRencana: rekomendasiRencana,
+                    rekomendasiMakanan: rekomendasiMakanan,
+                    makanans: makanans,
+                  ),
                 ],
               );
             },

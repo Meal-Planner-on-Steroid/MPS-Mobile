@@ -11,4 +11,5 @@ class MakananFilter {
   String? jenis;
 
   String page = "1";
+  String? limit;
 }

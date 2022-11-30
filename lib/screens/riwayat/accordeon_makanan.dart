@@ -1,14 +1,17 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mps/utils/accordeon_rekomendasi_makanan/makanan_card.dart';
 
 class AccordionMakanan extends StatefulWidget {
   final List<dynamic> rekomendasiRencana;
+  final List<dynamic> rekomendasiMakanan;
+  final List<dynamic> makanans;
+
   const AccordionMakanan({
     Key? key,
     required this.rekomendasiRencana,
+    required this.rekomendasiMakanan,
+    required this.makanans,
   }) : super(key: key);
 
   @override
@@ -36,78 +39,65 @@ class _AccordionMakananState extends State<AccordionMakanan> {
 
   late List<ListAccordeion> items = [];
 
-  List<ListAccordeion> listAccordeionBuilder(List<dynamic> rekomendasiRencana) {
+  List<ListAccordeion> listAccordeionBuilder(
+    List<dynamic> rekomendasiRencana,
+    List<dynamic> rekomendasiMakanan,
+    List<dynamic> makanans,
+  ) {
     List<ListAccordeion> result = [];
 
     // Loop setiap colum atau hari di data
     for (var i = 0; i < rekomendasiRencana.length; i++) {
-      // List<dynamic> makanans = data[i];
       if (i >= 7) {
         break;
       }
 
-      // List<MakananCard> listBody = [];
+      // debugPrint('Rekomendasi rencana id: ${rekomendasiRencana[i].id}');
+      var listMakananRencana = rekomendasiMakanan.where((element) {
+        return element.rekomendasiRencanaDietId == rekomendasiRencana[i].id;
+      }).toList();
 
-      // Lopp setiap makanan di data
-      // for (var j = 0; j < makanans.length; j++) {
-      //   listBody.add(MakananCard(
-      //     waktuMakan: waktuMakan[j].title,
-      //     namaMakanan: makanans[j].nama,
-      //     protein: makanans[j].protein,
-      //     karbo: makanans[j].karbo,
-      //     fat: makanans[j].lemak,
-      //     energi: makanans[j].energi,
-      //   ));
-      // }
+      List<MakananCard> listBody = [];
+
+      // Buat list makanan di dalam hari berdasarkan rekomendasiMakanan
+      for (var j = 0; j < listMakananRencana.length; j++) {
+        var thisWaktuMakan = waktuMakan
+            .where(
+                (element) => element.code == listMakananRencana[j].waktuMakan)
+            .toList();
+        var thisMakanan = makanans
+            .where((element) => element.id == listMakananRencana[j].makananId)
+            .toList();
+
+        listBody.add(MakananCard(
+          waktuMakan: thisWaktuMakan[0].title,
+          namaMakanan: thisMakanan[0].nama,
+          protein: thisMakanan[0].protein,
+          karbo: thisMakanan[0].karbo,
+          fat: thisMakanan[0].lemak,
+          energi: thisMakanan[0].energi,
+        ));
+      }
 
       result.add(
         ListAccordeion(
           header: hari[i],
           title: hari[i],
-          body: [
-            const MakananCard(
-              waktuMakan: 'waktuMakan',
-              namaMakanan: 'namaMakanan',
-              protein: 0,
-              karbo: 0,
-              fat: 0,
-              energi: 0,
-            ),
-            const MakananCard(
-              waktuMakan: 'waktuMakan',
-              namaMakanan: 'namaMakanan',
-              protein: 0,
-              karbo: 0,
-              fat: 0,
-              energi: 0,
-            ),
-            const MakananCard(
-              waktuMakan: 'waktuMakan',
-              namaMakanan: 'namaMakanan',
-              protein: 0,
-              karbo: 0,
-              fat: 0,
-              energi: 0,
-            ),
-            const MakananCard(
-              waktuMakan: 'waktuMakan',
-              namaMakanan: 'namaMakanan',
-              protein: 0,
-              karbo: 0,
-              fat: 0,
-              energi: 0,
-            ),
-            const MakananCard(
-              waktuMakan: 'waktuMakan',
-              namaMakanan: 'namaMakanan',
-              protein: 0,
-              karbo: 0,
-              fat: 0,
-              energi: 0,
-            ),
-          ],
+          body: listBody,
+          // body: [
+          //   const MakananCard(
+          //     waktuMakan: 'waktuMakan',
+          //     namaMakanan: 'namaMakanan',
+          //     protein: 0,
+          //     karbo: 0,
+          //     fat: 0,
+          //     energi: 0,
+          //   ),
+          // ],
         ),
       );
+
+      // break;
     }
 
     return result;
@@ -115,9 +105,12 @@ class _AccordionMakananState extends State<AccordionMakanan> {
 
   @override
   Widget build(BuildContext context) {
-    items = listAccordeionBuilder(widget.rekomendasiRencana);
+    items = listAccordeionBuilder(
+      widget.rekomendasiRencana,
+      widget.rekomendasiMakanan,
+      widget.makanans,
+    );
 
-    inspect(widget.rekomendasiRencana);
     return Container(
       color: Colors.white,
       child: Column(

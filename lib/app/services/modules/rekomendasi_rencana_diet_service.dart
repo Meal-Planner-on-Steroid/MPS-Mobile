@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:mps/app/filters/rekomendasi_rencana_diet_filter.dart';
-import 'package:mps/app/serializers/rekomendasi_makanan_diet_serializer.dart';
 import 'package:mps/app/serializers/rekomendasi_rencana_diet_serializer.dart';
 
 class RekomendasiRencanaDietService {

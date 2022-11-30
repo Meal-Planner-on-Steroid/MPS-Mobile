@@ -3,6 +3,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:mps/app/controllers/modules/riwayat_rekomendasi_rencana_diet_controller.dart';
 import 'package:mps/app/filters/riwayat_rekomendasi_rencana_diet_filter.dart';
 import 'package:mps/app/serializers/riwayat_rekomendasi_rencana_diet_serializer.dart';
+import 'package:mps/utils/coming_soon_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/riwayat/riwayat_item.dart';
 
@@ -41,6 +42,48 @@ class _RiwayatPageState extends State<RiwayatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          TextButton(
+            onPressed: () => showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => const ComingSoonDialog(),
+            ),
+            child: Row(
+              children: const [
+                Text(
+                  'Share',
+                  style: TextStyle(color: Colors.black),
+                ),
+                SizedBox(width: 4),
+                Icon(
+                  Icons.share,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ),
+          TextButton(
+            onPressed: () => showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => const ComingSoonDialog(),
+            ),
+            child: Row(
+              children: const [
+                Text(
+                  'Export',
+                  style: TextStyle(color: Colors.black),
+                ),
+                SizedBox(width: 4),
+                Icon(
+                  Icons.save,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
       backgroundColor: Colors.grey.shade300,
       body: SafeArea(
         child: FutureBuilder<RiwayatRekomendasiRencanaDietSerializer>(

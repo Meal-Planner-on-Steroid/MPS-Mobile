@@ -96,6 +96,8 @@ class Data {
   final ButuhLemak? butuhLemak;
   final ButuhKarbo? butuhKarbo;
   final int? userId;
+  final String? createdAt;
+  final String? updatedAt;
 
   Data({
     required this.id,
@@ -109,6 +111,8 @@ class Data {
     required this.butuhLemak,
     required this.butuhKarbo,
     required this.userId,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) {
@@ -124,6 +128,8 @@ class Data {
       butuhLemak: ButuhLemak.fromJson(json['butuh_lemak']),
       butuhKarbo: ButuhKarbo.fromJson(json['butuh_karbo']),
       userId: json['user_id'],
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
     );
   }
 }

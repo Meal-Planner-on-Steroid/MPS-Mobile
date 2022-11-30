@@ -3,7 +3,12 @@ import '../../screens/riwayat/riwayat_detail_page.dart';
 
 class RiwayatItem extends StatefulWidget {
   final String title;
-  const RiwayatItem({Key? key, required this.title}) : super(key: key);
+  final int riwayatId;
+  const RiwayatItem({
+    Key? key,
+    required this.title,
+    required this.riwayatId,
+  }) : super(key: key);
 
   @override
   State<RiwayatItem> createState() => _RiwayatItemState();
@@ -17,7 +22,8 @@ class _RiwayatItemState extends State<RiwayatItem> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const RiwayatDetailpage(),
+            builder: (context) =>
+                RiwayatDetailpage(riwayatId: widget.riwayatId),
           ),
         );
       },

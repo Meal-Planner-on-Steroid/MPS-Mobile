@@ -28,6 +28,7 @@ class RiwayatRekomendasiRencanaDietService {
         "butuh_karbo": riwayatRekomendasiRencanaDietFilter.butuhKarbo,
         "butuh_lemak": riwayatRekomendasiRencanaDietFilter.butuhLemak,
         "user_id": riwayatRekomendasiRencanaDietFilter.userId,
+        "order_by": riwayatRekomendasiRencanaDietFilter.orderBy,
       };
 
       final url = Uri.http(_baseUrl.toString(), endpoint, queryParams);

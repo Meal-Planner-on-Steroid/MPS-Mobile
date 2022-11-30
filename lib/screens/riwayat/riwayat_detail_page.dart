@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:mps/utils/accordeon_rekomendasi_makanan/accordion_makanan.dart';
-import 'package:mps/utils/makanan_card.dart';
+import 'package:mps/screens/riwayat/accordeon_makanan.dart';
 
 class RiwayatDetailpage extends StatefulWidget {
   const RiwayatDetailpage({Key? key}) : super(key: key);
@@ -13,6 +12,7 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Riwayat'),
       ),
@@ -20,8 +20,7 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
-            // Section
-            const SizedBox(height: 16),
+            // Status pengguna
             Container(
               decoration: BoxDecoration(
                 border: Border.all(
@@ -64,7 +63,7 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
               ),
             ),
 
-            // Section
+            // Status gizi
             const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
@@ -118,12 +117,7 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
 
             // Accordeon makanan
             const SizedBox(height: 16),
-
-            const MakananCard(),
-
-            const SizedBox(height: 16),
-
-            // const AccordionMakanan(),
+            const AccordionMakanan(riwayatId: 1),
           ],
         ),
       ),

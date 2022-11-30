@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mps/app/controllers/pages/detail_menu_controller.dart';
-import 'package:mps/app/models/detail_menu_model.dart';
+import 'package:mps/app/models/page/detail_menu_model.dart';
 
 class DetailMenuPage extends StatefulWidget {
   final int makananId;

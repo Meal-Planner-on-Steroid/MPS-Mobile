@@ -9,4 +9,5 @@ class RiwayatRekomendasiRencanaDietFilter {
   String? butuhKarbo;
   String? butuhLemak;
   String? userId;
+  String? orderBy;
 }

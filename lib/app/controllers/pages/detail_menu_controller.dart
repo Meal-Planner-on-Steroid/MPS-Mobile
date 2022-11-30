@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mps/app/filters/bahan_makanan_filter.dart';
 import 'package:mps/app/filters/makanan_filter.dart';
-import 'package:mps/app/models/detail_menu_model.dart';
+import 'package:mps/app/models/page/detail_menu_model.dart';
 import 'package:mps/app/models/makanan_model.dart';
 import 'package:mps/app/services/modules/bahan_makanan_service.dart';
 import 'package:mps/app/services/modules/makanan_service.dart';

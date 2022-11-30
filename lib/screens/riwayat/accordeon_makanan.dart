@@ -1,12 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mps/utils/accordeon_rekomendasi_makanan/makanan_card.dart';
 
 class AccordionMakanan extends StatefulWidget {
-  final int riwayatId;
+  final List<dynamic> rekomendasiRencana;
   const AccordionMakanan({
     Key? key,
-    required this.riwayatId,
+    required this.rekomendasiRencana,
   }) : super(key: key);
 
   @override
@@ -34,11 +36,11 @@ class _AccordionMakananState extends State<AccordionMakanan> {
 
   late List<ListAccordeion> items = [];
 
-  List<ListAccordeion> listAccordeionBuilder(int id) {
+  List<ListAccordeion> listAccordeionBuilder(List<dynamic> rekomendasiRencana) {
     List<ListAccordeion> result = [];
 
     // Loop setiap colum atau hari di data
-    for (var i = 0; i < hari.length; i++) {
+    for (var i = 0; i < rekomendasiRencana.length; i++) {
       // List<dynamic> makanans = data[i];
       if (i >= 7) {
         break;
@@ -113,7 +115,9 @@ class _AccordionMakananState extends State<AccordionMakanan> {
 
   @override
   Widget build(BuildContext context) {
-    items = listAccordeionBuilder(widget.riwayatId);
+    items = listAccordeionBuilder(widget.rekomendasiRencana);
+
+    inspect(widget.rekomendasiRencana);
     return Container(
       color: Colors.white,
       child: Column(

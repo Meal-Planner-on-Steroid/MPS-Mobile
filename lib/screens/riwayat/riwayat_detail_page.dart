@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mps/app/controllers/pages/riwayat_detail_controller.dart';
@@ -94,6 +96,9 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
 
               var data = snapshot.data!;
               var riwayatRekomendasi = data.riwayatRekomendasi.data;
+              var rekomendasiRencana = data.rekomendasiRencana.data;
+
+              // inspect(rekomendasiRencana);
 
               return ListView(
                 children: [
@@ -229,7 +234,7 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
 
                   // Accordeon makanan
                   const SizedBox(height: 16),
-                  const AccordionMakanan(riwayatId: 1),
+                  AccordionMakanan(rekomendasiRencana: rekomendasiRencana),
                 ],
               );
             },

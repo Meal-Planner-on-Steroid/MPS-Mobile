@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:mps/app/filters/rekomendasi_rencana_diet_filter.dart';
 import 'package:mps/app/serializers/rekomendasi_makanan_diet_serializer.dart';
+import 'package:mps/app/serializers/rekomendasi_rencana_diet_serializer.dart';
 
 class RekomendasiRencanaDietService {
   final String? _baseUrl = dotenv.env['BASE_URL'];
@@ -14,6 +15,8 @@ class RekomendasiRencanaDietService {
     try {
       final queryParams = {
         "id": rekomendasiRencanaDietFilter.id,
+        "riwayat_rekomendasi_id":
+            rekomendasiRencanaDietFilter.riwayatRekomendasiId,
         "order_by": rekomendasiRencanaDietFilter.orderBy
       };
 
@@ -23,7 +26,7 @@ class RekomendasiRencanaDietService {
       var request = await http.get(url);
 
       final response = jsonDecode(request.body);
-      return RekomendasiMakananDietSerializer.fromJson(response);
+      return RekomendasiRencanaDietSerializer.fromJson(response);
     } catch (e) {
       debugPrint(e.toString());
       return false;
@@ -40,7 +43,7 @@ class RekomendasiRencanaDietService {
       var request = await http.get(url);
 
       final response = jsonDecode(request.body);
-      return RekomendasiMakananDietSerializer.fromJson(response);
+      return RekomendasiRencanaDietSerializer.fromJson(response);
     } catch (e) {
       debugPrint(e.toString());
       return false;

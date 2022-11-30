@@ -45,9 +45,17 @@ class RiwayatRekomendasiRencanaDietService {
     }
   }
 
-  Future getObject() async {
+  Future getObject(String id) async {
     try {
-      return true;
+      final url = Uri.http(
+        _baseUrl.toString(),
+        "$endpoint$id/",
+      );
+
+      var request = await http.get(url);
+
+      final response = jsonDecode(request.body);
+      return RiwayatRekomendasiRencanaDietSerializer.fromJson(response);
     } catch (e) {
       debugPrint(e.toString());
       return false;

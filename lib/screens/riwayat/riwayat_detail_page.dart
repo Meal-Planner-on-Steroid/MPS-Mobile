@@ -18,13 +18,13 @@ class RiwayatDetailpage extends StatefulWidget {
 class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
   final _riwayatDetailController = RiwayatDetailController();
 
-  // late Future<RiwayatDetail> riwayatDetailFuture;
+  late Future<RiwayatDetail> riwayatDetailFuture;
   late Future<int> damnFuture;
 
-  // Future<RiwayatDetail> getThisRiwayatDetail(int id) async {
-  //   var response = await _riwayatDetailController.getObject(id.toString());
-  //   return response;
-  // }
+  Future<RiwayatDetail> getThisRiwayatDetail(int id) async {
+    var response = await _riwayatDetailController.getObject(id.toString());
+    return response;
+  }
 
   Future<int> getNumber() async {
     await Future.delayed(const Duration(seconds: 1));
@@ -36,7 +36,7 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
   void initState() {
     super.initState();
 
-    // riwayatDetailFuture = getThisRiwayatDetail(widget.riwayatId);
+    riwayatDetailFuture = getThisRiwayatDetail(widget.riwayatId);
     damnFuture = getNumber();
   }
 
@@ -45,14 +45,22 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
     debugPrint("Riwayat id adalah: ${widget.riwayatId}");
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            riwayatDetailFuture = getThisRiwayatDetail(widget.riwayatId);
+          });
+        },
+        child: const Icon(Icons.refresh),
+      ),
       appBar: AppBar(
         title: const Text('Kembali'),
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: FutureBuilder<int>(
-            future: damnFuture,
+          child: FutureBuilder<RiwayatDetail>(
+            future: riwayatDetailFuture,
             builder: (context, snapshot) {
               if (!snapshot.hasData ||
                   snapshot.connectionState != ConnectionState.done) {
@@ -84,9 +92,144 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
                 );
               }
 
+              var data = snapshot.data!;
+              var riwayatRekomendasi = data.riwayatRekomendasi.data;
+
               return ListView(
-                children: const [
-                  Text('Berhasil'),
+                children: [
+                  // Status pengguna
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromRGBO(127, 209, 174, 1),
+                        width: 2,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(9),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Status',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('IMT'),
+                              Text(riwayatRekomendasi.imt!.toStringAsFixed(2)),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Kebutuhan Energi'),
+                              Row(
+                                children: [
+                                  Text(riwayatRekomendasi.keseluruhanEnergi!
+                                      .toStringAsFixed(2)),
+                                  const Text(' kcal'),
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // Status gizi
+                  const SizedBox(height: 16),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromRGBO(127, 209, 174, 1),
+                        width: 2,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(9),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Kebutuhan Gizi',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Protein'),
+                              Row(
+                                children: [
+                                  Text(riwayatRekomendasi
+                                      .butuhProtein!.protein10!
+                                      .toStringAsFixed(2)),
+                                  const Text(' - '),
+                                  Text(riwayatRekomendasi
+                                      .butuhProtein!.protein15!
+                                      .toStringAsFixed(2)),
+                                  const Text(' g'),
+                                ],
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Karbohidrat'),
+                              Row(
+                                children: [
+                                  Text(riwayatRekomendasi.butuhKarbo!.karbo60!
+                                      .toStringAsFixed(2)),
+                                  const Text(' - '),
+                                  Text(riwayatRekomendasi.butuhKarbo!.karbo75!
+                                      .toStringAsFixed(2)),
+                                  const Text(' g'),
+                                ],
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Lemak'),
+                              Row(
+                                children: [
+                                  Text(riwayatRekomendasi.butuhLemak!.lemak10!
+                                      .toStringAsFixed(2)),
+                                  const Text(' - '),
+                                  Text(riwayatRekomendasi.butuhLemak!.lemak25!
+                                      .toStringAsFixed(2)),
+                                  const Text(' g'),
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // Accordeon makanan
+                  const SizedBox(height: 16),
+                  const AccordionMakanan(riwayatId: 1),
                 ],
               );
             },

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mps/app/controllers/modules/riwayat_rekomendasi_rencana_diet_controller.dart';
@@ -43,14 +41,6 @@ class _RiwayatPageState extends State<RiwayatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            listRiwayatFuture = getListRiwayatFuture();
-          });
-        },
-        child: const Icon(Icons.local_dining),
-      ),
       backgroundColor: Colors.grey.shade300,
       body: SafeArea(
         child: FutureBuilder<RiwayatRekomendasiRencanaDietSerializer>(

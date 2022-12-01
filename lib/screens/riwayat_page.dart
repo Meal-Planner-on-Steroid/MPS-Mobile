@@ -84,7 +84,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
           ),
         ],
       ),
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: FutureBuilder<RiwayatRekomendasiRencanaDietSerializer>(
           future: listRiwayatFuture,

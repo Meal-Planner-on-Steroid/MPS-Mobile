@@ -1,6 +1,10 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:mps/app/services/pages/auth_service.dart';
 import 'package:mps/screens/auth/login_page.dart';
+import 'package:mps/screens/intro_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/home_page.dart';
 import 'screens/me_page.dart';
 import 'screens/menu_page.dart';
@@ -30,7 +34,78 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.black,
         ),
       ),
-      home: const RootPage(),
+      home: const Splash(),
+    );
+  }
+}
+
+class Splash extends StatefulWidget {
+  const Splash({super.key});
+
+  @override
+  State<Splash> createState() => _SplashState();
+}
+
+// class _SplashState extends State<Splash> {
+class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
+  Future checkFirst() async {
+    final navigator = Navigator.of(context);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool access = (prefs.getString('access') ?? '').isNotEmpty;
+    bool refresh = (prefs.getString('access') ?? '').isNotEmpty;
+    bool seen = (prefs.getBool('seen') ?? false);
+
+    if (access && refresh) {
+      if (seen) {
+        // Pindah ke home page
+        navigator.pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const RootPage(),
+          ),
+        );
+      } else {
+        // Pindah ke intro
+        navigator.pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const IntroPage(),
+          ),
+        );
+      }
+    } else {
+      // Pindah ke login page
+      navigator.pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const LoginPage(),
+        ),
+      );
+    }
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) => checkFirst();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          const Spacer(),
+          Container(
+            alignment: const Alignment(0, 0.5),
+            child: Column(
+              children: const [
+                GFLoader(
+                  type: GFLoaderType.circle,
+                ),
+                SizedBox(height: 16),
+                Text('Loading...'),
+              ],
+            ),
+          ),
+          const Spacer(),
+        ],
+      ),
     );
   }
 }
@@ -73,37 +148,60 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getAuth(),
-      builder: (context, AsyncSnapshot<bool> snapshot) {
-        if (snapshot.data == true) {
-          return Scaffold(
-            backgroundColor: Colors.grey.shade300,
-            // appBar: AppBar(
-            //   title: const Text('Flutter'),
-            // ),
-            body: pages[currentPage],
-            bottomNavigationBar: NavigationBar(
-              destinations: const [
-                NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-                NavigationDestination(icon: Icon(Icons.person), label: 'Me'),
-                NavigationDestination(
-                    icon: Icon(Icons.fastfood), label: 'Menu'),
-                NavigationDestination(
-                    icon: Icon(Icons.history), label: 'Riwayat'),
-              ],
-              onDestinationSelected: (int index) {
-                setState(() {
-                  currentPage = index;
-                });
-              },
-              selectedIndex: currentPage,
-            ),
-          );
-        } else {
-          return const LoginPage();
-        }
-      },
+    return Scaffold(
+      backgroundColor: Colors.grey.shade300,
+      // appBar: AppBar(
+      //   title: const Text('Flutter'),
+      // ),
+      body: pages[currentPage],
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.person), label: 'Me'),
+          NavigationDestination(icon: Icon(Icons.fastfood), label: 'Menu'),
+          NavigationDestination(icon: Icon(Icons.history), label: 'Riwayat'),
+        ],
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        selectedIndex: currentPage,
+      ),
     );
   }
+  // Widget build(BuildContext context) {
+  //   return FutureBuilder(
+  //     future: getAuth(),
+  //     builder: (context, AsyncSnapshot<bool> snapshot) {
+  //       if (snapshot.data == true) {
+  //         return Scaffold(
+  //           backgroundColor: Colors.grey.shade300,
+  //           // appBar: AppBar(
+  //           //   title: const Text('Flutter'),
+  //           // ),
+  //           body: pages[currentPage],
+  //           bottomNavigationBar: NavigationBar(
+  //             destinations: const [
+  //               NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+  //               NavigationDestination(icon: Icon(Icons.person), label: 'Me'),
+  //               NavigationDestination(
+  //                   icon: Icon(Icons.fastfood), label: 'Menu'),
+  //               NavigationDestination(
+  //                   icon: Icon(Icons.history), label: 'Riwayat'),
+  //             ],
+  //             onDestinationSelected: (int index) {
+  //               setState(() {
+  //                 currentPage = index;
+  //               });
+  //             },
+  //             selectedIndex: currentPage,
+  //           ),
+  //         );
+  //       } else {
+  //         return const LoginPage();
+  //       }
+  //     },
+  //   );
+  // }
 }

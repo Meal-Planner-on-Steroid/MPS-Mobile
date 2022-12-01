@@ -28,10 +28,14 @@ class _RiwayatItemState extends State<RiwayatItem> {
         );
       },
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(9),
+          ),
+          border: Border.all(
+            color: Colors.grey.shade700,
+            width: 2,
           ),
         ),
         padding:

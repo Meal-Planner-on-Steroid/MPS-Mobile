@@ -51,6 +51,8 @@ class AuthService {
 
       await prefs.remove('access');
       await prefs.remove('refresh');
+      await prefs.remove('seen');
+      await prefs.clear();
 
       debugPrint('Auth preference deleted');
 

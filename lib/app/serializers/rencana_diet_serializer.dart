@@ -18,18 +18,24 @@ class Data {
   final int? id;
   final String? tanggal;
   final int? userId;
+  final String? createdAt;
+  final String? updatedAt;
 
   Data({
     required this.id,
     required this.tanggal,
     required this.userId,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      id: json['tanggal'],
-      tanggal: json['berat_badan'],
+      id: json['id'],
+      tanggal: json['tanggal'],
       userId: json['user_id'],
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
     );
   }
 }

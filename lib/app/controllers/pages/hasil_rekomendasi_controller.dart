@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mps/app/filters/rencana_diet_filter.dart';
 import 'package:mps/app/filters/tingkat_aktivitas_filter.dart';
 import 'package:mps/app/filters/user_profile_filter.dart';
 import 'package:mps/app/models/rencana_diet_model.dart';
@@ -16,6 +17,7 @@ class HasilRekomendasiController {
 
   var tingkatAktivitasFilter = TingkatAktivitasFilter();
   var userProfileFilter = UserProfileFilter();
+  var rencanaDietFilter = RencanaDietFilter();
 
   var riwayatRekomendasiRencanaDiet = RiwayatRekomendasiRencanaDiet();
   KebutuhanGizi riwayatKebutuhanGizi = KebutuhanGizi();
@@ -86,12 +88,27 @@ class HasilRekomendasiController {
       var insertRiwayatRekomendasi = await _riwayatRekomendasiRencanaDietService
           .post(riwayatRekomendasiRencanaDiet);
 
+      // Tentukan pivot tanggal
+      DateTime pivotTanggal = DateTime.now();
+      // Ambil tanggal terbaru dari rencaana diet
+      rencanaDietFilter.userId = prefs.getString('userId');
+      rencanaDietFilter.orderBy = "-tanggal";
+
+      var rencanaDietData = await _rencaDietService.get(rencanaDietFilter);
+      if (rencanaDietData.data.isNotEmpty) {
+        var dataWaktu = rencanaDietData.data[0];
+        DateTime rencanaTanggalDietTerbaru = DateTime.parse(dataWaktu.tanggal);
+
+        if (pivotTanggal.isBefore(rencanaTanggalDietTerbaru)) {
+          pivotTanggal = rencanaTanggalDietTerbaru;
+        }
+      }
+
       // Insert for loop rencana diet
-      DateTime oldDate = DateTime.now();
       rencanaDiet.userId = int.parse(prefs.getString('userId') ?? '');
       for (var i = 0; i < rekomendasi.length; i++) {
-        rencanaDiet.tanggal =
-            DateTime(oldDate.year, oldDate.month, oldDate.day + i);
+        rencanaDiet.tanggal = DateTime(
+            pivotTanggal.year, pivotTanggal.month, pivotTanggal.day + i);
 
         // Tambah waktu makan ke makanan
         for (var j = 0; j < rekomendasi[i].length; j++) {

@@ -45,6 +45,29 @@ class HitungKebutuhanGiziController {
     }
   }
 
+  // Future testDate() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   var userId = prefs.getString('userId');
+
+  //   _rencanaDietFilter.userId = userId;
+  //   _rencanaDietFilter.orderBy = "-tanggal";
+
+  //   DateTime pivotTanggal = DateTime.now();
+
+  //   var request = await _rencanaDietService.get(_rencanaDietFilter);
+  //   if (request.data.isNotEmpty) {
+  //     debugPrint('ada rencana diet');
+  //     var dataWaktu = request.data[0];
+  //     DateTime rencanaTanggalDietTerbaru = DateTime.parse(dataWaktu.tanggal);
+
+  //     if (pivotTanggal.isBefore(rencanaTanggalDietTerbaru)) {
+  //       pivotTanggal = rencanaTanggalDietTerbaru;
+  //     }
+  //   }
+
+  //   debugPrint("Pivot tanggal adalah $pivotTanggal");
+  // }
+
   Future post(UserProfile userProfile) async {
     try {
       // Ambil nilai tingkat aktivitas

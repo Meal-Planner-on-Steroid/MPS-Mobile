@@ -3,4 +3,6 @@ class RencanaDietFilter {
   String? tanggalGt;
   String? tanggalLt;
   String? userId;
+
+  String? orderBy;
 }

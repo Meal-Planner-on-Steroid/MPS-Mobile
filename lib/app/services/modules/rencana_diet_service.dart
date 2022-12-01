@@ -18,6 +18,7 @@ class RencanaDietService {
         "tanggal__gt": rencanaDietFilter.tanggalGt,
         "tanggal__lt": rencanaDietFilter.tanggalLt,
         "user_id": rencanaDietFilter.userId,
+        "order_by": rencanaDietFilter.orderBy,
       };
 
       final url = Uri.http(_baseUrl.toString(), endpoint, queryParams);

@@ -19,7 +19,15 @@ class _IntroPage2State extends State<IntroPage2> {
             child: Column(
               children: const [
                 Spacer(),
-                Text('Dapatkan rekomendasi diet secara otomatis'),
+                SizedBox(
+                  height: 200,
+                  child: Image(image: AssetImage('assets/images/otomatis.jpg')),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Dapatkan rekomendasi diet secara otomatis',
+                  style: TextStyle(fontSize: 16),
+                ),
                 Spacer(),
               ],
             ),

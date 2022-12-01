@@ -19,7 +19,17 @@ class _IntroPage1State extends State<IntroPage1> {
             child: Column(
               children: const [
                 Spacer(),
-                Text('Hitung kebutuhan gizi kamu'),
+                Image(image: AssetImage('assets/images/smart_patrick.png')),
+                SizedBox(height: 16),
+                Text(
+                  'Hitung kebutuhan gizi kamu',
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'Untuk diet yang lebih terjaga',
+                  style: TextStyle(fontSize: 16),
+                ),
                 Spacer(),
               ],
             ),

@@ -125,7 +125,7 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return 'Please enter your username';
+                                      return 'Tolong isi berat badan';
                                     }
                                     return null;
                                   },
@@ -153,7 +153,7 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return 'Please enter your username';
+                                      return 'Tolong isi tinggi badan';
                                     }
                                     return null;
                                   },
@@ -174,13 +174,13 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                                   maxLength: 2,
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
-                                    suffix: Text('Kg'),
-                                    hintText: '60',
+                                    suffix: Text('Tahun'),
+                                    hintText: '25',
                                     border: OutlineInputBorder(),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return 'Please enter your username';
+                                      return 'Tolong isi usia';
                                     }
                                     return null;
                                   },

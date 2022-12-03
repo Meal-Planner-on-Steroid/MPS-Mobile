@@ -23,7 +23,7 @@ class RencanaDietService {
 
       final url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
 
-      debugPrint(url.toString());
+      // debugPrint(url.toString());
 
       var request = await http.get(url);
 

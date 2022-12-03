@@ -5,6 +5,7 @@ import 'package:mps/app/serializers/user_profile_serializer.dart';
 import 'package:mps/utils/avatar_dan_setting.dart';
 import 'package:mps/utils/home/goal_hari.dart';
 import 'package:mps/utils/home/slider_rencana_diet.dart';
+import 'package:mps/utils/home/test_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -104,7 +105,8 @@ class _HomePageState extends State<HomePage> {
             // Slider
             const SizedBox(height: 16),
             Center(child: Text(_homeDate)),
-            SliderRencanaDiet(homeDate: _updateHomeDate),
+            // SliderRencanaDiet(homeDate: _updateHomeDate),
+            TestPage(homeDate: _updateHomeDate),
           ],
         ),
       ),

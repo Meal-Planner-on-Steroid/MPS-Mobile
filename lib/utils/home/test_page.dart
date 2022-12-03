@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -55,6 +57,7 @@ class TestPageState extends State<TestPage> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               String data = snapshot.data!;
+              inspect(data);
               return Container(
                 padding: const EdgeInsets.only(left: 24, right: 24),
                 child: Column(

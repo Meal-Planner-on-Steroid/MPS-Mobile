@@ -10,6 +10,8 @@ class TestPageController {
       var url = Uri.https(baseUrl, endpoint);
       var request = await http.get(url);
 
+      // inspect(request.body);
+
       return request.body.toString();
     } catch (e) {
       debugPrint(e.toString());

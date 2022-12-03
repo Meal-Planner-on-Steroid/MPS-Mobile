@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:intl/intl.dart';
 import 'package:mps/app/controllers/pages/home_controller.dart';
-import 'package:mps/app/controllers/pages/test_controller.dart';
 import 'package:mps/utils/home/checkbox_gelas.dart';
 import 'package:mps/utils/home/kartu_olahraga.dart';
 import '../makanan_card.dart';
@@ -22,12 +23,10 @@ class SliderRencanaDiet extends StatefulWidget {
 class _SliderRencanaDietState extends State<SliderRencanaDiet> {
   final PageController _pageViewController = PageController(initialPage: 16);
   final _homeController = HomeController();
-  final _testController = TestPageController();
 
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
 
-  // late Future<String> futureText;
-  late Future<bool> futureRencanaDiet;
+  late Future<Map<String, dynamic>> futureRencanaDiet;
 
   DateTime currentDate = DateTime.now();
   var thisPageDate = DateTime.now();
@@ -55,11 +54,7 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
   };
   late List<MakananCard> listMakananCard;
 
-  Future<String> getRandomText(String whatDate) async {
-    return await _testController.get() + whatDate;
-  }
-
-  Future<bool> getRencanaDiet(String tanggal) async {
+  Future<Map<String, dynamic>> getRencanaDiet(String tanggal) async {
     return await _homeController.get(tanggal);
   }
 
@@ -94,15 +89,13 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
   void initState() {
     super.initState();
 
-    // futureText = getRandomText(formatter.format(thisPageDate).toString());
     futureRencanaDiet = getRencanaDiet(formatter.format(thisPageDate));
   }
 
+  // ! Lag karena futurebuilder terpainggi banyak kali
+  // * Lihat cara penggunakan provider dan cosumer
   @override
   Widget build(BuildContext context) {
-    listMakananCard = listMakananCardBuilder();
-    statusMinum = statusMinumBuilder(8, 2);
-
     return ExpandablePageView.builder(
       onPageChanged: (position) async {
         setState(() {
@@ -111,18 +104,20 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
               currentDate.year, currentDate.month, currentDate.day + index);
           widget.homeDate(formatter.format(thisPageDate));
 
-          // futureText = getRandomText(formatter.format(thisPageDate).toString());
           futureRencanaDiet = getRencanaDiet(formatter.format(thisPageDate));
         });
       },
       controller: _pageViewController,
       itemCount: 31,
       itemBuilder: (context, position) {
-        return FutureBuilder<bool>(
+        return FutureBuilder<Map<String, dynamic>>(
           future: futureRencanaDiet,
           builder: (context, snapshot) {
+            listMakananCard = listMakananCardBuilder();
+            statusMinum = statusMinumBuilder(8, 2);
             if (snapshot.hasData) {
-              bool data = snapshot.data!;
+              Map<String, dynamic> data = snapshot.data!;
+              inspect(snapshot.data);
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(

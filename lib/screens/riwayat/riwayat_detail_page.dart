@@ -46,14 +46,6 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
     debugPrint("Riwayat id adalah: ${widget.riwayatId}");
     return Scaffold(
       backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            riwayatDetailFuture = getThisRiwayatDetail(widget.riwayatId);
-          });
-        },
-        child: const Icon(Icons.refresh),
-      ),
       appBar: AppBar(
         title: const Text('Kembali'),
         actions: [

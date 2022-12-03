@@ -19,10 +19,13 @@ class _CheckboxGelasState extends State<CheckboxGelas> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Icon(
-        Icons.local_drink_rounded,
-        color: _glassColor,
-        size: 48,
+      child: Container(
+        color: Colors.transparent,
+        child: Icon(
+          Icons.local_drink_rounded,
+          color: _glassColor,
+          size: 48,
+        ),
       ),
       onTap: () {
         setState(() {

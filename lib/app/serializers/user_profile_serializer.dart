@@ -154,22 +154,22 @@ class Data {
   }
 }
 
-class UserProfileSeralizer {
+class UserProfileSerializer {
   final String? message;
   final int? statusCode;
   final dynamic data;
 
-  UserProfileSeralizer({this.message, this.statusCode, this.data});
+  UserProfileSerializer({this.message, this.statusCode, this.data});
 
-  factory UserProfileSeralizer.fromJson(Map<String, dynamic> json) {
+  factory UserProfileSerializer.fromJson(Map<String, dynamic> json) {
     if (json['data'] is List) {
-      return UserProfileSeralizer(
+      return UserProfileSerializer(
         message: json['message'],
         statusCode: json['statusCode'],
         data: json['data'].map((e) => Data.fromJson(e)).toList(),
       );
     } else {
-      return UserProfileSeralizer(
+      return UserProfileSerializer(
         message: json['message'],
         statusCode: json['statusCode'],
         data: Data.fromJson(json['data']),

@@ -20,7 +20,7 @@ class HitungKebutuhanGiziService {
       var request = await http.get(url);
 
       final response = jsonDecode(request.body);
-      return UserProfileSeralizer.fromJson(response);
+      return UserProfileSerializer.fromJson(response);
     } on Exception catch (e) {
       debugPrint(e.toString());
       return false;
@@ -65,7 +65,7 @@ class HitungKebutuhanGiziService {
       // TODO: serialize list or object
       var response = jsonDecode(request.body);
       debugPrint(response.toString());
-      response = UserProfileSeralizer.fromJson(response);
+      response = UserProfileSerializer.fromJson(response);
 
       if (response.statusCode != 200) {
         debugPrint(response.message.toString());
@@ -119,7 +119,7 @@ class HitungKebutuhanGiziService {
       // TODO: serialize list or object
       var response = jsonDecode(request.body);
       debugPrint(response.toString());
-      response = UserProfileSeralizer.fromJson(response);
+      response = UserProfileSerializer.fromJson(response);
 
       if (response.statusCode != 200) {
         debugPrint(response.message.toString());

@@ -2,7 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class GoalHariIni extends StatefulWidget {
-  const GoalHariIni({Key? key}) : super(key: key);
+  final double keseluruhanEnergi;
+  final double butuhKarbo;
+  final double butuhProtein;
+  final double butuhLemak;
+  final double progresEnergi;
+  final double progresKarbo;
+  final double progresProtein;
+  final double progresLemak;
+
+  const GoalHariIni({
+    Key? key,
+    this.keseluruhanEnergi = 0,
+    this.butuhKarbo = 0,
+    this.butuhProtein = 0,
+    this.butuhLemak = 0,
+    this.progresEnergi = 0,
+    this.progresKarbo = 0,
+    this.progresProtein = 0,
+    this.progresLemak = 0,
+  }) : super(key: key);
 
   @override
   State<GoalHariIni> createState() => _GoalHariIniState();
@@ -29,7 +48,12 @@ class _GoalHariIniState extends State<GoalHariIni> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Goal hari ini
-            const Text('Goal hari ini️ ️‍🔥'),
+            const Text(
+              'Goal hari ini️ ️‍🔥',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
 
             // goal lingkaran
             const SizedBox(height: 8),
@@ -38,51 +62,57 @@ class _GoalHariIniState extends State<GoalHariIni> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Energi',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
-                      '🔥 1000 kcal',
-                      style: TextStyle(
+                      '🔥 ${widget.keseluruhanEnergi.toStringAsFixed(0)} kcal',
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
+
+                // Progress lingkaran karbo
                 CircularPercentIndicator(
                   radius: 60.0,
                   lineWidth: 5.0,
-                  percent: 0.25,
-                  center: const Text('25%'),
+                  percent: widget.progresKarbo,
+                  center: Text('${widget.progresKarbo.toStringAsFixed(0)}%'),
                   footer: const Padding(
                     padding: EdgeInsets.only(top: 4),
                     child: Text('Karb'),
                   ),
                   progressColor: Colors.red,
                 ),
+
+                // Progress lingkaran protein
                 CircularPercentIndicator(
                   radius: 60.0,
                   lineWidth: 5.0,
-                  percent: 0.6,
-                  center: const Text('60%'),
+                  percent: widget.progresProtein,
+                  center: Text('${widget.progresProtein.toStringAsFixed(0)}%'),
                   footer: const Padding(
                     padding: EdgeInsets.only(top: 4),
                     child: Text('Pro'),
                   ),
                   progressColor: Colors.blue,
                 ),
+
+                // Progress lingkaran lemak
                 CircularPercentIndicator(
                   radius: 60.0,
                   lineWidth: 5.0,
-                  percent: 0.80,
-                  center: const Text('80%'),
+                  percent: widget.progresLemak,
+                  center: Text('${widget.progresLemak.toStringAsFixed(0)}%'),
                   footer: const Padding(
                     padding: EdgeInsets.only(top: 4),
                     child: Text('Fat'),
@@ -113,7 +143,7 @@ class _GoalHariIniState extends State<GoalHariIni> {
               visible: opened,
               child: Column(
                 children: [
-                  // Energi
+                  // Progres bar Energi
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -124,17 +154,18 @@ class _GoalHariIniState extends State<GoalHariIni> {
                           animation: true,
                           lineHeight: 12.0,
                           animationDuration: 500,
-                          percent: 0.25,
+                          percent: widget.progresEnergi,
                           linearStrokeCap: LinearStrokeCap.roundAll,
                           progressColor: Colors.green,
                           backgroundColor: Colors.green.shade200,
                         ),
                       ),
-                      const Text('12 / 1000 kcal'),
+                      Text(
+                          '${widget.progresEnergi.toStringAsFixed(0)} / ${widget.keseluruhanEnergi.toStringAsFixed(0)} kcal'),
                     ],
                   ),
 
-                  // Karbohidrat
+                  // Progres bar Karbohidrat
                   const SizedBox(height: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,17 +177,18 @@ class _GoalHariIniState extends State<GoalHariIni> {
                           animation: true,
                           lineHeight: 12.0,
                           animationDuration: 500,
-                          percent: 0.25,
+                          percent: widget.progresKarbo,
                           linearStrokeCap: LinearStrokeCap.roundAll,
                           progressColor: Colors.redAccent,
                           backgroundColor: Colors.red.shade200,
                         ),
                       ),
-                      const Text('12 / 1000 g'),
+                      Text(
+                          '${widget.progresKarbo.toStringAsFixed(0)} / ${widget.butuhKarbo.toStringAsFixed(0)} g'),
                     ],
                   ),
 
-                  // Protein
+                  // Progres bar Protein
                   const SizedBox(height: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,17 +200,18 @@ class _GoalHariIniState extends State<GoalHariIni> {
                           animation: true,
                           lineHeight: 12.0,
                           animationDuration: 500,
-                          percent: 0.25,
+                          percent: widget.progresProtein,
                           linearStrokeCap: LinearStrokeCap.roundAll,
                           progressColor: Colors.blue,
                           backgroundColor: Colors.blue.shade200,
                         ),
                       ),
-                      const Text('12 / 1000 g'),
+                      Text(
+                          '${widget.progresProtein.toStringAsFixed(0)} / ${widget.butuhProtein.toStringAsFixed(0)} g'),
                     ],
                   ),
 
-                  // Lemak
+                  // Progres bar Lemak
                   const SizedBox(height: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,13 +223,14 @@ class _GoalHariIniState extends State<GoalHariIni> {
                           animation: true,
                           lineHeight: 12.0,
                           animationDuration: 500,
-                          percent: 0.25,
+                          percent: widget.progresLemak,
                           linearStrokeCap: LinearStrokeCap.roundAll,
                           progressColor: Colors.yellow.shade800,
                           backgroundColor: Colors.yellow.shade200,
                         ),
                       ),
-                      const Text('12 / 1000 g'),
+                      Text(
+                          '${widget.progresLemak.toStringAsFixed(0)} / ${widget.butuhLemak.toStringAsFixed(0)} g'),
                     ],
                   ),
                 ],

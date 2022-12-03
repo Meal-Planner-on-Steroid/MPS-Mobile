@@ -20,7 +20,7 @@ class UserProfileService {
       var request = await http.get(url);
 
       final response = jsonDecode(request.body);
-      return UserProfileSeralizer.fromJson(response);
+      return UserProfileSerializer.fromJson(response);
     } catch (e) {
       debugPrint('Error waktu get user profile');
       debugPrint(e.toString());

@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../utils/avatar_dan_setting.dart';
-import '../utils/home/goal_hari.dart';
-import '../utils/home/slider_rencana_diet.dart';
+import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart';
+import 'package:mps/app/serializers/user_profile_serializer.dart';
+import 'package:mps/utils/avatar_dan_setting.dart';
+import 'package:mps/utils/home/goal_hari.dart';
+import 'package:mps/utils/home/slider_rencana_diet.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,12 +16,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _hitungKebutuhanGiziController = HitungKebutuhanGiziController();
+
   String _homeDate = DateFormat('yyy-MM-dd').format(DateTime.now()).toString();
+
+  late Future<UserProfileSerializer> _userProfileFuture;
+
+  Future<UserProfileSerializer> getUserProfile() async {
+    final userProfileData = await _hitungKebutuhanGiziController.get();
+    // inspect(userProfileData);
+    return userProfileData;
+  }
 
   void _updateHomeDate(String homeDate) {
     setState(() {
       _homeDate = homeDate;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _userProfileFuture = getUserProfile();
   }
 
   @override
@@ -40,12 +61,45 @@ class _HomePageState extends State<HomePage> {
                 right: 24,
               ),
               child: Column(
-                children: const [
-                  AvatarDanSetting(currentPage: 'Home'),
+                children: [
+                  const AvatarDanSetting(currentPage: 'Home'),
 
                   // Dropdown status
-                  SizedBox(height: 16),
-                  GoalHariIni(),
+                  const SizedBox(height: 16),
+                  FutureBuilder<UserProfileSerializer>(
+                    future: _userProfileFuture,
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const GoalHariIni();
+                      }
+                      var data = snapshot.data!.data[0];
+                      inspect(data);
+
+                      double tempButuhKarbo =
+                          (data.butuhKarbo.karbo60 + data.butuhKarbo.karbo75) /
+                              2;
+                      double tempButuhProtein = (data.butuhProtein.protein10 +
+                              data.butuhProtein.protein15) /
+                          2;
+                      double tempButuhLemak =
+                          (data.butuhLemak.lemak10 + data.butuhLemak.lemak25) /
+                              2;
+
+                      return GoalHariIni(
+                        keseluruhanEnergi: data.keseluruhanEnergi ?? 0,
+                        butuhKarbo: tempButuhKarbo,
+                        butuhProtein: tempButuhProtein,
+                        butuhLemak: tempButuhLemak,
+                        progresEnergi: 0,
+                        progresKarbo: 0,
+                        progresProtein: 0,
+                        progresLemak: 0,
+                      );
+                      // return const Text('ada data');
+                    },
+                  ),
+
+                  // const GoalHariIni(),
                 ],
               ),
             ),

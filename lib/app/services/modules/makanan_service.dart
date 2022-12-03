@@ -33,7 +33,7 @@ class MakananService {
 
       url = Uri.parse(decodeUrl);
 
-      debugPrint(url.toString());
+      // debugPrint(url.toString());
 
       var request = await http.get(url);
 

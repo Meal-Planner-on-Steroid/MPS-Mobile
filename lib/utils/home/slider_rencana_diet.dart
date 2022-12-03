@@ -50,6 +50,10 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
     "jumlah_minum": 8,
     "progress": 2,
   };
+  Map<String, dynamic> statusOlahraga = {
+    "nama": '',
+    "status": 2,
+  };
   late List<MakananCard> listMakananCard;
 
   Future<Map<String, dynamic>> getRencanaDiet(String tanggal) async {
@@ -73,26 +77,33 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
     List<MakananCard> result = [];
 
     // Loop setiap waktu makan, untuk sekarang
-    for (var i = 0; i < waktuMakan.length; i++) {
-      var thisWaktuMakan = waktuMakan[i];
-      var thisRencanaMakan = rencanaMakanan.where((element) {
-        return element.waktuMakan == thisWaktuMakan.code;
-      }).toList();
-      var thisMakanan = makanans.where((element) {
-        return element.id == thisRencanaMakan[0].makananId;
-      }).toList();
+    if (rencanaMakanan.isEmpty || makanans.isEmpty) {
+      for (var i = 0; i < waktuMakan.length; i++) {
+        var thisWaktuMakan = waktuMakan[i];
 
-      // inspect(thisRencanaMakan);
-      // inspect(thisMakanan);
+        result.add(MakananCard(
+          waktuMakan: thisWaktuMakan.title,
+        ));
+      }
+    } else {
+      for (var i = 0; i < waktuMakan.length; i++) {
+        var thisWaktuMakan = waktuMakan[i];
+        var thisRencanaMakan = rencanaMakanan.where((element) {
+          return element.waktuMakan == thisWaktuMakan.code;
+        }).toList();
+        var thisMakanan = makanans.where((element) {
+          return element.id == thisRencanaMakan[0].makananId;
+        }).toList();
 
-      result.add(MakananCard(
-        waktuMakan: thisWaktuMakan.title,
-        namaMakanan: thisMakanan[0].nama,
-        protein: thisMakanan[0].protein,
-        karbo: thisMakanan[0].karbo,
-        fat: thisMakanan[0].lemak,
-        energi: thisMakanan[0].energi,
-      ));
+        result.add(MakananCard(
+          waktuMakan: thisWaktuMakan.title,
+          namaMakanan: thisMakanan[0].nama,
+          protein: thisMakanan[0].protein,
+          karbo: thisMakanan[0].karbo,
+          fat: thisMakanan[0].lemak,
+          energi: thisMakanan[0].energi,
+        ));
+      }
     }
 
     return result;
@@ -128,18 +139,36 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Map<String, dynamic> data = snapshot.data!;
-              var rencanaMinum = data['rencana_diet_minum'].data[0];
-              var rencanaOlahraga = data['rencana_diet_olahraga'].data[0];
 
-              listMakananCard = listMakananCardBuilder(
-                data['rencana_diet_makanan'].data,
-                data['makanans'].data,
-              );
+              // Cek rencana minum
+              if (data.containsKey('rencana_diet_minum')) {
+                var rencanaMinum = data['rencana_diet_minum'].data[0];
+                statusMinum = statusMinumBuilder(
+                  rencanaMinum.jumlahMinum,
+                  rencanaMinum.progress,
+                );
+              }
 
-              statusMinum = statusMinumBuilder(
-                rencanaMinum.jumlahMinum,
-                rencanaMinum.progress,
-              );
+              // Cek rencana makanan
+              if (data.containsKey('rencana_diet_makanan') &&
+                  data.containsKey('makanans')) {
+                listMakananCard = listMakananCardBuilder(
+                  data['rencana_diet_makanan'].data,
+                  data['makanans'].data,
+                );
+              } else {
+                listMakananCard = listMakananCardBuilder([], []);
+              }
+
+              // cek rencana olahraga
+              if (data.containsKey('rencana_diet_olahraga')) {
+                var rencanaOlahraga = data['rencana_diet_olahraga'].data[0];
+                statusOlahraga = {
+                  "nama": rencanaOlahraga.nama,
+                  "status": rencanaOlahraga.status == 2,
+                };
+              }
+
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -216,8 +245,8 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
 
                     // Karu olahraga
                     KartuOlahraga(
-                      namaOlahraga: rencanaOlahraga.nama,
-                      isComplete: rencanaOlahraga.status == 2,
+                      namaOlahraga: statusOlahraga['nama'],
+                      isComplete: statusOlahraga['status'] == 1,
                     ),
 
                     // Content

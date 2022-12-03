@@ -12,7 +12,6 @@ import 'package:mps/app/services/modules/rencana_diet_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController {
-  // final _makananFavoritService = MakananFavoritService();
   final _rencanaDietService = RencanaDietService();
   final _rencanaDietMakananService = RencanaDietMakananService();
   final _rencanaDietMinumService = RencanaDietMinumService();
@@ -37,37 +36,40 @@ class HomeController {
       rencanaDietFilter.userId = prefs.getString('userId');
       var responseRencanaDiet =
           await _rencanaDietService.get(rencanaDietFilter);
-      var rencanaDietId = responseRencanaDiet.data[0].id;
-      result['rencana_diet'] = responseRencanaDiet;
 
-      // Ambil rencana diet makanan
-      rencanaDietMakananFilter.rencanaDietId = rencanaDietId.toString();
-      var responseRencanaMakananDiet =
-          await _rencanaDietMakananService.get(rencanaDietMakananFilter);
-      result['rencana_diet_makanan'] = responseRencanaMakananDiet;
+      if (responseRencanaDiet.data.length > 0) {
+        var rencanaDietId = responseRencanaDiet.data[0].id;
+        result['rencana_diet'] = responseRencanaDiet;
 
-      // Buat list id makanan
-      List<int> listMakananIds = [];
-      for (var i = 0; i < responseRencanaMakananDiet.data.length; i++) {
-        listMakananIds.add(responseRencanaMakananDiet.data[i].makananId);
+        // Ambil rencana diet makanan
+        rencanaDietMakananFilter.rencanaDietId = rencanaDietId.toString();
+        var responseRencanaMakananDiet =
+            await _rencanaDietMakananService.get(rencanaDietMakananFilter);
+        result['rencana_diet_makanan'] = responseRencanaMakananDiet;
+
+        // Buat list id makanan
+        List<int> listMakananIds = [];
+        for (var i = 0; i < responseRencanaMakananDiet.data.length; i++) {
+          listMakananIds.add(responseRencanaMakananDiet.data[i].makananId);
+        }
+
+        // Ambil list makanan di listMakananIds
+        makananFilter.idIn = listMakananIds.join(',').toString();
+        var responseMakanan = await _makananService.get(makananFilter);
+        result['makanans'] = responseMakanan;
+
+        // Ambil rencana diet minum
+        rencanaDietMinumFilter.rencanaDietId = rencanaDietId.toString();
+        var responseRencanaMinumDiet =
+            await _rencanaDietMinumService.get(rencanaDietMinumFilter);
+        result['rencana_diet_minum'] = responseRencanaMinumDiet;
+
+        // Ambil rencana diet olahraga
+        rencanaDietOlahragaFilter.rencanaDietId = rencanaDietId.toString();
+        var responseRencanaOlahragaDiet =
+            await _rencanaDietOlahragaService.get(rencanaDietOlahragaFilter);
+        result['rencana_diet_olahraga'] = responseRencanaOlahragaDiet;
       }
-
-      // Ambil list makanan di listMakananIds
-      makananFilter.idIn = listMakananIds.join(',').toString();
-      var responseMakanan = await _makananService.get(makananFilter);
-      result['makanans'] = responseMakanan;
-
-      // Ambil rencana diet minum
-      rencanaDietMinumFilter.rencanaDietId = rencanaDietId.toString();
-      var responseRencanaMinumDiet =
-          await _rencanaDietMinumService.get(rencanaDietMinumFilter);
-      result['rencana_diet_minum'] = responseRencanaMinumDiet;
-
-      // Ambil rencana diet olahraga
-      rencanaDietOlahragaFilter.rencanaDietId = rencanaDietId.toString();
-      var responseRencanaOlahragaDiet =
-          await _rencanaDietOlahragaService.get(rencanaDietOlahragaFilter);
-      result['rencana_diet_olahraga'] = responseRencanaOlahragaDiet;
 
       // inspect(result['rencana_diet'].data[0]);
       // inspect(result['rencana_diet_makanan'].data);

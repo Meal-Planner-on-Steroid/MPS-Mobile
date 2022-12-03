@@ -28,6 +28,7 @@ class RencanaDietService {
       var request = await http.get(url);
 
       final response = jsonDecode(request.body);
+      // debugPrint(response.toString());
       return RencanaDietSerializer.fromJson(response);
     } catch (e) {
       debugPrint(e.toString());

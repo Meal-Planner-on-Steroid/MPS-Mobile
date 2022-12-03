@@ -85,7 +85,7 @@ class _GoalHariIniState extends State<GoalHariIni> {
                 CircularPercentIndicator(
                   radius: 60.0,
                   lineWidth: 5.0,
-                  percent: widget.progresKarbo,
+                  percent: (widget.progresKarbo / widget.butuhKarbo),
                   center: Text('${widget.progresKarbo.toStringAsFixed(0)}%'),
                   footer: const Padding(
                     padding: EdgeInsets.only(top: 4),
@@ -98,7 +98,7 @@ class _GoalHariIniState extends State<GoalHariIni> {
                 CircularPercentIndicator(
                   radius: 60.0,
                   lineWidth: 5.0,
-                  percent: widget.progresProtein,
+                  percent: (widget.progresProtein / widget.butuhProtein),
                   center: Text('${widget.progresProtein.toStringAsFixed(0)}%'),
                   footer: const Padding(
                     padding: EdgeInsets.only(top: 4),
@@ -111,7 +111,7 @@ class _GoalHariIniState extends State<GoalHariIni> {
                 CircularPercentIndicator(
                   radius: 60.0,
                   lineWidth: 5.0,
-                  percent: widget.progresLemak,
+                  percent: (widget.progresLemak / widget.butuhLemak),
                   center: Text('${widget.progresLemak.toStringAsFixed(0)}%'),
                   footer: const Padding(
                     padding: EdgeInsets.only(top: 4),
@@ -154,7 +154,8 @@ class _GoalHariIniState extends State<GoalHariIni> {
                           animation: true,
                           lineHeight: 12.0,
                           animationDuration: 500,
-                          percent: widget.progresEnergi,
+                          percent:
+                              (widget.progresEnergi / widget.keseluruhanEnergi),
                           linearStrokeCap: LinearStrokeCap.roundAll,
                           progressColor: Colors.green,
                           backgroundColor: Colors.green.shade200,
@@ -177,7 +178,7 @@ class _GoalHariIniState extends State<GoalHariIni> {
                           animation: true,
                           lineHeight: 12.0,
                           animationDuration: 500,
-                          percent: widget.progresKarbo,
+                          percent: (widget.progresKarbo / widget.butuhKarbo),
                           linearStrokeCap: LinearStrokeCap.roundAll,
                           progressColor: Colors.redAccent,
                           backgroundColor: Colors.red.shade200,
@@ -200,7 +201,8 @@ class _GoalHariIniState extends State<GoalHariIni> {
                           animation: true,
                           lineHeight: 12.0,
                           animationDuration: 500,
-                          percent: widget.progresProtein,
+                          percent:
+                              (widget.progresProtein / widget.butuhProtein),
                           linearStrokeCap: LinearStrokeCap.roundAll,
                           progressColor: Colors.blue,
                           backgroundColor: Colors.blue.shade200,
@@ -223,7 +225,7 @@ class _GoalHariIniState extends State<GoalHariIni> {
                           animation: true,
                           lineHeight: 12.0,
                           animationDuration: 500,
-                          percent: widget.progresLemak,
+                          percent: (widget.progresLemak / widget.butuhLemak),
                           linearStrokeCap: LinearStrokeCap.roundAll,
                           progressColor: Colors.yellow.shade800,
                           backgroundColor: Colors.yellow.shade200,

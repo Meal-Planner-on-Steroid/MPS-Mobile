@@ -1,24 +1,19 @@
-import 'package:flutter/material.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mps/app/controllers/pages/test_controller.dart';
-import '../makanan_card.dart';
-import 'slider_rencana_diet_page.dart';
 
-class SliderRencanaDiet extends StatefulWidget {
+class TestPage extends StatefulWidget {
   final ValueChanged<String> homeDate;
 
-  const SliderRencanaDiet({
-    Key? key,
-    required this.homeDate,
-  }) : super(key: key);
+  const TestPage({super.key, required this.homeDate});
 
   @override
-  State<SliderRencanaDiet> createState() => _SliderRencanaDietState();
+  State<TestPage> createState() => TestPageState();
 }
 
-class _SliderRencanaDietState extends State<SliderRencanaDiet> {
-  final PageController _pageViewController = PageController(initialPage: 16);
+class TestPageState extends State<TestPage> {
+  PageController pageViewController = PageController(initialPage: 11);
   final _testController = TestPageController();
 
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
@@ -40,53 +35,20 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
     futureText = getRandomText(formatter.format(thisPageDate).toString());
   }
 
-  // List<ListRencanaDiet> listRencanaDiet = [
-  //   ListRencanaDiet(
-  //     hari: 'hari',
-  //     body: const [
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //     ],
-  //   ),
-  //   ListRencanaDiet(
-  //     hari: 'hari',
-  //     body: const [
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //     ],
-  //   ),
-  //   ListRencanaDiet(
-  //     hari: 'hari',
-  //     body: const [
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //       MakananCard(beChecked: true),
-  //     ],
-  //   ),
-  // ];
-
   @override
   Widget build(BuildContext context) {
     return ExpandablePageView.builder(
       onPageChanged: (position) async {
         setState(() {
-          index = position - 16;
+          index = position - 11;
           thisPageDate = DateTime(
               currentDate.year, currentDate.month, currentDate.day + index);
           widget.homeDate(formatter.format(thisPageDate));
           futureText = getRandomText(formatter.format(thisPageDate).toString());
         });
       },
-      controller: _pageViewController,
-      itemCount: 31,
+      controller: pageViewController,
+      itemCount: 21,
       itemBuilder: (context, position) {
         return FutureBuilder<String>(
           future: futureText,
@@ -94,10 +56,10 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
             if (snapshot.hasData) {
               String data = snapshot.data!;
               return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.only(left: 24, right: 24),
                 child: Column(
                   children: [
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 32),
                     Text('Current position $position'),
                     Text('Current index $index'),
                     Text('Current date ${formatter.format(currentDate)}'),
@@ -121,28 +83,5 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
         );
       },
     );
-
-    // return ExpandablePageView(
-    //   controller: _pageController,
-    //   children: listRencanaDiet
-    //       .map(
-    //         (item) => SliderRencanaDietPage(
-    //           hari: item.hari,
-    //           makanans: item.body,
-    //           controller: _pageController,
-    //         ),
-    //       )
-    //       .toList(),
-    // );
   }
-}
-
-class ListRencanaDiet {
-  final String hari;
-  final List body;
-
-  ListRencanaDiet({
-    required this.hari,
-    required this.body,
-  });
 }

@@ -131,8 +131,8 @@ class _GoalHariIniState extends State<GoalHariIni> {
                     opened = !opened;
                   });
                 },
-                child: const Icon(
-                  Icons.keyboard_arrow_down,
+                child: Icon(
+                  opened ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
                   size: 36,
                 ),
               ),

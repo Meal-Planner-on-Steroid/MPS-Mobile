@@ -48,7 +48,6 @@ class RencanaDietService {
     try {
       final url = Uri.http(_baseUrl.toString(), endpoint);
 
-      // ignore: unused_local_variable
       var request = await http.post(
         url,
         headers: {"Content-Type": "application/json"},

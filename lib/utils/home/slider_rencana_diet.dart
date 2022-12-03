@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:intl/intl.dart';
+import 'package:mps/app/controllers/pages/home_controller.dart';
 import 'package:mps/app/controllers/pages/test_controller.dart';
 import 'package:mps/utils/home/checkbox_gelas.dart';
 import 'package:mps/utils/home/kartu_olahraga.dart';
@@ -20,26 +21,17 @@ class SliderRencanaDiet extends StatefulWidget {
 
 class _SliderRencanaDietState extends State<SliderRencanaDiet> {
   final PageController _pageViewController = PageController(initialPage: 16);
+  final _homeController = HomeController();
   final _testController = TestPageController();
 
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
 
-  late Future<String> futureText;
+  // late Future<String> futureText;
+  late Future<bool> futureRencanaDiet;
 
   DateTime currentDate = DateTime.now();
   var thisPageDate = DateTime.now();
   var index = 0;
-
-  Future<String> getRandomText(String whatDate) async {
-    return await _testController.get() + whatDate;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    futureText = getRandomText(formatter.format(thisPageDate).toString());
-  }
 
   List<ItemWaktuMakan> waktuMakan = [
     ItemWaktuMakan(title: 'Makan Pagi', code: 'PH'),
@@ -61,8 +53,15 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
     "jumlah_minum": 8,
     "progress": 2,
   };
-
   late List<MakananCard> listMakananCard;
+
+  Future<String> getRandomText(String whatDate) async {
+    return await _testController.get() + whatDate;
+  }
+
+  Future<bool> getRencanaDiet(String tanggal) async {
+    return await _homeController.get(tanggal);
+  }
 
   Map<String, dynamic> statusMinumBuilder(int jumlahMinum, int progress) {
     Map<String, dynamic> result = {};
@@ -92,6 +91,14 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    // futureText = getRandomText(formatter.format(thisPageDate).toString());
+    futureRencanaDiet = getRencanaDiet(formatter.format(thisPageDate));
+  }
+
+  @override
   Widget build(BuildContext context) {
     listMakananCard = listMakananCardBuilder();
     statusMinum = statusMinumBuilder(8, 2);
@@ -103,17 +110,19 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
           thisPageDate = DateTime(
               currentDate.year, currentDate.month, currentDate.day + index);
           widget.homeDate(formatter.format(thisPageDate));
-          futureText = getRandomText(formatter.format(thisPageDate).toString());
+
+          // futureText = getRandomText(formatter.format(thisPageDate).toString());
+          futureRencanaDiet = getRencanaDiet(formatter.format(thisPageDate));
         });
       },
       controller: _pageViewController,
       itemCount: 31,
       itemBuilder: (context, position) {
-        return FutureBuilder<String>(
-          future: futureText,
+        return FutureBuilder<bool>(
+          future: futureRencanaDiet,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              String data = snapshot.data!;
+              bool data = snapshot.data!;
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -197,7 +206,7 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
                     Text('Current date ${formatter.format(currentDate)}'),
                     Text('This page date ${formatter.format(thisPageDate)}'),
                     const Text('the random text bellow'),
-                    Text(data),
+                    Text(data.toString()),
                     const SizedBox(height: 8),
                   ],
                 ),

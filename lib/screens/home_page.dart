@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart';
@@ -73,7 +71,6 @@ class _HomePageState extends State<HomePage> {
                         return const GoalHariIni();
                       }
                       var data = snapshot.data!.data[0];
-                      inspect(data);
 
                       double tempButuhKarbo =
                           (data.butuhKarbo.karbo60 + data.butuhKarbo.karbo75) /
@@ -107,9 +104,7 @@ class _HomePageState extends State<HomePage> {
             // Slider
             const SizedBox(height: 16),
             Center(child: Text(_homeDate)),
-            // const SizedBox(height: 16),
             SliderRencanaDiet(homeDate: _updateHomeDate),
-            // TestPage(homeDate: _updateHomeDate),
           ],
         ),
       ),

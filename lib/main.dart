@@ -150,9 +150,6 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
-      // appBar: AppBar(
-      //   title: const Text('Flutter'),
-      // ),
       body: pages[currentPage],
       bottomNavigationBar: NavigationBar(
         destinations: const [
@@ -170,38 +167,4 @@ class _RootPageState extends State<RootPage> {
       ),
     );
   }
-  // Widget build(BuildContext context) {
-  //   return FutureBuilder(
-  //     future: getAuth(),
-  //     builder: (context, AsyncSnapshot<bool> snapshot) {
-  //       if (snapshot.data == true) {
-  //         return Scaffold(
-  //           backgroundColor: Colors.grey.shade300,
-  //           // appBar: AppBar(
-  //           //   title: const Text('Flutter'),
-  //           // ),
-  //           body: pages[currentPage],
-  //           bottomNavigationBar: NavigationBar(
-  //             destinations: const [
-  //               NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-  //               NavigationDestination(icon: Icon(Icons.person), label: 'Me'),
-  //               NavigationDestination(
-  //                   icon: Icon(Icons.fastfood), label: 'Menu'),
-  //               NavigationDestination(
-  //                   icon: Icon(Icons.history), label: 'Riwayat'),
-  //             ],
-  //             onDestinationSelected: (int index) {
-  //               setState(() {
-  //                 currentPage = index;
-  //               });
-  //             },
-  //             selectedIndex: currentPage,
-  //           ),
-  //         );
-  //       } else {
-  //         return const LoginPage();
-  //       }
-  //     },
-  //   );
-  // }
 }

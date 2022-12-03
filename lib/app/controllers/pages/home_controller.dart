@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mps/app/filters/makanan_filter.dart';
 import 'package:mps/app/filters/rencana_diet_filter.dart';
 import 'package:mps/app/filters/rencana_diet_makanan_filter.dart';
 import 'package:mps/app/filters/rencana_diet_minum_filter.dart';
 import 'package:mps/app/filters/rencana_diet_olahraga_filter.dart';
+import 'package:mps/app/services/modules/makanan_service.dart';
 import 'package:mps/app/services/modules/rencana_diet_makanan_service.dart';
 import 'package:mps/app/services/modules/rencana_diet_minum_service.dart';
 import 'package:mps/app/services/modules/rencana_diet_olahraga_service.dart';
@@ -15,6 +17,7 @@ class HomeController {
   final _rencanaDietMakananService = RencanaDietMakananService();
   final _rencanaDietMinumService = RencanaDietMinumService();
   final _rencanaDietOlahragaService = RencanaDietOlahragaService();
+  final _makananService = MakananService();
 
   RencanaDietFilter rencanaDietFilter = RencanaDietFilter();
   RencanaDietMakananFilter rencanaDietMakananFilter =
@@ -22,6 +25,7 @@ class HomeController {
   RencanaDietMinumFilter rencanaDietMinumFilter = RencanaDietMinumFilter();
   RencanaDietOlahragaFilter rencanaDietOlahragaFilter =
       RencanaDietOlahragaFilter();
+  MakananFilter makananFilter = MakananFilter();
 
   Future get(String tanggal) async {
     try {
@@ -42,6 +46,17 @@ class HomeController {
           await _rencanaDietMakananService.get(rencanaDietMakananFilter);
       result['rencana_diet_makanan'] = responseRencanaMakananDiet;
 
+      // Buat list id makanan
+      List<int> listMakananIds = [];
+      for (var i = 0; i < responseRencanaMakananDiet.data.length; i++) {
+        listMakananIds.add(responseRencanaMakananDiet.data[i].makananId);
+      }
+
+      // Ambil list makanan di listMakananIds
+      makananFilter.idIn = listMakananIds.join(',').toString();
+      var responseMakanan = await _makananService.get(makananFilter);
+      result['makanans'] = responseMakanan;
+
       // Ambil rencana diet minum
       rencanaDietMinumFilter.rencanaDietId = rencanaDietId.toString();
       var responseRencanaMinumDiet =
@@ -56,6 +71,7 @@ class HomeController {
 
       // inspect(result['rencana_diet'].data[0]);
       // inspect(result['rencana_diet_makanan'].data);
+      // inspect(result['makanans'].data);
       // inspect(result['rencana_diet_minum'].data[0]);
       // inspect(result['rencana_diet_olahraga'].data[0]);
 

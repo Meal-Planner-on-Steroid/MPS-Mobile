@@ -105,8 +105,8 @@ class _HomePageState extends State<HomePage> {
             // Slider
             const SizedBox(height: 16),
             Center(child: Text(_homeDate)),
-            // SliderRencanaDiet(homeDate: _updateHomeDate),
-            TestPage(homeDate: _updateHomeDate),
+            SliderRencanaDiet(homeDate: _updateHomeDate),
+            // TestPage(homeDate: _updateHomeDate),
           ],
         ),
       ),

@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mps/utils/checkbox_green.dart';
 
 class KartuOlahraga extends StatelessWidget {
-  const KartuOlahraga({Key? key}) : super(key: key);
+  final String namaOlahraga;
+  final bool isComplete;
+
+  const KartuOlahraga({
+    Key? key,
+    this.namaOlahraga = "Belum olahraga 😔",
+    this.isComplete = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,44 +45,47 @@ class KartuOlahraga extends StatelessWidget {
                     const SizedBox(width: 8),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           'Olahraga',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                           ),
                         ),
-                        SizedBox(height: 8),
-                        Text('Nama olahraga'),
+                        const SizedBox(height: 8),
+                        Text(namaOlahraga != ''
+                            ? namaOlahraga
+                            : 'Belum olahraga 😔'),
                       ],
                     ),
                   ],
                 ),
-                const CheckboxGreen(checked: false),
+                CheckboxGreen(checked: isComplete),
               ],
             ),
+
             // Divider
-            Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 8),
-                child: Container(
-                  height: 2,
-                  color: Colors.yellow.shade700,
-                )),
+            // Padding(
+            //     padding: const EdgeInsets.only(top: 8, bottom: 8),
+            //     child: Container(
+            //       height: 2,
+            //       color: Colors.yellow.shade700,
+            //     )),
 
             // Detail & kalori
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                // Detail
-                Text('Detail'),
-                // Kalori
-                Text(
-                  'Kalori',
-                  style: TextStyle(color: Colors.blue),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     // Detail
+            //     Text('Detail'),
+            //     // Kalori
+            //     Text(
+            //       'Kalori',
+            //       style: TextStyle(color: Colors.blue),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

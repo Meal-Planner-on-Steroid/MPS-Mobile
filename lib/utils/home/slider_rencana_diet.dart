@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:intl/intl.dart';
@@ -69,16 +67,31 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
     return result;
   }
 
-  List<MakananCard> listMakananCardBuilder() {
+  // List<MakananCard> listMakananCardBuilder() {
+  List<MakananCard> listMakananCardBuilder(
+      List<dynamic> rencanaMakanan, List<dynamic> makanans) {
     List<MakananCard> result = [];
 
     // Loop setiap waktu makan, untuk sekarang
     for (var i = 0; i < waktuMakan.length; i++) {
       var thisWaktuMakan = waktuMakan[i];
+      var thisRencanaMakan = rencanaMakanan.where((element) {
+        return element.waktuMakan == thisWaktuMakan.code;
+      }).toList();
+      var thisMakanan = makanans.where((element) {
+        return element.id == thisRencanaMakan[0].makananId;
+      }).toList();
+
+      // inspect(thisRencanaMakan);
+      // inspect(thisMakanan);
 
       result.add(MakananCard(
-        namaMakanan: 'Watku makan loop',
         waktuMakan: thisWaktuMakan.title,
+        namaMakanan: thisMakanan[0].nama,
+        protein: thisMakanan[0].protein,
+        karbo: thisMakanan[0].karbo,
+        fat: thisMakanan[0].lemak,
+        energi: thisMakanan[0].energi,
       ));
     }
 
@@ -113,11 +126,20 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
         return FutureBuilder<Map<String, dynamic>>(
           future: futureRencanaDiet,
           builder: (context, snapshot) {
-            listMakananCard = listMakananCardBuilder();
-            statusMinum = statusMinumBuilder(8, 2);
             if (snapshot.hasData) {
               Map<String, dynamic> data = snapshot.data!;
-              inspect(snapshot.data);
+              var rencanaMinum = data['rencana_diet_minum'].data[0];
+              var rencanaOlahraga = data['rencana_diet_olahraga'].data[0];
+
+              listMakananCard = listMakananCardBuilder(
+                data['rencana_diet_makanan'].data,
+                data['makanans'].data,
+              );
+
+              statusMinum = statusMinumBuilder(
+                rencanaMinum.jumlahMinum,
+                rencanaMinum.progress,
+              );
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -193,15 +215,16 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
                     ),
 
                     // Karu olahraga
-                    const KartuOlahraga(),
+                    KartuOlahraga(
+                      namaOlahraga: rencanaOlahraga.nama,
+                      isComplete: rencanaOlahraga.status == 2,
+                    ),
 
                     // Content
                     Text('Current position $position'),
                     Text('Current index $index'),
                     Text('Current date ${formatter.format(currentDate)}'),
                     Text('This page date ${formatter.format(thisPageDate)}'),
-                    const Text('the random text bellow'),
-                    Text(data.toString()),
                     const SizedBox(height: 8),
                   ],
                 ),

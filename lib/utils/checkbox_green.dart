@@ -51,6 +51,8 @@ class _CheckboxGreenState extends State<CheckboxGreen> {
         // Update checked di awal
         setState(() => checked = !checked!);
 
+        debugPrint('dari checkbox green');
+
         if (checked!) {
           // POST untuk create preferensi makanan
           setState(() {

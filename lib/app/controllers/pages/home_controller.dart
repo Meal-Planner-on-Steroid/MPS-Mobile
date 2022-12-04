@@ -4,11 +4,13 @@ import 'package:mps/app/filters/rencana_diet_filter.dart';
 import 'package:mps/app/filters/rencana_diet_makanan_filter.dart';
 import 'package:mps/app/filters/rencana_diet_minum_filter.dart';
 import 'package:mps/app/filters/rencana_diet_olahraga_filter.dart';
+import 'package:mps/app/models/rencana_diet_makanan_model.dart';
 import 'package:mps/app/services/modules/makanan_service.dart';
 import 'package:mps/app/services/modules/rencana_diet_makanan_service.dart';
 import 'package:mps/app/services/modules/rencana_diet_minum_service.dart';
 import 'package:mps/app/services/modules/rencana_diet_olahraga_service.dart';
 import 'package:mps/app/services/modules/rencana_diet_service.dart';
+import 'package:mps/app/services/pages/home_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController {
@@ -17,6 +19,7 @@ class HomeController {
   final _rencanaDietMinumService = RencanaDietMinumService();
   final _rencanaDietOlahragaService = RencanaDietOlahragaService();
   final _makananService = MakananService();
+  final _homeService = HomeService();
 
   RencanaDietFilter rencanaDietFilter = RencanaDietFilter();
   RencanaDietMakananFilter rencanaDietMakananFilter =
@@ -78,6 +81,25 @@ class HomeController {
       // inspect(result['rencana_diet_olahraga'].data[0]);
 
       return result;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+
+  Future updateProgresMakanan(int rencanaMakanId, int status) async {
+    try {
+      RencanaDietMakanan rencanaDietMakanan = RencanaDietMakanan();
+
+      rencanaDietMakanan.status = status;
+
+      debugPrint(rencanaMakanId.toString());
+      debugPrint(rencanaDietMakanan.status.toString());
+      // ignore: unused_local_variable
+      var requestRencanaMakanan = await _homeService.updateProgresMakanan(
+          rencanaDietMakanan, rencanaMakanId);
+
+      return true;
     } catch (e) {
       debugPrint(e.toString());
       return false;

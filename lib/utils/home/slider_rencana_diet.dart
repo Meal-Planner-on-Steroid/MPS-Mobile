@@ -4,14 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:mps/app/controllers/pages/home_controller.dart';
 import 'package:mps/utils/home/checkbox_gelas.dart';
 import 'package:mps/utils/home/kartu_olahraga.dart';
-import '../makanan_card.dart';
+import 'package:mps/utils/makanan_card.dart';
 
 class SliderRencanaDiet extends StatefulWidget {
-  final ValueChanged<String> homeDate;
-
   const SliderRencanaDiet({
     Key? key,
-    required this.homeDate,
   }) : super(key: key);
 
   @override
@@ -126,7 +123,6 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
           index = position - 16;
           thisPageDate = DateTime(
               currentDate.year, currentDate.month, currentDate.day + index);
-          widget.homeDate(formatter.format(thisPageDate));
 
           futureRencanaDiet = getRencanaDiet(formatter.format(thisPageDate));
         });
@@ -272,16 +268,6 @@ class _SliderRencanaDietState extends State<SliderRencanaDiet> {
       },
     );
   }
-}
-
-class ListRencanaDiet {
-  final String hari;
-  final List body;
-
-  ListRencanaDiet({
-    required this.hari,
-    required this.body,
-  });
 }
 
 class ItemWaktuMakan {

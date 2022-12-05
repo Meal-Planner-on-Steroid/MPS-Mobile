@@ -18,12 +18,14 @@ class RencanaDietService {
         "tanggal__gt": rencanaDietFilter.tanggalGt,
         "tanggal__lt": rencanaDietFilter.tanggalLt,
         "user_id": rencanaDietFilter.userId,
+        "limit": rencanaDietFilter.limit,
+        "page": rencanaDietFilter.page,
         "order_by": rencanaDietFilter.orderBy,
       };
 
       final url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
 
-      // debugPrint(url.toString());
+      debugPrint(url.toString());
 
       var request = await http.get(url);
 

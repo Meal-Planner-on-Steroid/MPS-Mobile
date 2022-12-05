@@ -29,8 +29,9 @@ class _HomePageState extends State<HomePage> {
 
   // Variable future dan late
   late Future<UserProfileSerializer> _userProfileFuture;
-  late Future<Map<String, dynamic>> futureRencanaDiet;
+  // late Future<Map<String, dynamic>> futureRencanaDiet;
   late List<MakananCard> listMakananCard;
+  late Future<Map<String, dynamic>> futureListRencanaDiet;
 
   // Variable biasa
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
@@ -61,6 +62,11 @@ class _HomePageState extends State<HomePage> {
 
   Future<Map<String, dynamic>> getRencanaDiet(String tanggal) async {
     return await _homeController.get(tanggal);
+  }
+
+  Future<Map<String, dynamic>> getSetRencanaDiet(
+      String mulaiDariTanggal) async {
+    return await _homeController.getSetRencanaDiet(mulaiDariTanggal);
   }
 
   Map<String, dynamic> statusMinumBuilder(int jumlahMinum, int progress) {
@@ -124,18 +130,20 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     _userProfileFuture = getUserProfile();
-    futureRencanaDiet = getRencanaDiet(formatter.format(thisPageDate));
+    // futureRencanaDiet = getRencanaDiet(formatter.format(thisPageDate));
+    futureListRencanaDiet = getSetRencanaDiet(formatter.format(
+        DateTime(currentDate.year, currentDate.month, currentDate.day - 16)));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {});
-        },
-        child: const Icon(Icons.refresh),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     setState(() {});
+      //   },
+      //   child: const Icon(Icons.refresh),
+      // ),
       body: SafeArea(
         child: ListView(
           // padding: const EdgeInsets.all(24),
@@ -192,57 +200,58 @@ class _HomePageState extends State<HomePage> {
             // Slider
             const SizedBox(height: 8),
             // const SliderRencanaDiet(),
-            // TestPage(homeDate: _updateHomeDate),
+            // const TestPage(),
 
-            ExpandablePageView.builder(
-              onPageChanged: (position) async {
-                setState(() {
-                  index = position - 16;
-                  thisPageDate = DateTime(currentDate.year, currentDate.month,
-                      currentDate.day + index);
-                  futureRencanaDiet =
-                      getRencanaDiet(formatter.format(thisPageDate));
-                });
-              },
-              controller: _pageViewController,
-              itemCount: 31,
-              itemBuilder: (context, position) {
-                return FutureBuilder<Map<String, dynamic>>(
-                  future: futureRencanaDiet,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      Map<String, dynamic> data = snapshot.data!;
+            FutureBuilder<Map<String, dynamic>>(
+              future: futureListRencanaDiet,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  Map<String, dynamic> data = snapshot.data!;
+                  // inspect(data);
 
-                      // Cek rencana minum
-                      if (data.containsKey('rencana_diet_minum')) {
-                        var rencanaMinum = data['rencana_diet_minum'].data[0];
+                  return ExpandablePageView.builder(
+                    controller: _pageViewController,
+                    itemCount: 31,
+                    itemBuilder: (context, position) {
+                      index = position - 16;
+                      thisPageDate = DateTime(currentDate.year,
+                          currentDate.month, currentDate.day + index);
+                      String dateKey = formatter.format(thisPageDate);
+
+                      if (data.containsKey(dateKey)) {
+                        Map<String, dynamic> currentData = data[dateKey];
+
+                        // Refererensi data agar mudah
+                        // ignore: unused_local_variable
+                        var rencanaDiet = currentData['rencana_diet'];
+                        List rencanaDietMakanan =
+                            currentData['rencana_diet_makanan'];
+                        List makanans = currentData['makanans'];
+                        var rencanaDietMinum =
+                            currentData['rencana_diet_minum'];
+                        var rencanaDietOlahraga =
+                            currentData['rencana_diet_olahraga'];
+
+                        // Build widget & data widget
+                        // Rencana minum
                         statusMinum = statusMinumBuilder(
-                          rencanaMinum.jumlahMinum,
-                          rencanaMinum.progress,
-                        );
-                      }
+                            rencanaDietMinum.jumlahMinum,
+                            rencanaDietMinum.progress);
 
-                      // Cek rencana makanan
-                      if (data.containsKey('rencana_diet_makanan') &&
-                          data.containsKey('makanans')) {
+                        // Rencana makan
                         listMakananCard = listMakananCardBuilder(
-                          data['rencana_diet_makanan'].data,
-                          data['makanans'].data,
+                          rencanaDietMakanan,
+                          makanans,
                         );
-                      } else {
-                        listMakananCard = listMakananCardBuilder([], []);
-                      }
 
-                      // cek rencana olahraga
-                      if (data.containsKey('rencana_diet_olahraga')) {
-                        var rencanaOlahraga =
-                            data['rencana_diet_olahraga'].data[0];
+                        // Rencana olahraga
                         statusOlahraga = {
-                          "nama": rencanaOlahraga.nama,
-                          "status": rencanaOlahraga.status == 2,
+                          "nama": rencanaDietOlahraga.nama,
+                          "status": rencanaDietOlahraga.status == 2,
                         };
                       }
 
+                      // Container page
                       return Container(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Column(
@@ -329,19 +338,166 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       );
-                    } else {
-                      return Column(
-                        children: const [
-                          SizedBox(height: 100),
-                          Text('Loading...'),
-                          SizedBox(height: 100),
-                        ],
-                      );
-                    }
-                  },
-                );
+                    },
+                  );
+                } else {
+                  return Column(
+                    children: const [
+                      Text('Loading...'),
+                    ],
+                  );
+                }
               },
             ),
+
+            // ExpandablePageView.builder(
+            //   onPageChanged: (position) async {
+            //     setState(() {
+            //       index = position - 16;
+            //       thisPageDate = DateTime(currentDate.year, currentDate.month,
+            //           currentDate.day + index);
+            //       futureRencanaDiet =
+            //           getRencanaDiet(formatter.format(thisPageDate));
+            //     });
+            //   },
+            //   controller: _pageViewController,
+            //   itemCount: 31,
+            //   itemBuilder: (context, position) {
+            //     return FutureBuilder<Map<String, dynamic>>(
+            //       future: futureRencanaDiet,
+            //       builder: (context, snapshot) {
+            //         if (snapshot.hasData) {
+            //           Map<String, dynamic> data = snapshot.data!;
+
+            //           // Cek rencana minum
+            //           if (data.containsKey('rencana_diet_minum')) {
+            //             var rencanaMinum = data['rencana_diet_minum'].data[0];
+            //             statusMinum = statusMinumBuilder(
+            //               rencanaMinum.jumlahMinum,
+            //               rencanaMinum.progress,
+            //             );
+            //           }
+
+            //           // Cek rencana makanan
+            //           if (data.containsKey('rencana_diet_makanan') &&
+            //               data.containsKey('makanans')) {
+            //             listMakananCard = listMakananCardBuilder(
+            //               data['rencana_diet_makanan'].data,
+            //               data['makanans'].data,
+            //             );
+            //           } else {
+            //             listMakananCard = listMakananCardBuilder([], []);
+            //           }
+
+            //           // cek rencana olahraga
+            //           if (data.containsKey('rencana_diet_olahraga')) {
+            //             var rencanaOlahraga =
+            //                 data['rencana_diet_olahraga'].data[0];
+            //             statusOlahraga = {
+            //               "nama": rencanaOlahraga.nama,
+            //               "status": rencanaOlahraga.status == 2,
+            //             };
+            //           }
+
+            //           return Container(
+            //             padding: const EdgeInsets.symmetric(horizontal: 24),
+            //             child: Column(
+            //               children: [
+            //                 // Navigasi
+            //                 Row(
+            //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                   children: [
+            //                     IconButton(
+            //                       onPressed: () {
+            //                         _pageViewController.previousPage(
+            //                             duration:
+            //                                 const Duration(milliseconds: 500),
+            //                             curve: Curves.easeInOut);
+            //                       },
+            //                       icon: const Icon(Icons.arrow_circle_left),
+            //                     ),
+            //                     Text(formatter.format(thisPageDate)),
+            //                     IconButton(
+            //                       onPressed: () {
+            //                         _pageViewController.nextPage(
+            //                             duration:
+            //                                 const Duration(milliseconds: 500),
+            //                             curve: Curves.easeInOut);
+            //                       },
+            //                       icon: const Icon(Icons.arrow_circle_right),
+            //                     ),
+            //                   ],
+            //                 ),
+
+            //                 // Rencana minum air
+            //                 Container(
+            //                   decoration: BoxDecoration(
+            //                     border: Border.all(
+            //                       color: const Color.fromRGBO(127, 209, 174, 1),
+            //                       width: 1,
+            //                     ),
+            //                     borderRadius: const BorderRadius.all(
+            //                       Radius.circular(9),
+            //                     ),
+            //                   ),
+            //                   child: GridView.builder(
+            //                     physics: const NeverScrollableScrollPhysics(),
+            //                     shrinkWrap: true,
+            //                     itemCount: statusMinum['jumlah_minum'],
+            //                     gridDelegate:
+            //                         const SliverGridDelegateWithFixedCrossAxisCount(
+            //                             crossAxisCount: 5),
+            //                     itemBuilder: (context, index) {
+            //                       return Padding(
+            //                         padding: const EdgeInsets.all(4),
+            //                         child: Center(
+            //                           child: Container(
+            //                             color: Colors.white,
+            //                             child: CheckboxGelas(
+            //                                 isDone: index <
+            //                                     statusMinum['progress']),
+            //                           ),
+            //                         ),
+            //                       );
+            //                     },
+            //                   ),
+            //                 ),
+            //                 const SizedBox(height: 8),
+
+            //                 // List rencana makanan diet
+            //                 Column(
+            //                   children: listMakananCard
+            //                       .map<Widget>(
+            //                         (item) => Padding(
+            //                           padding: const EdgeInsets.only(bottom: 8),
+            //                           child: item,
+            //                         ),
+            //                       )
+            //                       .toList(),
+            //                 ),
+
+            //                 // Karu olahraga
+            //                 KartuOlahraga(
+            //                   namaOlahraga: statusOlahraga['nama'],
+            //                   isComplete: statusOlahraga['status'] == 1,
+            //                 ),
+            //                 const SizedBox(height: 8),
+            //               ],
+            //             ),
+            //           );
+            //         } else {
+            //           return Column(
+            //             children: const [
+            //               SizedBox(height: 100),
+            //               Text('Loading...'),
+            //               SizedBox(height: 100),
+            //             ],
+            //           );
+            //         }
+            //       },
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

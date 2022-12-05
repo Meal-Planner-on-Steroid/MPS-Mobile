@@ -23,9 +23,16 @@ class RencanaDietMinumService {
         "progress__gt": rencanaDietMinumFilter.progressGt,
         "progress__lt": rencanaDietMinumFilter.progressLt,
         "rencana_diet_id": rencanaDietMinumFilter.rencanaDietId,
+        "rencana_diet_id__in": rencanaDietMinumFilter.rencanaDietIdIn,
+        "limit": rencanaDietMinumFilter.limit,
+        "page": rencanaDietMinumFilter.page,
+        "order_by": rencanaDietMinumFilter.orderBy,
       };
 
-      final url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
+      var url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
+      var decodeUrl = Uri.decodeFull(url.toString());
+
+      url = Uri.parse(decodeUrl);
 
       // debugPrint(url.toString());
 

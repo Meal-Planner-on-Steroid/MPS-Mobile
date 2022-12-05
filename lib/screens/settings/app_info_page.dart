@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/components/typography/gf_typography.dart';
-import 'package:getwidget/getwidget.dart';
 
 class AppInfo extends StatelessWidget {
   const AppInfo({super.key});

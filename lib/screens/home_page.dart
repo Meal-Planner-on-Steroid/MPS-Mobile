@@ -1,5 +1,6 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart';
 import 'package:mps/app/controllers/pages/home_controller.dart';
@@ -343,6 +344,11 @@ class _HomePageState extends State<HomePage> {
                 } else {
                   return Column(
                     children: const [
+                      SizedBox(height: 32),
+                      GFLoader(
+                        type: GFLoaderType.circle,
+                      ),
+                      SizedBox(height: 16),
                       Text('Loading...'),
                     ],
                   );

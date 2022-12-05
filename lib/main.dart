@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mps/app/services/pages/auth_service.dart';
 import 'package:mps/screens/auth/login_page.dart';
+import 'package:mps/screens/fail_page.dart';
 import 'package:mps/screens/intro_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/home_page.dart';
@@ -10,6 +11,7 @@ import 'screens/me_page.dart';
 import 'screens/menu_page.dart';
 import 'screens/riwayat_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 
 void main() async {
   await dotenv.load(fileName: 'assets/env/.env_development');
@@ -48,6 +50,22 @@ class Splash extends StatefulWidget {
 
 // class _SplashState extends State<Splash> {
 class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
+  Future<bool> checkConnection() async {
+    try {
+      debugPrint('Check server');
+      final String? baseUrl = dotenv.env['BASE_URL'];
+      var url = Uri.http(baseUrl.toString(), '');
+
+      await http.get(url);
+      debugPrint('sudah Check server');
+
+      return true;
+    } catch (e) {
+      debugPrint('gagal Check server');
+      return false;
+    }
+  }
+
   Future checkFirst() async {
     final navigator = Navigator.of(context);
 
@@ -56,27 +74,38 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
     bool refresh = (prefs.getString('access') ?? '').isNotEmpty;
     bool seen = (prefs.getBool('seen') ?? false);
 
-    if (access && refresh) {
-      if (seen) {
-        // Pindah ke home page
-        navigator.pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const RootPage(),
-          ),
-        );
+    if (await checkConnection()) {
+      if (access && refresh) {
+        if (seen) {
+          // Pindah ke home page
+          navigator.pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const RootPage(),
+            ),
+          );
+        } else {
+          // Pindah ke intro
+          navigator.pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const IntroPage(),
+            ),
+          );
+        }
       } else {
-        // Pindah ke intro
+        // Pindah ke login page
         navigator.pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const IntroPage(),
+            builder: (context) => const LoginPage(),
           ),
         );
       }
     } else {
-      // Pindah ke login page
       navigator.pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const LoginPage(),
+          builder: (context) => const FailPage(
+            pesan:
+                'Terjadi masalah saat menghubungi server, mohon coba lagi nanti',
+          ),
         ),
       );
     }

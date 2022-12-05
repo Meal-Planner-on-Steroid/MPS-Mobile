@@ -97,7 +97,13 @@ class SettingsPage extends StatelessWidget {
                           );
                         },
                         child: Container(
-                          color: Colors.white,
+                          padding: const EdgeInsets.all(8),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(9),
+                            ),
+                          ),
                           child: Row(
                             children: [
                               Icon(

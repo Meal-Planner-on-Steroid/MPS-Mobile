@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mps/screens/settings/app_info_page.dart';
 
 // ignore: must_be_immutable
 class HelpPage extends StatelessWidget {
@@ -8,17 +9,20 @@ class HelpPage extends StatelessWidget {
       settingIcon: Icons.question_mark,
       title: 'Cara penggunaan',
       desc: 'Langkah detail penggunaan aplikasi',
+      hrefType: 'link',
       href: 'link website',
     ),
     ListHelp(
       settingIcon: Icons.group,
       title: 'Hubungi Kami',
       desc: 'Pertanyaan? Butuh bantuan?',
+      hrefType: 'link',
       href: 'link website',
     ),
     ListHelp(
       settingIcon: Icons.phone_android,
       title: 'Ketentuan dan Kebijakan Privasi',
+      hrefType: 'link',
       desc: '',
       href: 'link website',
     ),
@@ -26,7 +30,8 @@ class HelpPage extends StatelessWidget {
       settingIcon: Icons.info_outline,
       title: 'Info Aplikasi',
       desc: '',
-      href: 'link website',
+      hrefType: 'widget',
+      href: const AppInfo(),
     ),
   ];
 
@@ -52,15 +57,23 @@ class HelpPage extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 16),
                       child: GestureDetector(
                         onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => item.href,
-                          //   ),
-                          // );
+                          if (item.hrefType == 'widget') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => item.href,
+                              ),
+                            );
+                          }
                         },
                         child: Container(
-                          color: Colors.white,
+                          padding: const EdgeInsets.all(8),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(9),
+                            ),
+                          ),
                           child: Row(
                             children: [
                               Icon(
@@ -104,12 +117,14 @@ class ListHelp {
   final IconData settingIcon;
   final String title;
   final String desc;
-  final String href;
+  final String hrefType;
+  final dynamic href;
 
   ListHelp({
     required this.settingIcon,
     required this.title,
     required this.desc,
+    required this.hrefType,
     required this.href,
   });
 }

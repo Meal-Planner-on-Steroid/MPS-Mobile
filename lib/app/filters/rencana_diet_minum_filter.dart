@@ -9,6 +9,9 @@ class RencanaDietMinumFilter {
   String? progressGt;
   String? progressLt;
   String? rencanaDietId;
+  String? rencanaDietIdIn;
 
   String? orderBy;
+  String page = "1";
+  String? limit;
 }

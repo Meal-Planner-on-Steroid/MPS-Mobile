@@ -17,10 +17,16 @@ class RencanaDietMakananService {
         "status": rencanaDietMakananFilter.status,
         "makanan_id": rencanaDietMakananFilter.makananId,
         "rencana_diet_id": rencanaDietMakananFilter.rencanaDietId,
+        "rencana_diet_id__in": rencanaDietMakananFilter.rencanaDietIdIn,
+        "limit": rencanaDietMakananFilter.limit,
+        "page": rencanaDietMakananFilter.page,
         "order_by": rencanaDietMakananFilter.orderBy,
       };
 
-      final url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
+      var url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
+      var decodeUrl = Uri.decodeFull(url.toString());
+
+      url = Uri.parse(decodeUrl);
 
       // debugPrint(url.toString());
 

@@ -37,8 +37,8 @@ class _MakananCardState extends State<MakananCard> {
   bool? checked;
 
   void createState() {
-    debugPrint('create sate dipanggil ${widget.rencanaMakanId}');
-    debugPrint('Dengan status ${widget.statusRencanaMakan}');
+    // debugPrint('create sate dipanggil ${widget.rencanaMakanId}');
+    // debugPrint('Dengan status ${widget.statusRencanaMakan}');
     if (widget.statusRencanaMakan == 2) {
       _checkColor = Colors.blue;
       _checkIcon = Icons.crop_square_outlined;

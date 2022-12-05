@@ -5,4 +5,6 @@ class RencanaDietFilter {
   String? userId;
 
   String? orderBy;
+  String page = "1";
+  String? limit;
 }

@@ -17,9 +17,16 @@ class RencanaDietOlahragaService {
         "nama__icontains": rencanaDietOlahragaFilter.namaIcontains,
         "status": rencanaDietOlahragaFilter.status,
         "rencana_diet_id": rencanaDietOlahragaFilter.rencanaDietId,
+        "rencana_diet_id__in": rencanaDietOlahragaFilter.rencanaDietIdIn,
+        "limit": rencanaDietOlahragaFilter.limit,
+        "page": rencanaDietOlahragaFilter.page,
+        "order_by": rencanaDietOlahragaFilter.orderBy,
       };
 
-      final url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
+      var url = Uri.http(_baseUrl.toString(), endpoint, queryParams);
+      var decodeUrl = Uri.decodeFull(url.toString());
+
+      url = Uri.parse(decodeUrl);
 
       // debugPrint(url.toString());
 

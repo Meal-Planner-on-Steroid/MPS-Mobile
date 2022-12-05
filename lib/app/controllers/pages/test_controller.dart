@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,9 +12,10 @@ class TestPageController {
       var url = Uri.https(baseUrl, endpoint);
       var request = await http.get(url);
 
-      // inspect(request.body);
+      inspect(request.body);
 
-      return request.body.toString();
+      // return request.body.toString();
+      return 'true';
     } catch (e) {
       debugPrint(e.toString());
       return false;

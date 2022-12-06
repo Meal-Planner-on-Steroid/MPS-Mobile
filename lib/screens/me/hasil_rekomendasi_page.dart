@@ -28,8 +28,12 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
   }
 
   Future<GenerateRekomendasiMenuSerializer> generateRekomendasiMenu() async {
-    var response = await _generateRekomendasiMakananController.post();
-    return response;
+    try {
+      var response = await _generateRekomendasiMakananController.post();
+      return response;
+    } catch (e) {
+      return Future.error('error');
+    }
   }
 
   @override

@@ -139,12 +139,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     setState(() {});
-      //   },
-      //   child: const Icon(Icons.refresh),
-      // ),
       body: SafeArea(
         child: ListView(
           // padding: const EdgeInsets.all(24),
@@ -198,11 +192,11 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            // Slider
             const SizedBox(height: 8),
             // const SliderRencanaDiet(),
             // const TestPage(),
 
+            // Slider
             FutureBuilder<Map<String, dynamic>>(
               future: futureListRencanaDiet,
               builder: (context, snapshot) {
@@ -250,6 +244,8 @@ class _HomePageState extends State<HomePage> {
                           "nama": rencanaDietOlahraga.nama,
                           "status": rencanaDietOlahraga.status == 2,
                         };
+                      } else {
+                        listMakananCard = listMakananCardBuilder([], []);
                       }
 
                       // Container page

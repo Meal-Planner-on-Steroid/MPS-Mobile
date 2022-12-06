@@ -61,8 +61,7 @@ class HitungKebutuhanGiziService {
         }),
       );
 
-      // ignore: todo
-      // TODO: serialize list or object
+      // serialize list or object
       var response = jsonDecode(request.body);
       debugPrint(response.toString());
       response = UserProfileSerializer.fromJson(response);
@@ -115,8 +114,7 @@ class HitungKebutuhanGiziService {
         }),
       );
 
-      // ignore: todo
-      // TODO: serialize list or object
+      // serialize list or object
       var response = jsonDecode(request.body);
       debugPrint(response.toString());
       response = UserProfileSerializer.fromJson(response);

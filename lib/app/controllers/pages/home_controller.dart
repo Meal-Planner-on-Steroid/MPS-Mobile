@@ -39,6 +39,9 @@ class HomeController {
       Map<String, dynamic> result = {};
       Map<String, dynamic> resultTemp = {};
 
+      final prefs = await SharedPreferences.getInstance();
+      var userId = prefs.getString('userId');
+
       debugPrint(mulaiDariTanggal);
 
       // ! Proses ambil data
@@ -46,12 +49,14 @@ class HomeController {
       rencanaDietFilter.tanggalGt = mulaiDariTanggal;
       rencanaDietFilter.limit = '40';
       rencanaDietFilter.orderBy = 'tanggal';
+      rencanaDietFilter.userId = userId;
+
       var responseRencanaDiet =
           await _rencanaDietService.get(rencanaDietFilter);
 
       if (responseRencanaDiet.data.length <= 0) {
         debugPrint("tidak ada data");
-        return false;
+        return result;
       }
 
       // ignore: unused_local_variable

@@ -1,11 +1,10 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mps/app/models/user_model.dart';
 import 'package:mps/app/services/pages/profile_page_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilPageController {
-  // ignore: unused_field
-  // final _makananFavoritService = MakananFavoritService();
   final _profilePageService = ProfilPageService();
 
   Future getObject() async {
@@ -58,7 +57,9 @@ class ProfilPageController {
       var response =
           await _profilePageService.changePassword(userId, userModel);
 
-      if (response == false) {
+      inspect(response);
+
+      if (response['statusCode'] != 200) {
         debugPrint("Gagal update user");
         return false;
       }

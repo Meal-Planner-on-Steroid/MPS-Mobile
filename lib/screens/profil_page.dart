@@ -6,7 +6,6 @@ import 'package:getwidget/position/gf_toast_position.dart';
 import 'package:mps/app/controllers/pages/profil_page_controller.dart';
 import 'package:mps/app/models/user_model.dart';
 import 'package:mps/app/serializers/user_serializer.dart';
-import 'package:mps/screens/fail_page.dart';
 
 class ProfilPage extends StatefulWidget {
   final String fromPage;
@@ -264,6 +263,7 @@ class _ProfilPageState extends State<ProfilPage> {
                   children: <Widget>[
                     // Password lama
                     TextFormField(
+                      obscureText: true,
                       decoration: const InputDecoration(
                         labelText: 'Password lama',
                         icon: Icon(
@@ -277,13 +277,20 @@ class _ProfilPageState extends State<ProfilPage> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter your username';
+                          return 'Tolong masukkan password lama';
                         }
                         return null;
                       },
+                      onSaved: (value) {
+                        setState(() {
+                          userModel.password = value!;
+                        });
+                      },
                     ),
+
                     // Password baru
                     TextFormField(
+                      obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Password baru',
                         icon: Icon(
@@ -297,9 +304,14 @@ class _ProfilPageState extends State<ProfilPage> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter your username';
+                          return 'Tolong masukkan password baru';
                         }
                         return null;
+                      },
+                      onSaved: (value) {
+                        setState(() {
+                          userModel.newPassword = value!;
+                        });
                       },
                     ),
 
@@ -314,11 +326,28 @@ class _ProfilPageState extends State<ProfilPage> {
                             shape: const StadiumBorder(),
                             primary: const Color.fromRGBO(127, 209, 174, 1),
                           ),
-                          onPressed: () {
-                            // final form = _passwordFormKey.currentState;
-                            // if (form!.validate()) {
-                            //   form.save();
-                            // }
+                          onPressed: () async {
+                            final form = _passwordFormKey.currentState;
+                            if (form!.validate()) {
+                              form.save();
+
+                              if (await _profilePageController
+                                  .changePassword(userModel)) {
+                                GFToast.showToast(
+                                  'Berhasil update password',
+                                  context,
+                                  toastPosition: GFToastPosition.BOTTOM,
+                                );
+                              } else {
+                                GFToast.showToast(
+                                  'Gagal update password',
+                                  context,
+                                  toastPosition: GFToastPosition.BOTTOM,
+                                );
+                              }
+
+                              inspect(userModel);
+                            }
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(11.0),

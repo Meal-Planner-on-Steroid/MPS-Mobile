@@ -91,7 +91,7 @@ class ProfilPageService {
       final response = jsonDecode(request.body);
       debugPrint(response.toString());
       // return UserSerializer.fromJson(response);
-      return true;
+      return response;
     } catch (e) {
       debugPrint(e.toString());
       return false;

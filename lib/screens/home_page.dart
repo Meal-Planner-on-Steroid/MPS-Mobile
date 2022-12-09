@@ -10,7 +10,9 @@ import 'package:mps/utils/home/checkbox_gelas.dart';
 import 'package:mps/utils/home/goal_hari.dart';
 import 'package:mps/utils/home/kartu_olahraga.dart';
 import 'package:mps/utils/home/makanan_card.dart';
+// ignore: unused_import
 import 'package:mps/utils/home/slider_rencana_diet.dart';
+// ignore: unused_import
 import 'package:mps/utils/home/test_page.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:intl/intl.dart';
 import 'package:mps/app/controllers/modules/riwayat_rekomendasi_rencana_diet_controller.dart';
 import 'package:mps/app/filters/riwayat_rekomendasi_rencana_diet_filter.dart';
 import 'package:mps/app/serializers/riwayat_rekomendasi_rencana_diet_serializer.dart';
@@ -17,6 +18,7 @@ class RiwayatPage extends StatefulWidget {
 class _RiwayatPageState extends State<RiwayatPage> {
   final _riwayatRekomendasiRencanaDietController =
       RiwayatRekomendasiRencanaDietController();
+  final DateFormat formatter = DateFormat('yyyy-MM-dd');
 
   late Future<RiwayatRekomendasiRencanaDietSerializer> listRiwayatFuture;
 
@@ -122,7 +124,8 @@ class _RiwayatPageState extends State<RiwayatPage> {
                     (item) => Column(
                       children: [
                         RiwayatItem(
-                            title: DateTime.parse(item.createdAt).toString(),
+                            title:
+                                "Rekomendasi - ${formatter.format(DateTime.parse(item.createdAt))}",
                             riwayatId: item.id),
                         const SizedBox(height: 16),
                       ],

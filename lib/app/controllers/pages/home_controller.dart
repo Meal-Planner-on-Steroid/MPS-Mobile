@@ -55,16 +55,14 @@ class HomeController {
           await _rencanaDietService.get(rencanaDietFilter);
 
       if (responseRencanaDiet.data.length <= 0) {
-        debugPrint("tidak ada data");
+        debugPrint("tidak ada data rencan diet");
         return result;
       }
+      debugPrint("ada data rencana diet");
 
       // ignore: unused_local_variable
       var rencanaDietId = responseRencanaDiet.data[0].id;
       resultTemp['rencana_diet'] = responseRencanaDiet.data;
-
-      debugPrint("ada data");
-      inspect(resultTemp);
 
       // Buat list rencana diet id
       List<int> listRencanaDietId = [];
@@ -92,18 +90,20 @@ class HomeController {
       resultTemp['makanans'] = responseMakanan.data;
 
       // GET list rencana diet minum in list rencana diet id
-      rencanaDietMinumFilter.rencanaDietId = listRencanaDietId.join(',');
+      rencanaDietMinumFilter.rencanaDietIdIn = listRencanaDietId.join(',');
       rencanaDietMinumFilter.limit = '40';
       var responseRencanaDietMinum =
           await _rencanaDietMinumService.get(rencanaDietMinumFilter);
       resultTemp['rencana_diet_minum'] = responseRencanaDietMinum.data;
 
       // GET list rencana diet olahraga in list rencana diet id
-      rencanaDietOlahragaFilter.rencanaDietId = listRencanaDietId.join(',');
+      rencanaDietOlahragaFilter.rencanaDietIdIn = listRencanaDietId.join(',');
       rencanaDietOlahragaFilter.limit = '40';
       var responseRencanaDietOlahraga =
           await _rencanaDietOlahragaService.get(rencanaDietOlahragaFilter);
       resultTemp['rencana_diet_olahraga'] = responseRencanaDietOlahraga.data;
+
+      inspect(resultTemp);
 
       // ! Proses bentuk data
       // Untuk setiap item di rencana diet
@@ -156,6 +156,7 @@ class HomeController {
         // break;
       }
 
+      debugPrint('berhasil membuat result');
       inspect(result);
 
       return result;

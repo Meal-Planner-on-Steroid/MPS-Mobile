@@ -141,6 +141,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.refresh),
+        onPressed: () {
+          setState(() {
+            futureListRencanaDiet = getSetRencanaDiet(formatter.format(DateTime(
+                currentDate.year, currentDate.month, currentDate.day - 16)));
+          });
+        },
+      ),
       body: SafeArea(
         child: ListView(
           // padding: const EdgeInsets.all(24),

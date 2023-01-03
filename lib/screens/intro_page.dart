@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mps/main.dart';
 import 'package:mps/screens/intro_page_item/intro_item_1.dart';
 import 'package:mps/screens/intro_page_item/intro_item_3.dart';
+import 'package:mps/screens/intro_page_item/intro_item_4.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'intro_page_item/intro_item_2.dart';
@@ -29,6 +30,7 @@ class _IntroPageState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> pageViewItems = [
+      const IntroPage4(),
       const IntroPage1(),
       const IntroPage2(),
       IntroPage3(update: _updateSubmit),

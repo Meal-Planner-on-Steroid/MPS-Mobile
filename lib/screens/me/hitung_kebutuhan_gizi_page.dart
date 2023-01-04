@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart';
 import 'package:mps/app/controllers/modules/tingkat_aktivitas_controller.dart';
 import 'package:mps/app/filters/tingkat_aktivitas_filter.dart';
@@ -23,6 +24,10 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
 
   final _hitungKebutuhanGiziController = HitungKebutuhanGiziController();
   final _tingkatAktivitasController = TingkatAktivitasController();
+
+  final beratBadanController = TextEditingController();
+  final tinggiBadanController = TextEditingController();
+  final usiaController = TextEditingController();
 
   var tingkatAktivitasFilter = TingkatAktivitasFilter();
 
@@ -116,7 +121,9 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                                 TextFormField(
                                   initialValue:
                                       currentData.beratBadan.toString(),
-                                  maxLength: 5,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(5)
+                                  ],
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     suffix: Text('Kg'),
@@ -144,7 +151,9 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                                 TextFormField(
                                   initialValue:
                                       currentData.tinggiBadan.toString(),
-                                  maxLength: 6,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(6)
+                                  ],
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     suffix: Text('cm'),
@@ -171,7 +180,9 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                                 const SizedBox(height: 8),
                                 TextFormField(
                                   initialValue: currentData.usia.toString(),
-                                  maxLength: 2,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(2)
+                                  ],
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     suffix: Text('Tahun'),
@@ -247,7 +258,7 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                                   icon: const Icon(Icons.format_shapes),
                                   items: _aktivitas,
                                   decoration: const InputDecoration(
-                                    hintText: 'Pilih gender terlebih dahulu',
+                                    hintText: 'Pilih tingkat aktivitas',
                                     border: OutlineInputBorder(),
                                   ),
                                   onSaved: (value) {

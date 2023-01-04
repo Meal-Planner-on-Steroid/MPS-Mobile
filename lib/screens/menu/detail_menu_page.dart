@@ -78,7 +78,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("assets/images/makanan_random.jpg"),
+                        image: AssetImage("assets/images/makanan_default.jpg"),
                         fit: BoxFit.cover,
                       ),
                     ),

@@ -92,7 +92,7 @@ class _MakananListPageState extends State<MakananListPage> {
                       contentPadding: const EdgeInsets.all(8),
                       leading: const CircleAvatar(
                         backgroundImage:
-                            AssetImage('assets/images/makanan_random.jpg'),
+                            AssetImage('assets/images/makanan_default.jpg'),
                         radius: 30,
                       ),
                       title: Text(

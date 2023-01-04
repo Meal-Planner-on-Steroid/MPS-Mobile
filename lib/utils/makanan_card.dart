@@ -51,7 +51,7 @@ class _MakananCardState extends State<MakananCard> {
                         child: SizedBox.fromSize(
                           size: const Size.fromRadius(40),
                           child: Image.asset(
-                            'assets/images/makanan_random.jpg',
+                            'assets/images/makanan_default.jpg',
                             fit: BoxFit.cover,
                           ),
                         ),

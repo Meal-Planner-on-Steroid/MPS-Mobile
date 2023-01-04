@@ -25,7 +25,7 @@ class AvatarDanSetting extends StatelessWidget {
             );
           },
           child: const CircleAvatar(
-            backgroundImage: AssetImage('assets/images/user_random.jpg'),
+            backgroundImage: AssetImage('assets/images/user_default.jpg'),
           ),
         ),
         GestureDetector(

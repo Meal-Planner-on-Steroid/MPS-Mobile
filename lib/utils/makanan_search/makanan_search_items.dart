@@ -12,57 +12,57 @@ class Makanan {
 
 const makananList = [
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 1",
     desc: "Deskripsi",
   ),
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 2",
     desc: "Deskripsi",
   ),
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 3",
     desc: "Deskripsi",
   ),
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 4",
     desc: "Deskripsi",
   ),
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 5",
     desc: "Deskripsi",
   ),
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 6",
     desc: "Deskripsi",
   ),
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 6",
     desc: "Deskripsi",
   ),
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 6",
     desc: "Deskripsi",
   ),
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 6",
     desc: "Deskripsi",
   ),
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 6",
     desc: "Deskripsi",
   ),
   Makanan(
-    image: 'assets/images/makanan_random.jpg',
+    image: 'assets/images/makanan_default.jpg',
     title: "Makanan 6",
     desc: "Deskripsi",
   ),

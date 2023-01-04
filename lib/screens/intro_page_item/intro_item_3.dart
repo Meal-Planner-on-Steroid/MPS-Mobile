@@ -212,7 +212,7 @@ class _IntroPage3State extends State<IntroPage3> {
                           icon: const Icon(Icons.format_shapes),
                           items: _aktivitas,
                           decoration: const InputDecoration(
-                            hintText: '=======',
+                            hintText: 'Pilih Tingkat Aktivitas',
                             border: OutlineInputBorder(),
                             fillColor: Colors.white,
                             filled: true,

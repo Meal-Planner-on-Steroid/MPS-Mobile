@@ -37,7 +37,7 @@ class KartuOlahraga extends StatelessWidget {
                       child: SizedBox.fromSize(
                         size: const Size.fromRadius(40),
                         child: Image.asset(
-                          'assets/images/makanan_random.jpg',
+                          'assets/images/olahraga_default.jpg',
                           fit: BoxFit.cover,
                         ),
                       ),

@@ -79,7 +79,7 @@ class _ProfilPageState extends State<ProfilPage> {
           children: [
             // Avatar besar
             const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/user_random.jpg'),
+              backgroundImage: AssetImage('assets/images/user_default.jpg'),
               radius: 100,
             ),
 
@@ -317,7 +317,7 @@ class _ProfilPageState extends State<ProfilPage> {
 
                     const SizedBox(height: 16),
 
-                    // Tombol update profil
+                    // Tombol update password
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -352,7 +352,7 @@ class _ProfilPageState extends State<ProfilPage> {
                           child: const Padding(
                             padding: EdgeInsets.all(11.0),
                             child: Text(
-                              'Update Profil',
+                              'Update Password',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,

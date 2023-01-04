@@ -95,7 +95,7 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   shape: const StadiumBorder(),
-                                  primary:
+                                  backgroundColor:
                                       const Color.fromRGBO(127, 209, 174, 1),
                                 ),
                                 onPressed: () async {
@@ -144,7 +144,7 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                         height: 64,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
+                            backgroundColor: Colors.green,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(9),
                             ),
@@ -184,7 +184,7 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                         height: 64,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.yellow.shade700,
+                            backgroundColor: Colors.yellow.shade700,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(9),
                             ),
@@ -214,7 +214,8 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                         height: 64,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: const Color.fromRGBO(255, 135, 101, 1),
+                            backgroundColor:
+                                const Color.fromRGBO(255, 135, 101, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(9),
                             ),

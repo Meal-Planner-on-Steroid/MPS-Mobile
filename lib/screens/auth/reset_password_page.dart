@@ -62,7 +62,8 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          primary: const Color.fromRGBO(127, 209, 174, 1),
+                          backgroundColor:
+                              const Color.fromRGBO(127, 209, 174, 1),
                         ),
                         onPressed: () {
                           // final form = _formKey.currentState;

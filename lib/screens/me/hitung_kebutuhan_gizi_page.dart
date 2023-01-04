@@ -281,7 +281,8 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                         const SizedBox(height: 16),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: const Color.fromRGBO(255, 135, 101, 1),
+                            backgroundColor:
+                                const Color.fromRGBO(255, 135, 101, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(9),
                             ),

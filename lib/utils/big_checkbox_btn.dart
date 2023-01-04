@@ -29,7 +29,7 @@ class _BigCheckboxBtnState extends State<BigCheckboxBtn> {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               shape: const StadiumBorder(),
-              primary: _btnColor,
+              backgroundColor: _btnColor,
             ),
             onPressed: () {
               setState(() {

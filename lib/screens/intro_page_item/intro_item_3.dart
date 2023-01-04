@@ -233,7 +233,8 @@ class _IntroPage3State extends State<IntroPage3> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             shape: const StadiumBorder(),
-                            primary: const Color.fromRGBO(127, 209, 174, 1),
+                            backgroundColor:
+                                const Color.fromRGBO(127, 209, 174, 1),
                           ),
                           onPressed: () async {
                             final form = _formKey.currentState;

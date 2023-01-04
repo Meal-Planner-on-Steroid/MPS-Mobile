@@ -5,10 +5,12 @@ import 'package:mps/screens/me/blok_makanan_page.dart';
 import 'package:mps/screens/profil_page.dart';
 import 'package:mps/screens/settings/air_minum_page.dart';
 import 'settings/goal_page.dart';
+// ignore: duplicate_import
 import 'settings/air_minum_page.dart';
 import 'settings/help_page.dart';
 import 'me/hitung_kebutuhan_gizi_page.dart';
 import 'me/makanan_favorit_page.dart';
+// ignore: duplicate_import
 import 'profil_page.dart';
 
 // ignore: must_be_immutable
@@ -141,7 +143,7 @@ class SettingsPage extends StatelessWidget {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: const StadiumBorder(),
-                    primary: const Color.fromRGBO(127, 209, 174, 1),
+                    backgroundColor: const Color.fromRGBO(127, 209, 174, 1),
                   ),
                   onPressed: () async {
                     if (await _authService.deleteAuth()) {

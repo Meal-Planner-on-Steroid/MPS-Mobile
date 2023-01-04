@@ -115,7 +115,8 @@ class _LoginPageState extends State<LoginPage> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          primary: const Color.fromRGBO(127, 209, 174, 1),
+                          backgroundColor:
+                              const Color.fromRGBO(127, 209, 174, 1),
                         ),
                         onPressed: () async {
                           final form = _formKey.currentState;
@@ -169,7 +170,8 @@ class _LoginPageState extends State<LoginPage> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          primary: const Color.fromRGBO(255, 255, 255, 1),
+                          backgroundColor:
+                              const Color.fromRGBO(255, 255, 255, 1),
                         ),
                         onPressed: () {
                           // final form = _formKey.currentState;

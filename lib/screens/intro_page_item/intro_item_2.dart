@@ -21,11 +21,14 @@ class _IntroPage2State extends State<IntroPage2> {
                 Spacer(),
                 SizedBox(
                   height: 200,
-                  child: Image(image: AssetImage('assets/images/otomatis.jpg')),
+                  child: Image(
+                      image: AssetImage(
+                          'assets/images/illustration/javascript_illustration.png')),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Dapatkan rekomendasi diet secara otomatis',
+                  'MPS membuat rekomendasi rencana diet secara otomatis khusus untuk Kamu',
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16),
                 ),
                 Spacer(),

@@ -20,12 +20,14 @@ class FailPage extends StatelessWidget {
                 const Spacer(),
                 SizedBox(
                   height: 160,
-                  child: Image.asset('assets/images/manhera_cry.jpg'),
+                  child: Image.asset(
+                      'assets/images/illustration/day41-desktop-trans.png'),
                 ),
                 const SizedBox(height: 16),
                 Text(
                   pesan,
                   textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16),
                 ),
                 const Spacer(),
               ],

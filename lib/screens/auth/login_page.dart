@@ -46,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   // Username input
                   TextFormField(
+                    cursorColor: Colors.black,
                     decoration: const InputDecoration(
                       hintText: 'Username',
                       border: OutlineInputBorder(
@@ -73,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 8),
                   TextFormField(
                     obscureText: true,
+                    cursorColor: Colors.black,
                     decoration: const InputDecoration(
                       hintText: 'Password',
                       border: OutlineInputBorder(

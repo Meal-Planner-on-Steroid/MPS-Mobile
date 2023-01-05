@@ -11,7 +11,7 @@ class _IntroPage4State extends State<IntroPage4> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromRGBO(249, 249, 249, 1),
+      color: const Color.fromRGBO(255, 182, 0, 1),
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -22,7 +22,8 @@ class _IntroPage4State extends State<IntroPage4> {
                 SizedBox(
                   height: 200,
                   child: Image(
-                      image: AssetImage('assets/images/manhera/angel.png')),
+                      image: AssetImage(
+                          'assets/images/illustration/day71-designer-tool-essential.png')),
                 ),
                 SizedBox(height: 16),
                 Text(
@@ -41,6 +42,7 @@ class _IntroPage4State extends State<IntroPage4> {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16),
                 ),
+                SizedBox(height: 40),
                 Spacer(),
               ],
             ),

@@ -58,9 +58,11 @@ class _RiwayatPageState extends State<RiwayatPage> {
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(width: 4),
-                Icon(
-                  Icons.share,
-                  color: Colors.black,
+                Image(
+                  image: AssetImage(
+                      "assets/images/icons/259-share-arrow-lineal.png"),
+                  width: 35,
+                  color: null,
                 ),
               ],
             ),
@@ -77,9 +79,11 @@ class _RiwayatPageState extends State<RiwayatPage> {
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(width: 4),
-                Icon(
-                  Icons.save,
-                  color: Colors.black,
+                Image(
+                  image: AssetImage(
+                      "assets/images/icons/497-truck-delivery-lineal.png"),
+                  width: 35,
+                  color: null,
                 ),
               ],
             ),

@@ -48,7 +48,6 @@ class Splash extends StatefulWidget {
   State<Splash> createState() => _SplashState();
 }
 
-// class _SplashState extends State<Splash> {
 class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
   Future<bool> checkConnection() async {
     try {
@@ -117,18 +116,25 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           const Spacer(),
           Container(
             alignment: const Alignment(0, 0.5),
             child: Column(
-              children: const [
-                GFLoader(
+              children: [
+                SizedBox(
+                  height: 160,
+                  child: Image.asset(
+                      'assets/images/illustration/rocket_green.png'),
+                ),
+                const SizedBox(height: 16),
+                const GFLoader(
                   type: GFLoaderType.circle,
                 ),
-                SizedBox(height: 16),
-                Text('Loading...'),
+                const SizedBox(height: 16),
+                const Text('Loading...'),
               ],
             ),
           ),
@@ -182,10 +188,39 @@ class _RootPageState extends State<RootPage> {
       body: pages[currentPage],
       bottomNavigationBar: NavigationBar(
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Me'),
-          NavigationDestination(icon: Icon(Icons.fastfood), label: 'Menu'),
-          NavigationDestination(icon: Icon(Icons.history), label: 'Riwayat'),
+          NavigationDestination(
+            icon: Image(
+              image: AssetImage("assets/images/icons/63-home-lineal.png"),
+              width: 35,
+              color: null,
+            ),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Image(
+              image: AssetImage("assets/images/icons/21-avatar-lineal.png"),
+              width: 35,
+              color: null,
+            ),
+            label: 'Me',
+          ),
+          NavigationDestination(
+            icon: Image(
+              image: AssetImage(
+                  "assets/images/icons/1486-food-as-resources-lineal.png"),
+              width: 35,
+              color: null,
+            ),
+            label: 'Menu',
+          ),
+          NavigationDestination(
+            icon: Image(
+              image: AssetImage("assets/images/icons/45-clock-time-lineal.png"),
+              width: 35,
+              color: null,
+            ),
+            label: 'Riwayat',
+          ),
         ],
         onDestinationSelected: (int index) {
           setState(() {

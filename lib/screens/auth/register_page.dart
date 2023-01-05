@@ -41,10 +41,11 @@ class RegisterPageState extends State<RegisterPage> {
 
                   const SizedBox(height: 64),
 
-                  // Register input
+                  // input nama depan
                   TextFormField(
+                    cursorColor: Colors.black,
                     decoration: const InputDecoration(
-                      hintText: 'First name',
+                      hintText: 'Nama depan',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(9),
@@ -55,7 +56,7 @@ class RegisterPageState extends State<RegisterPage> {
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter your first name';
+                        return 'Tolong masukkan Nama depan';
                       }
                       return null;
                     },
@@ -65,11 +66,13 @@ class RegisterPageState extends State<RegisterPage> {
                       });
                     },
                   ),
-
                   const SizedBox(height: 8),
+
+                  // Input nama belakang
                   TextFormField(
+                    cursorColor: Colors.black,
                     decoration: const InputDecoration(
-                      hintText: 'Last name',
+                      hintText: 'Nama belakang',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(9),
@@ -80,7 +83,7 @@ class RegisterPageState extends State<RegisterPage> {
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter your last name';
+                        return 'Tolong masukkan Nama belakaang';
                       }
                       return null;
                     },
@@ -90,9 +93,11 @@ class RegisterPageState extends State<RegisterPage> {
                       });
                     },
                   ),
-
                   const SizedBox(height: 8),
+
+                  // Input email
                   TextFormField(
+                    cursorColor: Colors.black,
                     decoration: const InputDecoration(
                       hintText: 'Email',
                       border: OutlineInputBorder(
@@ -105,7 +110,7 @@ class RegisterPageState extends State<RegisterPage> {
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter your username';
+                        return 'Tolong masukkan email';
                       }
                       return null;
                     },
@@ -115,9 +120,11 @@ class RegisterPageState extends State<RegisterPage> {
                       });
                     },
                   ),
-
                   const SizedBox(height: 8),
+
+                  // Input username
                   TextFormField(
+                    cursorColor: Colors.black,
                     decoration: const InputDecoration(
                       hintText: 'Username',
                       border: OutlineInputBorder(
@@ -130,7 +137,7 @@ class RegisterPageState extends State<RegisterPage> {
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter your username';
+                        return 'Tolong masukkan username';
                       }
                       return null;
                     },
@@ -140,9 +147,11 @@ class RegisterPageState extends State<RegisterPage> {
                       });
                     },
                   ),
-
                   const SizedBox(height: 8),
+
+                  // Input password
                   TextFormField(
+                    cursorColor: Colors.black,
                     obscureText: true,
                     decoration: const InputDecoration(
                       hintText: 'Password',
@@ -156,7 +165,7 @@ class RegisterPageState extends State<RegisterPage> {
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter your password';
+                        return 'Tolong masukkan password';
                       }
                       return null;
                     },

@@ -52,12 +52,22 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
-                      children: const [
-                        GFLoader(
+                      children: [
+                        SizedBox(
+                          height: 160,
+                          child: Image.asset(
+                              'assets/images/illustration/rocket_green.png'),
+                        ),
+                        const SizedBox(height: 16),
+                        const GFLoader(
                           type: GFLoaderType.circle,
                         ),
-                        SizedBox(height: 16),
-                        Text('Membuat rekomendasi menu makanan diet untukmu'),
+                        const SizedBox(height: 16),
+                        const Text(
+                          'Membuat rekomendasi menu makanan diet untukmu',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ],
                     ),
                   ],

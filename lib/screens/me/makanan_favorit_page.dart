@@ -24,17 +24,30 @@ class _MakananFavoritPageState extends State<MakananFavoritPage> {
             tabs: const [
               Tab(
                 text: 'Menu',
-                icon: Icon(Icons.fastfood),
+                icon: Image(
+                  image: AssetImage(
+                      "assets/images/icons/1486-food-as-resources-lineal.png"),
+                  width: 35,
+                  color: null,
+                ),
               ),
               Tab(
                 text: 'Bahan',
-                icon: Icon(Icons.egg),
+                icon: Image(
+                  image: AssetImage("assets/images/icons/585-herbs-lineal.png"),
+                  width: 35,
+                  color: null,
+                ),
               ),
               Tab(
-                  text: 'Camilan',
-                  icon: Icon(
-                    Icons.icecream_sharp,
-                  )),
+                text: 'Camilan',
+                icon: Image(
+                  image: AssetImage(
+                      "assets/images/icons/2230-candy-cane-lineal.png"),
+                  width: 35,
+                  color: null,
+                ),
+              ),
             ],
           ),
           title: Text(widget.fromPage),

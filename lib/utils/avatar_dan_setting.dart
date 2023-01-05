@@ -39,8 +39,15 @@ class AvatarDanSetting extends StatelessWidget {
           },
           child: const Padding(
             padding: EdgeInsets.all(12.0),
-            child: Icon(
-              Icons.settings,
+            child: SizedBox(
+              height: 25,
+              width: 25,
+              child: CircleAvatar(
+                maxRadius: 20,
+                backgroundColor: Colors.transparent,
+                backgroundImage:
+                    AssetImage('assets/images/illustration/icon_gear_3.png'),
+              ),
             ),
           ),
         ),

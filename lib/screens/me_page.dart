@@ -72,9 +72,14 @@ class _MePageState extends State<MePage> {
                         },
                         child: Column(
                           children: const [
-                            Icon(Icons.person),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/icons/646-walking-walkcycle-person-lineal.png"),
+                              width: 35,
+                              color: null,
+                            ),
                             Text('Kebutuhan'),
-                            Text('gizi'),
+                            Text('Gizi'),
                           ],
                         ),
                       ),
@@ -93,7 +98,12 @@ class _MePageState extends State<MePage> {
                         },
                         child: Column(
                           children: const [
-                            Icon(Icons.favorite),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/icons/237-star-rating-morph-lineal.png"),
+                              width: 35,
+                              color: null,
+                            ),
                             Text('Makanan'),
                             Text('Favorit'),
                           ],
@@ -114,7 +124,12 @@ class _MePageState extends State<MePage> {
                         },
                         child: Column(
                           children: const [
-                            Icon(Icons.heart_broken),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/icons/926-roadblock-lineal.png"),
+                              width: 35,
+                              color: null,
+                            ),
                             Text('Blok'),
                             Text('Makanan'),
                           ],

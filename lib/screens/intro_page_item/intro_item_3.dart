@@ -84,6 +84,7 @@ class _IntroPage3State extends State<IntroPage3> {
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(5)
                           ],
+                          cursorColor: Colors.black,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             suffix: Text('Kg'),
@@ -111,6 +112,7 @@ class _IntroPage3State extends State<IntroPage3> {
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(6)
                           ],
+                          cursorColor: Colors.black,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             suffix: Text('cm'),
@@ -138,6 +140,7 @@ class _IntroPage3State extends State<IntroPage3> {
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(2)
                           ],
+                          cursorColor: Colors.black,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             suffix: Text('Tahun'),

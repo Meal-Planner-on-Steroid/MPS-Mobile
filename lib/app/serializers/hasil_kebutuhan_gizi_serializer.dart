@@ -3,79 +3,90 @@
 {
     "message": "Berhasil menentukan kebutuhan gizi",
     "data": {
-        "amb": 1547.0,
-        "total_energi": 2475.2000000000003,
-        "imt": 23.73323840037973,
+        "amb": 1958.0,
+        "total_energi": 3230.7,
+        "energi_sesuai": 2730.7,
+        "imt": 35.59985760056959,
         "kebutuhan_protein": {
-            "protein_10": 61.88000000000001,
-            "protein_15": 92.82000000000001
+            "protein_15": 102.40124999999999,
+            "protein_20": 136.535
         },
         "kebutuhan_lemak": {
-            "lemak_10": 27.502222222222226,
-            "lemak_25": 68.75555555555556
+            "lemak_20": 60.68222222222222,
+            "lemak_25": 75.85277777777777
         },
         "kebutuhan_karbo": {
-            "karbo_60": 371.28000000000003,
-            "karbo_75": 464.1
+            "karbo_55": 375.47125,
+            "karbo_65": 443.73875
         }
     }
 }
 */
 
 class ButuhProtein {
-  final double? protein10;
   final double? protein15;
+  final double? protein20;
 
   ButuhProtein({
-    required this.protein10,
     required this.protein15,
+    required this.protein20,
   });
 
   factory ButuhProtein.fromJson(Map<String, dynamic> json) {
-    final protein10 = json['protein_10'];
     final protein15 = json['protein_15'];
+    final protein20 = json['protein_20'];
 
-    return ButuhProtein(protein10: protein10, protein15: protein15);
-  }
-}
-
-class ButuhKarbo {
-  final double? karbo60;
-  final double? karbo75;
-
-  ButuhKarbo({
-    required this.karbo60,
-    required this.karbo75,
-  });
-
-  factory ButuhKarbo.fromJson(Map<String, dynamic> json) {
-    final karbo60 = json['karbo_60'];
-    final karbo75 = json['karbo_75'];
-
-    return ButuhKarbo(karbo60: karbo60, karbo75: karbo75);
+    return ButuhProtein(
+      protein15: protein15,
+      protein20: protein20,
+    );
   }
 }
 
 class ButuhLemak {
-  final double? lemak10;
+  final double? lemak20;
   final double? lemak25;
 
   ButuhLemak({
-    required this.lemak10,
+    required this.lemak20,
     required this.lemak25,
   });
 
   factory ButuhLemak.fromJson(Map<String, dynamic> json) {
-    final lemak10 = json['lemak_10'];
+    final lemak20 = json['lemak_20'];
     final lemak25 = json['lemak_25'];
 
-    return ButuhLemak(lemak10: lemak10, lemak25: lemak25);
+    return ButuhLemak(
+      lemak20: lemak20,
+      lemak25: lemak25,
+    );
+  }
+}
+
+class ButuhKarbo {
+  final double? karbo55;
+  final double? karbo65;
+
+  ButuhKarbo({
+    required this.karbo55,
+    required this.karbo65,
+  });
+
+  factory ButuhKarbo.fromJson(Map<String, dynamic> json) {
+    final karbo55 = json['karbo_55'];
+    final karbo65 = json['karbo_65'];
+
+    return ButuhKarbo(
+      karbo55: karbo55,
+      karbo65: karbo65,
+    );
   }
 }
 
 class Data {
   final double? amb;
   final double? keseluruhanEnergi;
+  final double? energiSesuai;
   final double? imt;
   final ButuhProtein? butuhProtein;
   final ButuhLemak? butuhLemak;
@@ -84,6 +95,7 @@ class Data {
   Data({
     required this.amb,
     required this.keseluruhanEnergi,
+    required this.energiSesuai,
     required this.imt,
     required this.butuhProtein,
     required this.butuhLemak,
@@ -93,6 +105,7 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) {
     final imt = json['imt'];
     final keseluruhanEnergi = json['total_energi'];
+    final energiSesuai = json['energi_sesuai'];
     final amb = json['amb'];
 
     final tempButuhProteinJson = json['kebutuhan_protein'];
@@ -107,6 +120,7 @@ class Data {
     return Data(
       imt: imt,
       keseluruhanEnergi: keseluruhanEnergi,
+      energiSesuai: energiSesuai,
       amb: amb,
       butuhProtein: butuhProtein,
       butuhLemak: butuhLemak,

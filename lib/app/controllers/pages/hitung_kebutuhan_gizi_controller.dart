@@ -93,22 +93,23 @@ class HitungKebutuhanGiziController {
       final prefs = await SharedPreferences.getInstance();
 
       userProfile.userId = int.parse(prefs.getString('userId') ?? '');
-      userProfile.keseluruhanEnergi = hasilKebutuhanGizi.data?.amb ?? 0;
+      userProfile.keseluruhanEnergi =
+          hasilKebutuhanGizi.data?.energiSesuai ?? 0;
       userProfile.imt = hasilKebutuhanGizi.data?.imt ?? 0;
       userProfile.imt = hasilKebutuhanGizi.data?.imt ?? 0;
 
-      butuhProtein.protein10 =
-          hasilKebutuhanGizi.data?.butuhProtein?.protein10 ?? 0;
       butuhProtein.protein15 =
           hasilKebutuhanGizi.data?.butuhProtein?.protein15 ?? 0;
+      butuhProtein.protein20 =
+          hasilKebutuhanGizi.data?.butuhProtein?.protein20 ?? 0;
       userProfile.butuhProtein = butuhProtein;
 
-      butuhLemak.lemak10 = hasilKebutuhanGizi.data?.butuhLemak?.lemak10 ?? 0;
+      butuhLemak.lemak20 = hasilKebutuhanGizi.data?.butuhLemak?.lemak20 ?? 0;
       butuhLemak.lemak25 = hasilKebutuhanGizi.data?.butuhLemak?.lemak25 ?? 0;
       userProfile.butuhLemak = butuhLemak;
 
-      butuhKarbo.karbo60 = hasilKebutuhanGizi.data?.butuhKarbo?.karbo60 ?? 0;
-      butuhKarbo.karbo75 = hasilKebutuhanGizi.data?.butuhKarbo?.karbo75 ?? 0;
+      butuhKarbo.karbo55 = hasilKebutuhanGizi.data?.butuhKarbo?.karbo55 ?? 0;
+      butuhKarbo.karbo65 = hasilKebutuhanGizi.data?.butuhKarbo?.karbo65 ?? 0;
       userProfile.butuhKarbo = butuhKarbo;
 
       inspect(userProfile);

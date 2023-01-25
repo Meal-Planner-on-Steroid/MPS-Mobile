@@ -285,7 +285,7 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                             const Text('Kebutuhan Energi'),
                             Row(
                               children: [
-                                Text(statusGizi.keseluruhanEnergi!
+                                Text(statusGizi.energiSesuai!
                                     .toStringAsFixed(2)),
                                 const Text(' kcal'),
                               ],
@@ -327,10 +327,10 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                             const Text('Protein'),
                             Row(
                               children: [
-                                Text(statusGizi.butuhProtein!.protein10!
+                                Text(statusGizi.butuhProtein!.protein15!
                                     .toStringAsFixed(2)),
                                 const Text(' - '),
-                                Text(statusGizi.butuhProtein!.protein15!
+                                Text(statusGizi.butuhProtein!.protein20!
                                     .toStringAsFixed(2)),
                                 const Text(' g'),
                               ],
@@ -344,10 +344,10 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                             const Text('Karbohidrat'),
                             Row(
                               children: [
-                                Text(statusGizi.butuhKarbo!.karbo60!
+                                Text(statusGizi.butuhKarbo!.karbo55!
                                     .toStringAsFixed(2)),
                                 const Text(' - '),
-                                Text(statusGizi.butuhKarbo!.karbo75!
+                                Text(statusGizi.butuhKarbo!.karbo65!
                                     .toStringAsFixed(2)),
                                 const Text(' g'),
                               ],
@@ -361,7 +361,7 @@ class _HasilRekomendasiPageState extends State<HasilRekomendasiPage> {
                             const Text('Lemak'),
                             Row(
                               children: [
-                                Text(statusGizi.butuhLemak!.lemak10!
+                                Text(statusGizi.butuhLemak!.lemak20!
                                     .toStringAsFixed(2)),
                                 const Text(' - '),
                                 Text(statusGizi.butuhLemak!.lemak25!

@@ -175,13 +175,13 @@ class _HomePageState extends State<HomePage> {
                       var data = snapshot.data!.data[0];
 
                       double tempButuhKarbo =
-                          (data.butuhKarbo.karbo60 + data.butuhKarbo.karbo75) /
+                          (data.butuhKarbo.karbo55 + data.butuhKarbo.karbo65) /
                               2;
-                      double tempButuhProtein = (data.butuhProtein.protein10 +
-                              data.butuhProtein.protein15) /
+                      double tempButuhProtein = (data.butuhProtein.protein15 +
+                              data.butuhProtein.protein20) /
                           2;
                       double tempButuhLemak =
-                          (data.butuhLemak.lemak10 + data.butuhLemak.lemak25) /
+                          (data.butuhLemak.lemak20 + data.butuhLemak.lemak25) /
                               2;
 
                       return GoalHariIni(

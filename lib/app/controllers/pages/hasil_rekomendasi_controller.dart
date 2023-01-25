@@ -63,20 +63,20 @@ class HasilRekomendasiController {
       riwayatKebutuhanGizi.keseluruhanEnergi =
           userProfileDataBody.keseluruhanEnergi;
 
-      riwayatKebutuhanGizi.butuhProtein.protein10 =
-          userProfileDataBody.butuhProtein.protein10;
       riwayatKebutuhanGizi.butuhProtein.protein15 =
           userProfileDataBody.butuhProtein.protein15;
+      riwayatKebutuhanGizi.butuhProtein.protein20 =
+          userProfileDataBody.butuhProtein.protein20;
 
-      riwayatKebutuhanGizi.butuhLemak.lemak10 =
-          userProfileDataBody.butuhLemak.lemak10;
+      riwayatKebutuhanGizi.butuhLemak.lemak20 =
+          userProfileDataBody.butuhLemak.lemak20;
       riwayatKebutuhanGizi.butuhLemak.lemak25 =
           userProfileDataBody.butuhLemak.lemak25;
 
-      riwayatKebutuhanGizi.butuhKarbo.karbo60 =
-          userProfileDataBody.butuhKarbo.karbo60;
-      riwayatKebutuhanGizi.butuhKarbo.karbo75 =
-          userProfileDataBody.butuhKarbo.karbo75;
+      riwayatKebutuhanGizi.butuhKarbo.karbo55 =
+          userProfileDataBody.butuhKarbo.karbo55;
+      riwayatKebutuhanGizi.butuhKarbo.karbo65 =
+          userProfileDataBody.butuhKarbo.karbo65;
 
       riwayatRekomendasiRencanaDiet.kebutuhanGizi = riwayatKebutuhanGizi;
 

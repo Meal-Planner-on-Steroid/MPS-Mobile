@@ -215,11 +215,11 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
                               Row(
                                 children: [
                                   Text(riwayatRekomendasi
-                                      .butuhProtein!.protein10!
+                                      .butuhProtein!.protein15!
                                       .toStringAsFixed(2)),
                                   const Text(' - '),
                                   Text(riwayatRekomendasi
-                                      .butuhProtein!.protein15!
+                                      .butuhProtein!.protein20!
                                       .toStringAsFixed(2)),
                                   const Text(' g'),
                                 ],
@@ -233,10 +233,10 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
                               const Text('Karbohidrat'),
                               Row(
                                 children: [
-                                  Text(riwayatRekomendasi.butuhKarbo!.karbo60!
+                                  Text(riwayatRekomendasi.butuhKarbo!.karbo55!
                                       .toStringAsFixed(2)),
                                   const Text(' - '),
-                                  Text(riwayatRekomendasi.butuhKarbo!.karbo75!
+                                  Text(riwayatRekomendasi.butuhKarbo!.karbo65!
                                       .toStringAsFixed(2)),
                                   const Text(' g'),
                                 ],
@@ -250,7 +250,7 @@ class _RiwayatDetailpageState extends State<RiwayatDetailpage> {
                               const Text('Lemak'),
                               Row(
                                 children: [
-                                  Text(riwayatRekomendasi.butuhLemak!.lemak10!
+                                  Text(riwayatRekomendasi.butuhLemak!.lemak20!
                                       .toStringAsFixed(2)),
                                   const Text(' - '),
                                   Text(riwayatRekomendasi.butuhLemak!.lemak25!

@@ -47,16 +47,16 @@ class HitungKebutuhanGiziService {
           "keseluruhan_energi": userProfile.keseluruhanEnergi,
           "imt": userProfile.imt,
           "butuh_protein": {
-            "protein_10": userProfile.butuhProtein.protein10,
-            "protein_15": userProfile.butuhProtein.protein15
+            "protein_15": userProfile.butuhProtein.protein15,
+            "protein_20": userProfile.butuhProtein.protein20
           },
           "butuh_lemak": {
-            "lemak_10": userProfile.butuhLemak.lemak10,
+            "lemak_20": userProfile.butuhLemak.lemak20,
             "lemak_25": userProfile.butuhLemak.lemak25,
           },
           "butuh_karbo": {
-            "karbo_60": userProfile.butuhKarbo.karbo60,
-            "karbo_75": userProfile.butuhKarbo.karbo75,
+            "karbo_55": userProfile.butuhKarbo.karbo55,
+            "karbo_65": userProfile.butuhKarbo.karbo65,
           }
         }),
       );
@@ -100,16 +100,16 @@ class HitungKebutuhanGiziService {
           "keseluruhan_energi": userProfile.keseluruhanEnergi,
           "imt": userProfile.imt,
           "butuh_protein": {
-            "protein_10": userProfile.butuhProtein.protein10,
-            "protein_15": userProfile.butuhProtein.protein15
+            "protein_15": userProfile.butuhProtein.protein15,
+            "protein_20": userProfile.butuhProtein.protein20
           },
           "butuh_lemak": {
-            "lemak_10": userProfile.butuhLemak.lemak10,
+            "lemak_20": userProfile.butuhLemak.lemak20,
             "lemak_25": userProfile.butuhLemak.lemak25,
           },
           "butuh_karbo": {
-            "karbo_60": userProfile.butuhKarbo.karbo60,
-            "karbo_75": userProfile.butuhKarbo.karbo75,
+            "karbo_55": userProfile.butuhKarbo.karbo55,
+            "karbo_65": userProfile.butuhKarbo.karbo65,
           }
         }),
       );

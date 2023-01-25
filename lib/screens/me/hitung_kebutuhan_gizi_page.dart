@@ -418,10 +418,10 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                             const Text('Protein'),
                             Row(
                               children: [
-                                Text(currentData.butuhProtein.protein10
+                                Text(currentData.butuhProtein.protein15
                                     .toStringAsFixed(2)),
                                 const Text(' - '),
-                                Text(currentData.butuhProtein.protein15
+                                Text(currentData.butuhProtein.protein20
                                     .toStringAsFixed(2)),
                                 const Text(' g'),
                               ],
@@ -435,10 +435,10 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                             const Text('Karbohidrat'),
                             Row(
                               children: [
-                                Text(currentData.butuhKarbo.karbo60
+                                Text(currentData.butuhKarbo.karbo55
                                     .toStringAsFixed(2)),
                                 const Text(' - '),
-                                Text(currentData.butuhKarbo.karbo75
+                                Text(currentData.butuhKarbo.karbo65
                                     .toStringAsFixed(2)),
                                 const Text(' g'),
                               ],
@@ -452,7 +452,7 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                             const Text('Lemak'),
                             Row(
                               children: [
-                                Text(currentData.butuhLemak.lemak10
+                                Text(currentData.butuhLemak.lemak20
                                     .toStringAsFixed(2)),
                                 const Text(' - '),
                                 Text(currentData.butuhLemak.lemak25

@@ -1,16 +1,16 @@
 class ButuhProtein {
-  double protein10 = 0;
   double protein15 = 0;
-}
-
-class ButuhKarbo {
-  double karbo60 = 0;
-  double karbo75 = 0;
+  double protein20 = 0;
 }
 
 class ButuhLemak {
-  double lemak10 = 0;
+  double lemak20 = 0;
   double lemak25 = 0;
+}
+
+class ButuhKarbo {
+  double karbo55 = 0;
+  double karbo65 = 0;
 }
 
 class KebutuhanGizi {
@@ -32,16 +32,16 @@ class KebutuhanGizi {
         "imt": imt,
         "keseluruhan_energi": keseluruhanEnergi,
         "butuh_protein": {
-          "protein_10": butuhProtein.protein10,
-          "protein_15": butuhProtein.protein15
+          "protein_15": butuhProtein.protein15,
+          "protein_20": butuhProtein.protein20
         },
         "butuh_lemak": {
-          "lemak_10": butuhLemak.lemak10,
+          "lemak_20": butuhLemak.lemak20,
           "lemak_25": butuhLemak.lemak25
         },
         "butuh_karbo": {
-          "karbo_60": butuhKarbo.karbo60,
-          "karbo_75": butuhKarbo.karbo75
+          "karbo_55": butuhKarbo.karbo55,
+          "karbo_65": butuhKarbo.karbo65
         }
       };
 }

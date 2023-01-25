@@ -1,16 +1,16 @@
 class ButuhProtein {
-  double protein10 = 0;
   double protein15 = 0;
-}
-
-class ButuhKarbo {
-  double karbo60 = 0;
-  double karbo75 = 0;
+  double protein20 = 0;
 }
 
 class ButuhLemak {
-  double lemak10 = 0;
+  double lemak20 = 0;
   double lemak25 = 0;
+}
+
+class ButuhKarbo {
+  double karbo55 = 0;
+  double karbo65 = 0;
 }
 
 class UserProfile {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mps/screens/settings/app_info_page.dart';
+import 'package:mps/screens/settings/kategori_imt_page.dart';
+import 'package:mps/screens/settings/tingkat_aktivitas_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
@@ -14,6 +16,13 @@ class HelpPage extends StatelessWidget {
       href: keDokumentasi,
     ),
     ListHelp(
+      settingIcon: Icons.phone_android,
+      title: 'Ketentuan dan Kebijakan Privasi',
+      desc: '',
+      hrefType: 'link',
+      href: ketentuanDanKebijakan,
+    ),
+    ListHelp(
       settingIcon: Icons.group,
       title: 'Hubungi Kami',
       desc: 'Pertanyaan? Butuh bantuan?',
@@ -21,11 +30,18 @@ class HelpPage extends StatelessWidget {
       href: 'link website',
     ),
     ListHelp(
-      settingIcon: Icons.phone_android,
-      title: 'Ketentuan dan Kebijakan Privasi',
-      desc: '',
-      hrefType: 'link',
-      href: ketentuanDanKebijakan,
+      settingIcon: Icons.sports_gymnastics,
+      title: 'Kategori IMT',
+      desc: 'Macam-macam kategori IMT',
+      hrefType: 'widget',
+      href: const KategoriImt(fromPage: 'Setting'),
+    ),
+    ListHelp(
+      settingIcon: Icons.accessibility_new_rounded,
+      title: 'Tingkat Aktivitas',
+      desc: 'Arti tingkat aktivitas',
+      hrefType: 'widget',
+      href: const TingkatAktivitasInfo(fromPage: 'Setting'),
     ),
     ListHelp(
       settingIcon: Icons.info_outline,

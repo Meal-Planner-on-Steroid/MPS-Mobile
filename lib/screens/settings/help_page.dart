@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mps/screens/settings/app_info_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class HelpPage extends StatelessWidget {
@@ -10,7 +11,7 @@ class HelpPage extends StatelessWidget {
       title: 'Cara penggunaan',
       desc: 'Langkah detail penggunaan aplikasi',
       hrefType: 'link',
-      href: 'link website',
+      href: keDokumentasi,
     ),
     ListHelp(
       settingIcon: Icons.group,
@@ -22,9 +23,9 @@ class HelpPage extends StatelessWidget {
     ListHelp(
       settingIcon: Icons.phone_android,
       title: 'Ketentuan dan Kebijakan Privasi',
-      hrefType: 'link',
       desc: '',
-      href: 'link website',
+      hrefType: 'link',
+      href: ketentuanDanKebijakan,
     ),
     ListHelp(
       settingIcon: Icons.info_outline,
@@ -64,6 +65,8 @@ class HelpPage extends StatelessWidget {
                                 builder: (context) => item.href,
                               ),
                             );
+                          } else if (item.hrefType == 'link') {
+                            item.href();
                           }
                         },
                         child: Container(
@@ -110,6 +113,33 @@ class HelpPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+keDokumentasi() async {
+  const url = 'https://meal-planner-on-steroid.github.io/MPS-Documentation/';
+  final uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    );
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+ketentuanDanKebijakan() async {
+  const url =
+      'https://github.com/Meal-Planner-on-Steroid/MPS-Privacy-Policy/blob/master/README.md';
+  final uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    );
+  } else {
+    throw 'Could not launch $url';
   }
 }
 

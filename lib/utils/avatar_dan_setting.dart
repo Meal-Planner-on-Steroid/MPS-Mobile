@@ -19,9 +19,10 @@ class AvatarDanSetting extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => ProfilPage(
-                        fromPage: currentPage,
-                      )),
+                builder: (context) => ProfilPage(
+                  fromPage: currentPage,
+                ),
+              ),
             );
           },
           child: const CircleAvatar(

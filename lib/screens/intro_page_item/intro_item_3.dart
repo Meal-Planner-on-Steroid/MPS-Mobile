@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:mps/app/controllers/modules/tingkat_aktivitas_controller.dart';
 import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart';
 import 'package:mps/app/filters/tingkat_aktivitas_filter.dart';
 import 'package:mps/app/models/user_profile_model.dart';
+import 'package:mps/utils/hitung_imt.dart';
+import 'package:mps/utils/kategori_imt.dart';
 import 'package:select_form_field/select_form_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,6 +36,7 @@ class _IntroPage3State extends State<IntroPage3> {
 
   // Kumpulan variable bawaan
   bool enableTingkatAktivitas = false;
+  String kategoriImtPengguna = '???';
   late List<dynamic> tingkatAktivitasTemp;
   final List<Map<String, dynamic>> _genders = [
     {
@@ -251,6 +255,21 @@ class _IntroPage3State extends State<IntroPage3> {
                               await _hitungKebutuhanGiziController
                                   .post(_userProfile);
                             }
+                            // ignore: use_build_context_synchronously
+                            GFToast.showToast(
+                              "IMT anda ${kategoriImt(hitungImt(_userProfile.beratBadan, _userProfile.tinggiBadan))}",
+                              context,
+                              toastPosition: GFToastPosition.BOTTOM,
+                              textStyle: const TextStyle(
+                                fontSize: 16,
+                                color: GFColors.LIGHT,
+                              ),
+                              backgroundColor: GFColors.DARK,
+                              trailing: const Icon(
+                                Icons.info,
+                                color: GFColors.SUCCESS,
+                              ),
+                            );
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(11.0),

@@ -4,6 +4,7 @@ import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart'
 import 'package:mps/app/controllers/modules/tingkat_aktivitas_controller.dart';
 import 'package:mps/app/filters/tingkat_aktivitas_filter.dart';
 import 'package:mps/app/models/user_profile_model.dart';
+import 'package:mps/utils/kategori_imt.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class HitungKebuguhanGiziPage extends StatefulWidget {
@@ -360,6 +361,14 @@ class _HitungKebuguhanGiziPageState extends State<HitungKebuguhanGiziPage> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Kategori'),
+                            Text(kategoriImt(currentData.imt)),
+                          ],
                         ),
                         const SizedBox(height: 8),
                         Row(

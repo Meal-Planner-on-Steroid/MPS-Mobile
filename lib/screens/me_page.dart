@@ -3,6 +3,7 @@ import 'package:mps/app/controllers/pages/hitung_kebutuhan_gizi_controller.dart'
 import 'package:mps/app/models/user_profile_model.dart';
 import 'package:mps/screens/me/makanan_blok_page.dart';
 import 'package:mps/utils/avatar_dan_setting.dart';
+import 'package:mps/utils/kategori_imt.dart';
 import 'me/hitung_kebutuhan_gizi_page.dart';
 import 'me/makanan_favorit_page.dart';
 import 'me/hasil_rekomendasi_page.dart';
@@ -261,6 +262,14 @@ class _MePageState extends State<MePage> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('Kategori'),
+                                Text(kategoriImt(currentData.imt)),
+                              ],
                             ),
                             const SizedBox(height: 8),
                             Row(

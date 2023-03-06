@@ -32,7 +32,7 @@ class AppInfo extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Alpha v0.2.3',
+                  'Alpha v0.2.4',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey.shade200,
